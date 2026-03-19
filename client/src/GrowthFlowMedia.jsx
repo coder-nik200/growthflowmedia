@@ -1,20 +1,52 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Layout ,ShoppingCart,Globe,PenTool,TrendingUp,Search,MessageCircle,Target,Megaphone,FileText,BarChart3,Server,Users,Bot,Layers,UserPlus,Menu, Mail, ChevronDown, ArrowRightCircle, Recycle, Link } from 'lucide-react';
-import { Phone, Facebook, Linkedin, Instagram, Youtube, Twitter, ChevronRight } from 'lucide-react';
-import Confetti from 'react-confetti'
-import {FaChevronDown, FaFacebook,FaGoogle} from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Layout,
+  ShoppingCart,
+  Globe,
+  PenTool,
+  TrendingUp,
+  Search,
+  MessageCircle,
+  Target,
+  Megaphone,
+  FileText,
+  BarChart3,
+  Server,
+  Users,
+  Bot,
+  Layers,
+  UserPlus,
+  Menu,
+  Mail,
+  ChevronDown,
+  ArrowRightCircle,
+  Recycle,
+  Link,
+  Plus,
+} from "lucide-react";
+import {
+  Phone,
+  Facebook,
+  Linkedin,
+  Instagram,
+  Youtube,
+  Twitter,
+  ChevronRight,
+} from "lucide-react";
+import Confetti from "react-confetti";
+import { FaChevronDown, FaFacebook, FaGoogle } from "react-icons/fa";
 import image1 from "../images/image.png";
 import image2 from "../images/image2.png";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import image3 from "../images/image3.png";
 import image4 from "../images/image4.png";
-import axios from 'axios';
+import axios from "axios";
 import image5 from "../images/image5.png";
-import vansh from "../images/vansh.png";
+// import vansh from "../images/vansh.png";
+import vansh from "../images/study.webp";
 
 import image6 from "../images/logo.png";
 import image10 from "../images/logo.jpg";
-
 
 import image7 from "../images/image7.jpg";
 import image8 from "../images/image8.jpg";
@@ -25,204 +57,181 @@ import image13 from "../images/image13.jpg";
 import image14 from "../images/image14.jpg";
 import image15 from "../images/image15.jpg";
 
-import {useWindowSize} from 'react-use'
-import { Star } from 'lucide-react';
+import { useWindowSize } from "react-use";
+import { Star } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import TestimonialsSection from './Testiminials';
-import { useNavigate } from 'react-router-dom';
+import TestimonialsSection from "./Testiminials";
+import { useNavigate } from "react-router-dom";
 
-import { motion, AnimatePresence } from 'framer-motion';
-
-
+import { motion, AnimatePresence } from "framer-motion";
+import Marquee from "./components/Marquee";
 
 export default function GrowthFlowMedia() {
   const [menuOpen, setMenuOpen] = useState(false);
-   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentImageText, setCurrentImageText] = useState(0);
-  
-  const {width,height}=useWindowSize();
-useEffect(()=>{
-  AOS.init({duration:800});
-},[]);
 
+  const { width, height } = useWindowSize();
+  useEffect(() => {
+    AOS.init({ duration: 800 });
+  }, []);
 
-const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      phone: '',
-      callback: '',
-      service:''
-      });
-      let [enquiryList, setEnquiryList] = useState([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    callback: "",
+    service: "",
+  });
+  let [enquiryList, setEnquiryList] = useState([]);
   // Images for the rotating display
   const designImages = [
-    {id:1,
-      image:image2,
-      text:"Build",
-      color:"text-green-600",
-    },
-    {id:2,
-      image:image3,
-      text:"Develop",
-      color:"text-orange-500",
-    },
-    {id:1,
-      image:image4,
-      text:"Grow",
-      color:"text-blue-600",
-    },
-     {id:1,
-      image:image5,
-      text:"Design",
-      color:"text-purple-600",
-    }
+    { id: 1, image: image2, text: "Build", color: "text-green-600" },
+    { id: 2, image: image3, text: "Develop", color: "text-orange-500" },
+    { id: 1, image: image4, text: "Grow", color: "text-blue-600" },
+    { id: 1, image: image5, text: "Design", color: "text-purple-600" },
   ];
-// Add this to your component's state declarations
-const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  // Add this to your component's state declarations
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
-// FAQ data array
-const faqData = [
-  {
-    question: "What Is The Significance Of Web Designing?",
-    answer: "Web design is crucial because it creates the first impression of your business online. A well-designed website improves user experience, builds trust with visitors, enhances SEO performance, and increases conversion rates. It's not just about aesthetics but also about functionality and user engagement."
-  },
-  {
-    question: "Why Is Content Marketing Required?",
-    answer: "Content marketing is essential because it builds brand awareness, establishes authority in your industry, improves SEO rankings, engages your target audience, and drives qualified traffic to your website. It helps build long-term relationships with customers and generates leads more effectively than traditional advertising."
-  },
-  {
-    question: "Can I Update The Content On My Site?",
-    answer: "Yes, absolutely! We provide user-friendly content management systems (CMS) that allow you to easily update text, images, and other content on your website. We also offer training sessions to ensure you're comfortable making updates yourself. Additionally, we provide ongoing support if you need assistance with more complex updates."
-  },
-  {
-    question: "How Long Does Website Development Take?",
-    answer: "The timeline varies based on project complexity. A basic website typically takes 2-4 weeks, while e-commerce sites or complex applications may take 6-8 weeks. We provide a detailed project timeline during our initial consultation and maintain transparent communication throughout the development process."
-  },
-  {
-    question: "What's Included In Your Digital Marketing Packages?",
-    answer: "Our digital marketing packages include strategy development, SEO optimization, social media management, content creation, PPC campaign management, analytics reporting, and monthly performance reviews. We customize each package based on your specific business goals and budget."
-  }
-];const [helpOpen, setHelpOpen] = useState(false);
-const navigate=useNavigate();
-const handleChangeSelection=(e)=>{
-const selectedValue=e.target.value;
-if(selectedValue){
-  navigate(selectedValue);
-}
-};
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    // Check if click is outside the help button container
-    const helpContainer = document.querySelector('.help-button-container');
-    if (helpOpen && helpContainer && !helpContainer.contains(event.target)) {
-      setHelpOpen(false);
+  // FAQ data array
+  const faqData = [
+    {
+      question: "What Is The Significance Of Web Designing?",
+      answer:
+        "Web design is crucial because it creates the first impression of your business online. A well-designed website improves user experience, builds trust with visitors, enhances SEO performance, and increases conversion rates. It's not just about aesthetics but also about functionality and user engagement.",
+    },
+    {
+      question: "Why Is Content Marketing Required?",
+      answer:
+        "Content marketing is essential because it builds brand awareness, establishes authority in your industry, improves SEO rankings, engages your target audience, and drives qualified traffic to your website. It helps build long-term relationships with customers and generates leads more effectively than traditional advertising.",
+    },
+    {
+      question: "Can I Update The Content On My Site?",
+      answer:
+        "Yes, absolutely! We provide user-friendly content management systems (CMS) that allow you to easily update text, images, and other content on your website. We also offer training sessions to ensure you're comfortable making updates yourself. Additionally, we provide ongoing support if you need assistance with more complex updates.",
+    },
+    {
+      question: "How Long Does Website Development Take?",
+      answer:
+        "The timeline varies based on project complexity. A basic website typically takes 2-4 weeks, while e-commerce sites or complex applications may take 6-8 weeks. We provide a detailed project timeline during our initial consultation and maintain transparent communication throughout the development process.",
+    },
+    {
+      question: "What's Included In Your Digital Marketing Packages?",
+      answer:
+        "Our digital marketing packages include strategy development, SEO optimization, social media management, content creation, PPC campaign management, analytics reporting, and monthly performance reviews. We customize each package based on your specific business goals and budget.",
+    },
+  ];
+  const [helpOpen, setHelpOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleChangeSelection = (e) => {
+    const selectedValue = e.target.value;
+    if (selectedValue) {
+      navigate(selectedValue);
     }
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if click is outside the help button container
+      const helpContainer = document.querySelector(".help-button-container");
+      if (helpOpen && helpContainer && !helpContainer.contains(event.target)) {
+        setHelpOpen(false);
+      }
+    };
 
-  document.addEventListener('mousedown', handleClickOutside);
-  document.addEventListener('touchstart', handleClickOutside); // For mobile touch
-  
-  return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-    document.removeEventListener('touchstart', handleClickOutside);
-  };
-}, [helpOpen]);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside); // For mobile touch
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [helpOpen]);
   const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Contact', path: '/contact' },
-
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
   ];
 
-  
-const [isServicesOpen, setIsServicesOpen] = useState(false);
-    // Handle service selection
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  // Handle service selection
   const handleServiceSelect = (path) => {
     navigate(path);
     setIsServicesOpen(false);
     setIsMenuOpen(false);
   };
   const serviceItems = [
-    { name: 'Website Design', path: '/webdesign' },
-    {name:'Lead Generation',path:'/lead'},
-    {name:'Go High Level CRM',path:'/gohigh'},
-    {name:'Ai Agents/Automation Development',path:'/ai'},
+    { name: "Website Design", path: "/webdesign" },
+    { name: "Lead Generation", path: "/lead" },
+    { name: "Go High Level CRM", path: "/gohigh" },
+    { name: "Ai Agents/Automation Development", path: "/ai" },
 
-    {name:'White Label Marketing',path:'/whitelabel'},
+    { name: "White Label Marketing", path: "/whitelabel" },
 
-   
-    {name:'Digital Marketing',path:'/digitalmarketing'},
-    {name:'Managed Hosting',path:'/hosting'},
+    { name: "Digital Marketing", path: "/digitalmarketing" },
+    { name: "Managed Hosting", path: "/hosting" },
 
+    { name: "Conversion Rate Optimization", path: "/conversionrate" },
 
+    { name: "Service Website", path: "/service-site" },
+    { name: "Meta Ads Management", path: "/metaads" },
 
-    {name:'Conversion Rate Optimization',path:'/conversionrate'},
+    { name: "Search Engine Optimisation", path: "/seo" },
 
-    {name:'Service Website',path:'/service-site'},
-    {name:'Meta Ads Management',path:'/metaads'},
+    { name: "Branding & Logo Design", path: "/branding&logodesign" },
 
-    {name:'Search Engine Optimisation',path:'/seo'},
+    { name: "ECommerce Websites", path: "/ecommerce" },
 
-    {name:'Branding & Logo Design',path:'/branding&logodesign'},
-
-    {name:'ECommerce Websites',path:'/ecommerce'},
-
-    {name:'Google Ads Management',path:'/googleads'},
-
-
-
-
-    
+    { name: "Google Ads Management", path: "/googleads" },
   ];
 
- 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!formData.email.endsWith("@gmail.com")){
+    if (!formData.email.endsWith("@gmail.com")) {
       toast.error("incorrect email!!");
       return;
-    }   
+    }
     axios
-      .post("https://growthflowmedia-esxn.vercel.app/web/api/enquiry/enquiry-insert", formData)
+      .post(
+        "https://growthflowmedia-esxn.vercel.app/web/api/enquiry/enquiry-insert",
+        formData,
+      )
       .then((res) => {
         toast.success("Message Sent!!!");
-        setFormData({ name: '',
-      email: '',
-      phone: '',
-      callback: '',
-      service:''});
-        navigate("/success-page")
-      }).catch((err)=>{
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          callback: "",
+          service: "",
+        });
+        navigate("/success-page");
+      })
+      .catch((err) => {
         toast.error("Failed to send message");
         console.log(err);
       });
   };
 
-
-
-
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
-  const menuItems = [
-    
-    
-    "Our Services",
-  ];
+  const menuItems = ["Our Services"];
 
-const ContactSection=useRef(null);
+  const ContactSection = useRef(null);
   const scrollToContact = () => {
     ContactSection.current.scrollIntoView({ behavior: "smooth" });
   };
   // Rotate images automatically
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % designImages.length);
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % designImages.length,
+      );
     }, 2000);
     return () => clearInterval(interval);
   }, []);
@@ -404,396 +413,365 @@ const ContactSection=useRef(null);
       `}</style>
 
       {/* Top Bar */}
-      <div data-aos="slide-down"className="bg-white border-b border-gray-200 px-4 py-2 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
-        <div className="flex flex-wrap gap-3 sm:gap-4 mb-2 sm:mb-0">
-          <div className="flex items-center gap-1">
-            <Phone size={14} className="text-orange-500" />
-            <a href="tel:+919646174266" className="whitespace-nowrap">9646174266</a>
-          </div>
-          <div className="flex items-center gap-1">
-            <Mail size={14} className="text-orange-500" />
-            <a href="mailto:support@growthflowmedia.com"  className="hidden sm:inline whitespace-nowrap">support@growthflowmedia.com</a>
-            <a href="mailto:support@growthflowmedia.com"  className="sm:hidden whitespace-nowrap">support@growthflow...</a>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-3 sm:gap-4">
-          <a onClick={scrollToContact} className="cursor-pointer hover:text-orange-500 whitespace-nowrap">Contact Us</a>
-        
-         
-        </div>
-      </div>
-
-      {/* Header */}
-      <header className="relative z-50 w-full bg-[#f7f7f7] py-4" data-aos="slide-down">
-        <div className="mx-auto max-w-7xl px-4">
-          <nav className="flex items-center justify-between rounded-2xl bg-white px-4 sm:px-6 py-3 sm:py-4 shadow-md">
-            {/* Logo */}
-            <div onClick ={()=>{navigate('/')}}className="flex items-center gap-2">
-              <img
-                src={image6}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              className="lg:hidden p-2"
-              onClick={() => setMenuOpen(!menuOpen)}
+      <div
+        data-aos="slide-down"
+        className="relative z-[101] w-full bg-[#fafafa] border-b border-gray-100/80 px-4 py-2 text-[11px] sm:text-xs font-medium tracking-wide text-gray-500"
+      >
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 sm:flex-row sm:gap-0">
+          {/* Contact Info Group */}
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-start">
+            {/* Phone */}
+            <a
+              href="tel:+919646174266"
+              className="group flex items-center gap-1.5 transition-colors duration-300 hover:text-[#e36a2e]"
             >
-              <Menu size={24} />
-            </button>
+              <Phone
+                size={13}
+                className="text-[#e36a2e] opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+              />
+              <span className="whitespace-nowrap">+91 9646 174 266</span>
+            </a>
 
-            {/* Menu - Desktop */}
-            <ul className="hidden z-50 lg:flex  items-center gap-4 xl:gap-8 text-sm xl:text-[15px] font-medium text-gray-700">
-              <li className="group relative cursor-pointer z-50">
-                  <div onClick={()=>{navigate('/')}}className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                    Home
-                    
-                  </div>
+            {/* Subtle Divider (Desktop Only) */}
+            <div className="hidden h-3 w-[1px] bg-gray-200 sm:block"></div>
 
-                </li>
-                <li>
-                 <div className="relative">
-                <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center font-medium transition-colors hover:text-gray-700 ${
-                    serviceItems.some(item => location.pathname === item.path)
-                      ? 'text-gray-700'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  Services
-                  <FaChevronDown className={`ml-2 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden"
-                      
-                    >
-                      {serviceItems.map((service) => (
-                        <button
-                          key={service.name}
-                          onClick={() => handleServiceSelect(service.path)}
-                          className="block w-full text-left px-4 py-3 hover:bg-gray-50 hover:text-primary-600 transition-colors text-gray-700 font-medium"
-                        >
-                          {service.name}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-                </li>
-                
-                
-                 <li onClick={()=>{navigate('/contact')}}className="group relative cursor-pointer">
-                  <div className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                   Contact us 
-                    
-                  </div>
+            {/* Email */}
+            <a
+              href="mailto:support@growthflowmedia.com"
+              className="group flex items-center gap-1.5 transition-colors duration-300 hover:text-[#e36a2e]"
+            >
+              <Mail
+                size={13}
+                className="text-[#e36a2e] opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+              />
+              <span className="hidden whitespace-nowrap sm:inline">
+                support@growthflowmedia.com
+              </span>
+              <span className="whitespace-nowrap sm:hidden">
+                support@growthflow...
+              </span>
+            </a>
+          </div>
 
-        
-                </li>
-      
-            </ul>
+          {/* Actions Group */}
+          <div className="flex items-center">
+            <a
+              onClick={scrollToContact}
+              className="cursor-pointer whitespace-nowrap transition-colors duration-300 hover:text-[#e36a2e]"
+            >
+              Contact Support
+            </a>
+          </div>
+        </div>
+      </div>
 
-            {/* CTA Button */}
-            <button className="hidden lg:flex gap-2 rounded-xl bg-[#e36a2e] px-4 sm:px-6 py-2 sm:py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28] whitespace-nowrap" onClick={scrollToContact}>
-              Get Started Now <span><ArrowRightCircle size={18} className='text-black'/></span>
-            </button>
-          </nav>
+      {/* Hero Section - Updated for Mobile Order */}
+      <section className="relative h-screen z-10 overflow-hidden bg-[#fafafa] px-4 sm:px-6 pt-32 pb-16 lg:pt-48 lg:pb-32">
+        {/* Subtle Background Glow/Gradient */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-orange-50/50 to-transparent rounded-[100%] blur-3xl pointer-events-none"></div>
 
-          {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden mt-4 bg-white rounded-2xl p-4 shadow-lg">
-              <ul className="cursor-pointer space-y-3">
-                 <li  onClick={()=>{navigate('/')}}className="py-2 border-b border-gray-100">
-                   Home
-                  </li>
-               
-                  <li className="py-2 border-b border-gray-100">
-                <div className="py-3 ">
-                  <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between w-full font-medium text-gray-700 hover:text-primary-600"
-                  >
-                    <span>Services</span>
-                    <FaChevronDown className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isServicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pt-2 space-y-2">
-                          {serviceItems.map((service) => (
-                            <button
-                              key={service.name}
-                              onClick={() => handleServiceSelect(service.path)}
-                              className="block w-full text-left py-2 px-4 rounded-lg hover:bg-gray-50 hover:text-primary-600 text-gray-600 font-medium"
-                            >
-                              {service.name}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-                  </li>
-              
-             
-                  <li  onClick={()=>{navigate('/contact')}}className="py-2 border-b border-gray-100">
-                  Contact
-                  </li>
-                  <button className="w-full flex justify-center gap-2 rounded-xl bg-[#e36a2e] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28]" onClick={scrollToContact}>
-                    Get Started Now <ArrowRightCircle size={18} className='text-black'/>
-                  </button>
-               
-              </ul>
+        <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content Area */}
+          <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+            {/* Premium Pill Badge */}
+            <div
+              data-aos="slide-right"
+              className="inline-flex items-center gap-2 bg-white border border-gray-100 shadow-sm px-4 py-2 rounded-full mb-8 text-xs sm:text-sm font-medium text-gray-600 whitespace-nowrap"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e36a2e] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e36a2e]"></span>
+              </span>
+              Design & Digital Marketing Agency, India
             </div>
-          )}
+
+            {/* Dynamic Animated Headline (Mobile) */}
+            <div className="lg:hidden mb-6 w-full flex flex-col items-center">
+              <div className="h-48 w-48 mb-6 overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+                <img
+                  key={designImages[currentImageIndex].id}
+                  src={designImages[currentImageIndex].image}
+                  alt={designImages[currentImageIndex].text}
+                  className="w-full h-full object-cover animate-popIn"
+                />
+              </div>
+              <h1
+                key={designImages[currentImageIndex].text}
+                className={`text-4xl sm:text-5xl font-extrabold tracking-tight ${designImages[currentImageIndex].color} animate-popIn`}
+              >
+                {designImages[currentImageIndex].text}
+              </h1>
+            </div>
+
+            {/* Dynamic Animated Headline (Desktop) */}
+            <div
+              className="hidden lg:flex items-center gap-6 mb-2"
+              data-aos="slide-right"
+            >
+              <div className="h-28 w-28 shrink-0 overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+                <img
+                  key={designImages[currentImageIndex].id}
+                  src={designImages[currentImageIndex].image}
+                  alt={designImages[currentImageIndex].text}
+                  className="w-full h-full object-cover animate-popIn"
+                />
+              </div>
+              <h1
+                key={designImages[currentImageIndex].text}
+                className={`text-6xl font-extrabold tracking-tight leading-none ${designImages[currentImageIndex].color} animate-popIn`}
+              >
+                {designImages[currentImageIndex].text}
+              </h1>
+            </div>
+
+            <h2
+              data-aos="slide-right"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight"
+            >
+              with Aussie Growth Media.
+            </h2>
+
+            <p
+              data-aos="slide-right"
+              className="text-gray-500 text-base sm:text-lg lg:text-xl max-w-xl mb-10 leading-relaxed"
+            >
+              Elevate your online presence with our seamless fusion of
+              cutting-edge design and strategic{" "}
+              <span className="font-semibold text-gray-800">
+                digital marketing
+              </span>{" "}
+              solutions.
+            </p>
+
+            {/* Premium Input & CTA Group */}
+            <div data-aos="slide-up" className="w-full max-w-lg lg:max-w-none">
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 ml-1">
+                Select a Service to Begin
+              </label>
+
+              <div className="flex flex-col sm:flex-row gap-3 p-2 bg-white rounded-3xl sm:rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100">
+                <select
+                  onChange={handleChangeSelection}
+                  defaultValue=""
+                  className="flex-1 bg-transparent border-none focus:ring-0 px-4 py-3 text-gray-700 text-sm sm:text-base outline-none cursor-pointer"
+                >
+                  <option value="" disabled>
+                    Select a Service
+                  </option>
+                  <option value="/webdesign">Website Design</option>
+                  <option value="/ecommerce">ECommerce Websites</option>
+                  <option value="/service-site">Service Website</option>
+                  <option value="/branding&logodesign">
+                    Branding & Logo Design
+                  </option>
+                  <option value="/digitalmarketing">Digital Marketing</option>
+                  <option value="/seo">Search Engine Optimisation</option>
+                  <option value="/googleads">Google Ads Management</option>
+                  <option value="/metaads">Meta Ads Management</option>
+                  <option value="/conversionrate">
+                    Conversion Rate Optimization
+                  </option>
+                  <option value="/hosting">Managed Hosting</option>
+                  <option value="/gohigh">Go High Level CRM</option>
+                  <option value="/ai">
+                    AI Agents / Automation Development
+                  </option>
+                  <option value="/whitelabel">White Label Marketing</option>
+                  <option value="/lead">Lead Generation</option>
+                </select>
+
+                <button
+                  onClick={scrollToContact}
+                  className="flex items-center justify-center gap-2 bg-[#e36a2e] hover:bg-[#cf5f28] text-white px-8 py-3.5 rounded-2xl sm:rounded-full font-semibold transition-all duration-300 hover:shadow-[0_8px_20px_rgba(227,106,46,0.3)] hover:-translate-y-0.5 whitespace-nowrap text-sm sm:text-base"
+                >
+                  Get Started
+                  <ArrowRightCircle
+                    size={18}
+                    className="text-white opacity-90"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image Area */}
+          <div className="order-1 lg:order-2 relative mt-8 lg:mt-0">
+            {/* Decorative background blob behind the image */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-orange-200/40 to-transparent blur-3xl transform scale-110 rounded-full z-0"></div>
+
+            <img
+              src={vansh}
+              data-aos="fade-up"
+              alt="Professional team member"
+              className="relative z-10 w-full max-w-md lg:max-w-lg mx-auto rounded-3xl shadow-2xl border-4 border-white transform transition-transform duration-700 hover:scale-[1.02]"
+            />
+          </div>
         </div>
-      </header>
+      </section>
 
-   {/* Hero Section - Updated for Mobile Order */}
-<section className="relative z-10 bg-gradient-to-br from-gray-50 to-white px-4 sm:px-6 py-12 lg:py-24">
-  <div data-aos="slide-right" className=" inline-block bg-orange-500 text-black px-4 py-2 rounded-md mb-4 sm:mb-6 text-xs sm:text-sm font-semibold whitespace-nowrap lg:mt-0 sm:mx-22">
-        Design & Digital Marketing Agency,India
-      </div>
-  <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-   
-   
-    <div className="order-2 lg:order-1">
-     
-      
-      
-      
-      <div className="lg:hidden mb-6">
-        <div className="h-58 w-full overflow-hidden ">
-          <img
-            key={designImages[currentImageIndex].id}
-            src={designImages[currentImageIndex].image}
-            alt={designImages[currentImageIndex].text}
-            className="w-full h-full object-cover animate-popIn"
-          />
-        </div>
-      </div>
-
-    
-      <div className="hidden lg:flex flex-col sm:flex-row gap-4 sm:gap-6 mb-4" data-aos="slide-right">
-        <div className="h-48 w-48 overflow-hidden rounded-lg">
-          <img
-            key={designImages[currentImageIndex].id}
-            src={designImages[currentImageIndex].image}
-            alt={designImages[currentImageIndex].text}
-            className="w-full h-full  animate-popIn"
-          />
-        </div>
-
-        <h1
-          key={designImages[currentImageIndex].text}
-          className={`text-5xl font-bold ${designImages[currentImageIndex].color} animate-popIn mt-10`}
-        >
-          {designImages[currentImageIndex].text}
-        </h1>
-      </div>
-
-   
-      <div className="lg:hidden mb-6 text-center">
-        <h1
-          key={designImages[currentImageIndex].text}
-          className={`text-4xl font-bold ${designImages[currentImageIndex].color} animate-popIn`}
-        >
-          {designImages[currentImageIndex].text}
-        </h1>
-      </div>
-
-      <h2 data-aos="slide-right" className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6 text-center lg:text-left">
-        with Growth Flow Media
-      </h2>
-
-      <p data-aos="slide-right" className="text-gray-700 text-base sm:text-lg mb-4 text-center lg:text-left">
-        Elevate your online presence with our seamless fusion of cutting-edge design and strategic <span className="font-semibold">digital marketing</span> solutions.
-      </p>
-
-      
-      <div data-aos="slide-right" className="mb-6">
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
-          Select Services
-        </label>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <select onChange={handleChangeSelection} defaultValue=""className="flex-1 border border-gray-300 rounded-md px-3 sm:px-4 py-2 sm:py-3 text-gray-700 bg-white text-sm sm:text-base">
-            <option value="">Select a Service</option>
-            <option value="/webdesign">Website Design</option>
-            <option value="/ecommerce">ECommerce Websites</option>
-            <option value="/service-site">Service Website</option>
-            <option value="/branding&logodesign">Branding & Logo Design</option>
-            <option value="/digitalmarketing">Digital Marketing</option>
-            <option value="/seo">Search Engine Optimisation</option>
-            <option value="/googleads">Google Ads Management</option>
-            <option value="/metaads">Meta Ads Management</option>
-       
-            <option value="/conversionrate">Conversion Rate Optimization</option>
-            <option value="/hosting">Managed Hosting</option>
-            <option value="/gohigh">Go High Level CRM</option>
-            <option value="/ai">AI Agents / Automation Development</option>
-            <option value="/whitelabel">White Label Marketing</option>
-            <option value="/lead">Lead Generation</option>
-          </select>
-          <button data-aos="slide-up" className="flex justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-black px-6 sm:px-8 py-2 sm:py-3 rounded-md font-semibold whitespace-nowrap text-sm sm:text-base" onClick={scrollToContact}>
-            Get Started Now <span><ArrowRightCircle size={18} className='text-black mt-0.5 sm:mt-1'/></span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-   
-    <div className="bg-transparent order-1 lg:order-2 lg:scale-130 mb-8 lg:mb-0">
-      <div className="lg:hidden mb-4">
-       
-        <div className="flex justify-center items-center gap-4">
-         
-        </div>
-      </div>
-      
-      <img
-        src={vansh}
-        data-aos="slide-left"
-        alt="Professional team member"
-        className="w-full max-w-md mx-auto rounded-lg"
-      />
-      
-   
-    </div>
-  </div>
-</section> 
+      <Marquee />
 
       {/* Featured In Section with Scrolling Animation */}
-      <section className="bg-black py-8 sm:py-12 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <h3 data-aos="slide-right" className="text-white text-lg sm:text-2xl font-bold mb-6 sm:mb-8 text-center">Featured in</h3>
-          <div className="relative">
-            <div className="flex gap-8 sm:gap-16 animate-scroll">
-              {/* First set of logos */}
-              <div data-aos="slide-up" className="flex gap-8 sm:gap-16 flex-shrink-0">
-                <div className="text-white text-xs sm:text-sm font-bold flex-shrink-0">
-                  <div className="border border-white px-3 sm:px-4 py-1 sm:py-2">
-                    SMALL BUSINESS<br/>
-                    <span className="italic text-lg sm:text-2xl">WORLD</span><br/>
-                    <span className="text-xs italic">JOURNAL</span>
-                  </div>
+      <section className="relative bg-zinc-950 py-12 sm:py-20 overflow-hidden border-t border-zinc-900">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative">
+          <h3
+            data-aos="fade-up"
+            className="text-center text-[11px] sm:text-xs font-bold tracking-[0.25em] text-zinc-500 uppercase mb-10 sm:mb-14"
+          >
+            Trusted & Featured In
+          </h3>
+
+          {/* The Marquee Container */}
+          <div className="relative flex overflow-hidden group">
+            {/* Edge Fading Masks (Creates the smooth fade-in/out effect at screen edges) */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 bg-gradient-to-r from-zinc-950 to-transparent pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 bg-gradient-to-l from-zinc-950 to-transparent pointer-events-none"></div>
+
+            {/* Scrolling Track (Note: hover:pause stops scrolling when user hovers if you add a group-hover:pause class in your Tailwind config, otherwise it just scrolls) */}
+            <div className="flex w-max min-w-full shrink-0 animate-scroll items-center gap-12 sm:gap-24 pl-12 sm:pl-24">
+              {/* LOGO GROUP 1 */}
+              <div className="flex shrink-0 items-center gap-12 sm:gap-24">
+                {/* Text Logo: Small Business World Journal */}
+                <div className="flex shrink-0 cursor-pointer flex-col items-center border border-zinc-700 p-2 text-zinc-400 transition-all duration-500 hover:border-zinc-300 hover:text-white">
+                  <span className="text-[10px] font-bold tracking-widest sm:text-xs">
+                    SMALL BUSINESS
+                  </span>
+                  <span className="text-sm font-serif italic sm:text-lg">
+                    WORLD
+                  </span>
+                  <span className="text-[8px] italic tracking-widest">
+                    JOURNAL
+                  </span>
                 </div>
-                <div className="text-white font-bold text-sm sm:text-xl flex-shrink-0">
-                  THE<br/>
-                  Australia<br/>
-                  <span className="text-xs">times</span>
+
+                {/* Text Logo: The Australia Times */}
+                <div className="flex shrink-0 cursor-pointer flex-col text-center text-zinc-400 transition-all duration-500 hover:text-white">
+                  <span className="text-[10px] font-bold sm:text-xs">THE</span>
+                  <span className="font-serif text-sm sm:text-lg">
+                    Australia
+                  </span>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-widest">
+                    times
+                  </span>
                 </div>
-                <div className="text-white font-bold text-2xl sm:text-4xl tracking-wider flex-shrink-0">
-                  FOX40
+
+                {/* Text Logo: FOX40 */}
+                <div className="shrink-0 cursor-pointer text-2xl font-black tracking-tighter text-zinc-400 transition-all duration-500 hover:text-white sm:text-4xl">
+                  FOX
+                  <span className="text-red-600 grayscale transition-all duration-500 hover:grayscale-0">
+                    40
+                  </span>
                 </div>
-                <div className="text-white text-xs sm:text-sm flex-shrink-0">
-                  <span className="font-bold">INNOVATION&</span><br/>
-                  ENTREPRENEURSHIP<br/>
-                  <span className="text-xs">NEWS</span>
-                </div>    <div className="flex items-center gap-2">
-              <img
-                src={image11}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image12}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image13}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image14}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image15}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div>
-                
+
+                {/* Text Logo: Innovation News */}
+                <div className="flex shrink-0 cursor-pointer flex-col text-zinc-400 transition-all duration-500 hover:text-white">
+                  <span className="text-[10px] font-bold sm:text-xs">
+                    INNOVATION&
+                  </span>
+                  <span className="text-[10px] font-light tracking-wide sm:text-xs">
+                    ENTREPRENEURSHIP
+                  </span>
+                  <span className="text-[8px] font-bold tracking-widest">
+                    NEWS
+                  </span>
+                </div>
+
+                {/* Image Logos */}
+                <img
+                  src={image11}
+                  alt="Featured Publication 1"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image12}
+                  alt="Featured Publication 2"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image13}
+                  alt="Featured Publication 3"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image14}
+                  alt="Featured Publication 4"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image15}
+                  alt="Featured Publication 5"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
               </div>
-             
-              {/* Duplicate set for infinite scroll */}
-              <div data-aos="slide-up" className="flex gap-8 sm:gap-16 flex-shrink-0">
-                <div className="text-white text-xs sm:text-sm font-bold flex-shrink-0">
-                  <div className="border border-white px-3 sm:px-4 py-1 sm:py-2">
-                    SMALL BUSINESS<br/>
-                    <span className="italic text-lg sm:text-2xl">WORLD</span><br/>
-                    <span className="text-xs italic">JOURNAL</span>
-                  </div>
+
+              {/* LOGO GROUP 2 (Duplicate for Infinite Scroll) */}
+              <div className="flex shrink-0 items-center gap-12 sm:gap-24">
+                <div className="flex shrink-0 cursor-pointer flex-col items-center border border-zinc-700 p-2 text-zinc-400 transition-all duration-500 hover:border-zinc-300 hover:text-white">
+                  <span className="text-[10px] font-bold tracking-widest sm:text-xs">
+                    SMALL BUSINESS
+                  </span>
+                  <span className="text-sm font-serif italic sm:text-lg">
+                    WORLD
+                  </span>
+                  <span className="text-[8px] italic tracking-widest">
+                    JOURNAL
+                  </span>
                 </div>
-                <div className="text-white font-bold text-sm sm:text-xl flex-shrink-0">
-                  THE<br/>
-                  Australia<br/>
-                  <span className="text-xs">times</span>
+
+                <div className="flex shrink-0 cursor-pointer flex-col text-center text-zinc-400 transition-all duration-500 hover:text-white">
+                  <span className="text-[10px] font-bold sm:text-xs">THE</span>
+                  <span className="font-serif text-sm sm:text-lg">
+                    Australia
+                  </span>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-widest">
+                    times
+                  </span>
                 </div>
-                <div className="text-white font-bold text-2xl sm:text-4xl tracking-wider flex-shrink-0">
-                  FOX40
+
+                <div className="shrink-0 cursor-pointer text-2xl font-black tracking-tighter text-zinc-400 transition-all duration-500 hover:text-white sm:text-4xl">
+                  FOX
+                  <span className="text-red-600 grayscale transition-all duration-500 hover:grayscale-0">
+                    40
+                  </span>
                 </div>
-                <div className="text-white text-xs sm:text-sm flex-shrink-0">
-                  <span className="font-bold">INNOVATION&</span><br/>
-                  ENTREPRENEURSHIP<br/>
-                  <span className="text-xs">NEWS</span>
+
+                <div className="flex shrink-0 cursor-pointer flex-col text-zinc-400 transition-all duration-500 hover:text-white">
+                  <span className="text-[10px] font-bold sm:text-xs">
+                    INNOVATION&
+                  </span>
+                  <span className="text-[10px] font-light tracking-wide sm:text-xs">
+                    ENTREPRENEURSHIP
+                  </span>
+                  <span className="text-[8px] font-bold tracking-widest">
+                    NEWS
+                  </span>
                 </div>
-               
-                <div className="flex items-center gap-2">
-              <img
-                src={image11}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image12}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image13}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image14}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div><div className="flex items-center gap-2">
-              <img
-                src={image15}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div>
+
+                <img
+                  src={image11}
+                  alt="Featured Publication 1"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image12}
+                  alt="Featured Publication 2"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image13}
+                  alt="Featured Publication 3"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image14}
+                  alt="Featured Publication 4"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
+                <img
+                  src={image15}
+                  alt="Featured Publication 5"
+                  className="h-8 sm:h-12 w-auto object-contain grayscale opacity-40 transition-all duration-500 hover:grayscale-0 hover:opacity-100 cursor-pointer"
+                />
               </div>
             </div>
           </div>
@@ -801,872 +779,1532 @@ const ContactSection=useRef(null);
       </section>
 
       {/* Congratulations Section with Confetti Animation */}
-      <section className="bg-black py-12 sm:py-20 relative overflow-hidden">
-        <Confetti 
+      <section className="relative bg-[#060608] py-20 sm:py-28 overflow-hidden">
+        {/* Confetti */}
+        <Confetti
           width={width}
           height={height}
           numberOfPieces={300}
           gravity={0.2}
           recycle={false}
         />
-       
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 relative z-10">
-          <h2 data-aos="slide-down"
- className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-            <span  className="text-orange-500">Congratulations!</span>{' '}
-            <span  className="text-white">You're </span>
-            <span  className="text-pink-500">Here</span>
+
+        {/* Background: layered radial glows */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse_at_top,rgba(249,115,22,0.12),transparent_70%)]" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_bottom,rgba(236,72,153,0.08),transparent_70%)]" />
+        </div>
+
+        {/* Thin top accent line */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-orange-500/60 to-transparent" />
+
+        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 relative z-10">
+          {/* Badge */}
+          <div
+            data-aos="fade-down"
+            className="inline-flex items-center gap-2 border border-white/10 bg-white/5 backdrop-blur-sm rounded-full px-4 py-1.5 mb-8"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] font-['Montserrat'] font-600 tracking-[0.2em] text-white/50 uppercase">
+              You Made It
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h2
+            data-aos="slide-down"
+            className="font-['Cormorant_Garamond'] text-5xl sm:text-6xl md:text-7xl font-light leading-[1.05] mb-6"
+          >
+            <span className="text-orange-400 italic">Congratulations!</span>
+            <br />
+            <span className="text-white">You're </span>
+            <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent italic">
+              Here.
+            </span>
           </h2>
-         
-          <p data-aos="slide-up"
-className="text-white text-lg sm:text-xl mb-6 sm:mb-8 font-handwriting">
-            because you're ready to grow your business, build a brand, and<br className="hidden sm:block"/>
-            create something incredible...
+
+          {/* Subtext */}
+          <p
+            data-aos="slide-up"
+            className="font-['Cormorant_Garamond'] text-white/60 text-xl sm:text-2xl font-light italic mb-12 leading-relaxed"
+          >
+            because you're ready to grow your business, build a brand,
+            <br className="hidden sm:block" />
+            and create something incredible...
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-8 sm:mb-12">
-            <div data-aos="slide-right" className="bg-white rounded-full px-4 sm:px-8 py-3 sm:py-4 flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-              <span className="text-2xl sm:text-3xl font-bold">4.9</span>
-              <div className="flex text-yellow-400">
+          {/* Rating Pills */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5 mb-12">
+            {/* Google */}
+            <div
+              data-aos="slide-right"
+              className="group flex items-center gap-3 bg-white/[0.04] border border-white/10 hover:border-white/20 hover:bg-white/[0.07] backdrop-blur-sm rounded-2xl px-5 py-3.5 w-full sm:w-auto transition-all duration-400 cursor-default"
+            >
+              <FaGoogle className="text-[#DB4437] text-lg shrink-0" />
+              <div className="w-px h-6 bg-white/10" />
+              <span className="font-['Montserrat'] text-2xl font-bold text-white">
+                4.9
+              </span>
+              <div className="flex text-yellow-400 text-sm gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i}>⭐</span>
+                  <span key={i}>★</span>
                 ))}
               </div>
-              <span className="text-xs sm:text-sm text-gray-600">from 63 reviews</span>
-              <span  className="text-xl sm:text-2xl"><FaGoogle className='text-[#DB4437]'/></span>
+              <span className="font-['Montserrat'] text-[11px] text-white/40 tracking-wide">
+                63 reviews
+              </span>
             </div>
-           
-            <div data-aos="slide-left" className="bg-white rounded-full px-4 sm:px-8 py-3 sm:py-4 flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-              <span className="text-2xl sm:text-3xl font-bold">4.9</span>
-              <div className="flex text-yellow-400">
+
+            {/* Facebook */}
+            <div
+              data-aos="slide-left"
+              className="group flex items-center gap-3 bg-white/[0.04] border border-white/10 hover:border-white/20 hover:bg-white/[0.07] backdrop-blur-sm rounded-2xl px-5 py-3.5 w-full sm:w-auto transition-all duration-400 cursor-default"
+            >
+              <FaFacebook className="text-[#1877F2] text-lg shrink-0" />
+              <div className="w-px h-6 bg-white/10" />
+              <span className="font-['Montserrat'] text-2xl font-bold text-white">
+                4.9
+              </span>
+              <div className="flex text-yellow-400 text-sm gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i}>⭐</span>
+                  <span key={i}>★</span>
                 ))}
               </div>
-              <span className="text-xs sm:text-sm text-gray-600">from 33 reviews</span>
-              <span className="text-xl sm:text-2xl"><FaFacebook className='text-[#1877F2]'/></span>
+              <span className="font-['Montserrat'] text-[11px] text-white/40 tracking-wide">
+                33 reviews
+              </span>
             </div>
           </div>
 
-          <button data-aos="slide-up" className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-colors flex items-center gap-2 mx-auto text-sm sm:text-base" onClick={scrollToContact}>
-            Get Started Now
-            <span className="text-lg sm:text-xl">→</span>
-          </button>
+          {/* CTA Button */}
+          <div data-aos="slide-up">
+            <button
+              onClick={scrollToContact}
+              className="group relative inline-flex items-center gap-3 font-['Montserrat'] text-sm font-semibold tracking-[0.15em] uppercase text-white px-8 py-4 rounded-full border border-white/20 hover:border-orange-500/60 transition-all duration-500 overflow-hidden"
+            >
+              {/* Hover fill */}
+              <span className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+              <span className="relative">Get Started Now</span>
+              <span className="relative text-orange-400 group-hover:translate-x-1 transition-transform duration-300 text-base">
+                →
+              </span>
+            </button>
+          </div>
         </div>
+
+        {/* Bottom thin accent */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-pink-500/40 to-transparent" />
       </section>
 
-      
-     {/* Services Section */}
-<section  className="bg-white py-12 sm:py-20">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6">
-    <h2 data-aos="slide-right"className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 section-heading">Our Growth Services</h2>
-    <p data-aos="slide-left"className="text-center text-lg sm:text-xl mb-8 sm:mb-12" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-      We Are A Full Service Digital Marketing Agency With Expertise In The Following Areas.
-    </p>
+      {/* Services Section */}
+      <section className="relative bg-[#fafafa] py-16 sm:py-24 lg:py-32 overflow-hidden">
+        {/* Subtle Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-12">
-      <button data-aos="slide-right"
-className="bg-purple-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-purple-600 flex items-center gap-2 text-sm sm:text-base justify-center"
-onClick={()=>{window.location.href='/ecommerce'}}> 
-  
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v4H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 10h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4z" clipRule="evenodd" />
-        </svg>
-        eCommerce Websites
-      </button>
-       <button data-aos="slide-right"
-className="bg-green-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-green-600 flex items-center gap-2 text-sm sm:text-base justify-center"
-onClick={()=>{window.location.href='/service-site'}}
->
-     <Globe size={20}/>
-        Service Websites
-      </button>
-       <button data-aos="slide-right"
-className="bg-blue-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-blue-600 flex items-center gap-2 text-sm sm:text-base justify-center" onClick={()=>{window.location.href='/ai'}}>
-       <Bot size={20}/>
-         Ai Agents/Automation Development
-      </button>
-     
-      <button data-aos="slide-up" className="bg-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-orange-600 flex items-center gap-2 text-sm sm:text-base justify-center" onClick={()=>{window.location.href='/metaads'}}>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
-        </svg>
-        Meta Ads Management
-      </button>
-      <button data-aos="slide-left"className="bg-pink-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-pink-700 flex items-center gap-2 text-sm sm:text-base justify-center" onClick={()=>{window.location.href='/googleads'}}>
-       <Target size={20}/>
-        Google Ads Management
-      </button>
-      <button  data-aos="slide-right"className="bg-yellow-300 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-yellow-500 flex items-center gap-2 text-sm sm:text-base justify-center" onClick={()=>{window.location.href='/hosting'}} >
-        <Server size={20}/>
-        Managed Hosting
-      </button>
-          <button  data-aos="slide-right"className="bg-red-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-red-900 flex items-center gap-2 text-sm sm:text-base justify-center"
-          onClick={()=>{window.location.href='/lead'}}
-          >
-        <UserPlus size={20}/>
-        lead Generation
-      </button>
-          <button  data-aos="slide-right"className="bg-blue-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-blue-900 flex items-center gap-2 text-sm sm:text-base justify-center" onClick={()=>{window.location.href='/whitelabel'}}>
-      <Layers size={20}/>
-        White Label Marketing
-      </button>
-      <button data-aos="slide-up"className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-green-700 flex items-center gap-2 text-sm sm:text-base justify-center"  onClick={()=>{window.location.href='/seo'}}>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
-        </svg>
-        SEO (Search Engine Optimization)
-      </button>
-
-    </div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-      <div data-aos="slide-right"className="bg-white rounded-lg p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow service-card">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3" />
-          </svg>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Branding & Logo Design</h3>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          Captivate the world with one look at your brand and logo. Our graphic design team is all about...
-        </p>
-        <button onClick={() => {
-                    window.location.href = `/branding&logodesign`;
-                  }}className="border-2 border-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-medium hover:bg-black hover:text-white flex items-center gap-2 text-sm sm:text-base">
-          Read More <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div data-aos="slide-down" className="bg-white rounded-lg p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow service-card">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Digital Marketing</h3>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          Don't follow the trend, but be one with our remarkable digital marketing service in Australia. W...
-        </p>
-        <button onClick={() => {
-                    window.location.href = `/digitalmarketing`;
-                  }}className="border-2 border-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-medium hover:bg-black hover:text-white flex items-center gap-2 text-sm sm:text-base">
-          Read More <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div  data-aos="slide-left"className="bg-white rounded-lg p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow service-card">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Conversion Rate Optimization</h3>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          Optimizing conversion rates is vital for reaching potential buyers. Our Conversion Rate Optimization...
-        </p>
-        <button onClick={() => {
-                    window.location.href = `/conversionrate`;
-                  }}className="border-2 border-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-medium hover:bg-black hover:text-white flex items-center gap-2 text-sm sm:text-base">
-          Click Here <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div data-aos="slide-right" className="bg-white rounded-lg p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow service-card">
-        <div  className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-          </svg>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Web Design & Development</h3>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          Your website is up on the internet even when you are not. With our professional team of web design...
-        </p>
-        <button onClick={() => {
-                    window.location.href = `/webdesign`;
-                  }}className="border-2 border-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-medium hover:bg-black hover:text-white flex items-center gap-2 text-sm sm:text-base">
-          Read More <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div data-aos="slide-up" className="bg-white rounded-lg p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow service-card">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-          </svg>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Managed Hosting</h3>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          Looking for a managed hosting provider? Our agency provides comprehensive enterprise grade...
-        </p>
-        <button onClick={() => {
-                    window.location.href = `/hosting`;
-                  }}className="border-2 border-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-medium hover:bg-black hover:text-white flex items-center gap-2 text-sm sm:text-base">
-          Click Here <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div data-aos="slide-left"className="bg-white rounded-lg p-4 sm:p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow service-card">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Go High Level CRM</h3>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          GoHighLevel is an all-in-one CRM and marketing automation platform for agencies and small businesse...
-        </p>
-        <button onClick={() => {
-                    window.location.href = `/gohigh`;
-                  }}className="border-2 border-black px-4 sm:px-6 py-1 sm:py-2 rounded-full font-medium hover:bg-black hover:text-white flex items-center gap-2 text-sm sm:text-base">
-          Click Here <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Why Choose Us Section */}
-      <section  className="relative bg-black py-12 sm:py-20 lg:py-32 overflow-hidden">
-        {/* Curved Background */}
-        <div className="absolute top-0 left-0 right-0 h-16 sm:h-20 lg:h-24 bg-white rounded-b-[50%]"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pt-8 sm:pt-12">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3 sm:mb-4" data-aos="slide-down">
-              Why Choose Us For Digital Marketing In Brisbane?
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+          {/* Header Section */}
+          <div className="mx-auto max-w-3xl text-center mb-16 sm:mb-20">
+            <h2
+              data-aos="fade-up"
+              className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 mb-6"
+            >
+              Our Growth <span className="text-[#e36a2e]">Services.</span>
             </h2>
-            <p className="text-white text-base sm:text-lg max-w-3xl mx-auto px-2" data-aos="slide-up">
-              With so many digital marketing agencies to choose from, all promising the same results...
-              Here's what sets us Growth Flow Media apart and why so many local businesses 
-              engage us as their marketing partner:
+            <p
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="text-lg sm:text-xl text-gray-500 leading-relaxed"
+            >
+              We are a full-service digital marketing agency. Explore our
+              expertise and discover how we can engineer your growth.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {/* Quick Links / Filter Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-16 sm:mb-24">
             {[
-              { 
-                title: "Award-Winning Agency", 
-                desc: "Growth Flow Media is a recognized award-winning digital marketing agency known for delivering outstanding results. With over 100 industry awards, our success reflects our commitment to innovation, performance, and client satisfaction. These achievements highlight the trust businesses place in us to drive real growth."
+              {
+                name: "eCommerce Websites",
+                path: "/ecommerce",
+                icon: <Globe size={18} />,
               },
-              { 
-                title: "No Contracts", 
-                desc: "At Growth Flow Media, we believe in earning loyalty through results, not locking clients into long-term contracts. We operate with complete transparency, integrity, and honesty. Our clients stay with us because we deliver value, not because they are obligated to."
+              {
+                name: "Service Websites",
+                path: "/service-site",
+                icon: <Globe size={18} />,
               },
-              { 
-                title: "No Outsourcing", 
-                desc: "All services at Growth Flow Media are handled entirely by our in-house team. We never outsource our work, ensuring consistent quality, better communication, and complete control over every campaign we manage. This approach allows us to maintain high standards across all deliverables."
+              { name: "AI Automation", path: "/ai", icon: <Bot size={18} /> },
+              {
+                name: "Meta Ads",
+                path: "/metaads",
+                icon: <Target size={18} />,
               },
-              { 
-                title: "Local Agency", 
-                desc: "As a local agency, we understand the market, audience, and business environment better than anyone else. Our team is based locally, making it easy for clients to connect with us directly, collaborate closely, and build strong long-term partnerships."
+              {
+                name: "Google Ads",
+                path: "/googleads",
+                icon: <Target size={18} />,
               },
-              { 
-                title: "Real Results", 
-                desc: "We focus on delivering real, measurable results that make a tangible impact on business growth. Our proven track record is supported by strong case studies, positive client reviews, and award-winning campaigns that consistently generate success."
+              {
+                name: "Managed Hosting",
+                path: "/hosting",
+                icon: <Server size={18} />,
               },
-              { 
-                title: "Experienced Team", 
-                desc: "Our team brings over 30 years of combined experience in digital marketing and has worked with hundreds of businesses across various industries. This depth of experience allows us to craft tailored strategies that deliver sustainable growth and maximum ROI."
-              }
-            ].map((item, index) => (
-              <div 
-                key={index} data-aos="fade-up"
-                className="group bg-[#0f0f0f] p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 hover:bg-orange-800  why-choose-card"
+              {
+                name: "Lead Generation",
+                path: "/lead",
+                icon: <UserPlus size={18} />,
+              },
+              {
+                name: "White Label",
+                path: "/whitelabel",
+                icon: <Layers size={18} />,
+              },
+              { name: "SEO", path: "/seo", icon: <Globe size={18} /> },
+            ].map((btn, index) => (
+              <button
+                key={btn.name}
+                data-aos="fade-up"
+                data-aos-delay={index * 50}
+                onClick={() => {
+                  window.location.href = btn.path;
+                }}
+                className="group flex items-center gap-2.5 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-600 shadow-[0_2px_10px_rgb(0,0,0,0.02)] transition-all duration-300 hover:border-[#e36a2e] hover:bg-[#e36a2e] hover:text-white hover:shadow-md"
               >
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-orange-500 mb-2  sm:mb-3 lg:mb-4 group-hover:text-white transition-colors duration-300" data-aos="slide-down">
-                  {index + 1}.{item.title}
+                <span className="opacity-70 transition-opacity group-hover:opacity-100">
+                  {btn.icon}
+                </span>
+                {btn.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Featured Service Cards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {/* Card 1: Branding */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/branding&logodesign`;
+              }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#e36a2e]/10 group-hover:border-[#e36a2e]/20">
+                <svg
+                  className="h-6 w-6 text-gray-600 transition-colors duration-500 group-hover:text-[#e36a2e]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 transition-colors group-hover:text-[#e36a2e]">
+                Branding & Logo Design
+              </h3>
+              <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
+                Captivate the world with one look at your brand and logo. Our
+                graphic design team is all about creating memorable identities.
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors group-hover:text-[#e36a2e]">
+                Explore Service
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+
+            {/* Card 2: Digital Marketing */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/digitalmarketing`;
+              }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#e36a2e]/10 group-hover:border-[#e36a2e]/20">
+                <svg
+                  className="h-6 w-6 text-gray-600 transition-colors duration-500 group-hover:text-[#e36a2e]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 transition-colors group-hover:text-[#e36a2e]">
+                Digital Marketing
+              </h3>
+              <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
+                Don't just follow the trend, become one. Stand out with our
+                remarkable digital marketing strategies designed for scale.
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors group-hover:text-[#e36a2e]">
+                Explore Service
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+
+            {/* Card 3: CRO */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/conversionrate`;
+              }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#e36a2e]/10 group-hover:border-[#e36a2e]/20">
+                <svg
+                  className="h-6 w-6 text-gray-600 transition-colors duration-500 group-hover:text-[#e36a2e]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 transition-colors group-hover:text-[#e36a2e]">
+                Conversion Rate Opt.
+              </h3>
+              <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
+                Optimizing conversion rates is vital for reaching potential
+                buyers. Turn your existing traffic into revenue.
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors group-hover:text-[#e36a2e]">
+                Explore Service
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+
+            {/* Card 4: Web Design */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="400"
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/webdesign`;
+              }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#e36a2e]/10 group-hover:border-[#e36a2e]/20">
+                <svg
+                  className="h-6 w-6 text-gray-600 transition-colors duration-500 group-hover:text-[#e36a2e]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 transition-colors group-hover:text-[#e36a2e]">
+                Web Design & Dev
+              </h3>
+              <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
+                Your website works even when you don't. Build a stunning,
+                high-converting digital storefront with our expert team.
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors group-hover:text-[#e36a2e]">
+                Explore Service
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+
+            {/* Card 5: Managed Hosting */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="500"
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/hosting`;
+              }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#e36a2e]/10 group-hover:border-[#e36a2e]/20">
+                <svg
+                  className="h-6 w-6 text-gray-600 transition-colors duration-500 group-hover:text-[#e36a2e]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 transition-colors group-hover:text-[#e36a2e]">
+                Managed Hosting
+              </h3>
+              <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
+                Looking for lightning-fast speeds and bulletproof security? We
+                provide comprehensive enterprise-grade hosting.
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors group-hover:text-[#e36a2e]">
+                Explore Service
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+
+            {/* Card 6: Go High Level CRM */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="600"
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] overflow-hidden cursor-pointer"
+              onClick={() => {
+                window.location.href = `/gohigh`;
+              }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#e36a2e]/10 group-hover:border-[#e36a2e]/20">
+                <svg
+                  className="h-6 w-6 text-gray-600 transition-colors duration-500 group-hover:text-[#e36a2e]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 transition-colors group-hover:text-[#e36a2e]">
+                GoHighLevel CRM
+              </h3>
+              <p className="text-gray-500 mb-8 text-sm sm:text-base leading-relaxed">
+                Master your sales pipeline. GoHighLevel is an all-in-one CRM and
+                marketing automation platform for scaling businesses.
+              </p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors group-hover:text-[#e36a2e]">
+                Explore Service
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="relative bg-[#060608] py-20 sm:py-28 lg:py-36 overflow-hidden">
+        {/* White curve top */}
+        <div className="absolute top-0 left-0 right-0 h-16 sm:h-24 bg-[#fafaf9] rounded-b-[50%] z-0" />
+
+        {/* Radial glow */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(249,115,22,0.06),transparent_60%)]" />
+
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.02]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pt-16 sm:pt-20">
+          {/* Header */}
+          <div className="text-center mb-16 sm:mb-20">
+            <div
+              data-aos="fade-down"
+              className="inline-flex items-center gap-2 border border-white/10 bg-white/5 backdrop-blur-sm rounded-full px-4 py-1.5 mb-8"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+              <span className="font-['Montserrat'] text-[10px] font-bold tracking-[0.25em] text-white/40 uppercase">
+                Brisbane's Trusted Agency
+              </span>
+            </div>
+
+            <h2
+              data-aos="slide-down"
+              className="font-['Cormorant_Garamond'] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white leading-[1.05] mb-6"
+            >
+              Why Choose Us For
+              <br />
+              <span className="italic text-orange-400">
+                Digital Marketing
+              </span>{" "}
+              <span className="text-white/30">in Brisbane?</span>
+            </h2>
+
+            <p
+              data-aos="slide-up"
+              className="font-['Montserrat'] text-white/40 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light tracking-wide"
+            >
+              With so many agencies promising the same results — here's what
+              sets Aussie Growth Media apart and why local businesses choose us
+              as their long-term marketing partner.
+            </p>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.06]">
+            {[
+              {
+                number: "01",
+                title: "Award-Winning Agency",
+                desc: "Over 100 industry awards reflecting our commitment to innovation, performance, and client satisfaction — and the trust businesses place in us to drive real growth.",
+                icon: (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                    />
+                  </svg>
+                ),
+              },
+              {
+                number: "02",
+                title: "No Contracts",
+                desc: "We earn loyalty through results, not lock-in. We operate with complete transparency and integrity — clients stay because we deliver value, not obligation.",
+                icon: (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                ),
+              },
+              {
+                number: "03",
+                title: "No Outsourcing",
+                desc: "Every deliverable is handled entirely in-house. This means consistent quality, direct communication, and complete control over every campaign we run.",
+                icon: (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                ),
+              },
+              {
+                number: "04",
+                title: "Local Agency",
+                desc: "We understand the local market, audience, and business environment better than anyone. Our team is based locally for direct collaboration and close partnership.",
+                icon: (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                ),
+              },
+              {
+                number: "05",
+                title: "Real Results",
+                desc: "Measurable impact on business growth — backed by strong case studies, authentic client reviews, and award-winning campaigns that consistently generate success.",
+                icon: (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
+                  </svg>
+                ),
+              },
+              {
+                number: "06",
+                title: "Experienced Team",
+                desc: "Over 30 years of combined experience across hundreds of businesses and industries — allowing us to craft tailored strategies that deliver sustainable growth and maximum ROI.",
+                icon: (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                ),
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 60}
+                className="group relative bg-[#060608] hover:bg-[#0f0f0f] p-7 sm:p-8 lg:p-10 transition-all duration-500 cursor-default overflow-hidden"
+              >
+                {/* Hover orange glow in corner */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/0 group-hover:bg-orange-500/5 rounded-full blur-2xl transition-all duration-700 -translate-y-1/2 translate-x-1/2" />
+
+                {/* Top row: number + icon */}
+                <div className="flex items-start justify-between mb-6">
+                  <span className="font-['Cormorant_Garamond'] text-5xl sm:text-6xl font-light text-white/[0.06] group-hover:text-orange-500/20 leading-none transition-colors duration-500 select-none">
+                    {item.number}
+                  </span>
+                  <div className="w-9 h-9 rounded-xl bg-white/[0.04] group-hover:bg-orange-500/10 border border-white/[0.06] group-hover:border-orange-500/20 flex items-center justify-center text-white/30 group-hover:text-orange-400 transition-all duration-500">
+                    {item.icon}
+                  </div>
                 </div>
-               
-                <p data-aos="slide-right" className="text-white text-sm sm:text-base group-hover:text-black transition-colors duration-300">{item.desc}</p>
+
+                {/* Title */}
+                <h3 className="font-['Cormorant_Garamond'] text-xl sm:text-2xl font-semibold text-white/80 group-hover:text-white mb-3 transition-colors duration-500 leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Thin accent line */}
+                <div className="w-8 h-px bg-white/10 group-hover:w-16 group-hover:bg-orange-500/60 transition-all duration-500 mb-4" />
+
+                {/* Desc */}
+                <p className="font-['Montserrat'] text-white/30 group-hover:text-white text-xs sm:text-sm leading-relaxed font-light transition-colors duration-500">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#060608] to-transparent pointer-events-none" />
       </section>
 
       {/* About Section */}
-      <section className="bg-black py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-            <div data-aos="flip-up">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-                <span className="text-orange-500">You Focus on Your Business.</span>
-                <br />
-                <span className="text-white">We’ll Take Care of Your Growth.</span>
+      <section className="relative bg-[#060608] py-20 sm:py-28 lg:py-36 overflow-hidden">
+        {/* Background atmosphere */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_top_left,rgba(249,115,22,0.07),transparent_60%)]" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(249,115,22,0.04),transparent_60%)]" />
+        </div>
+
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.018]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-center">
+            {/* ── LEFT: Copy ── */}
+            <div data-aos="fade-right">
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-2 border border-white/10 bg-white/5 backdrop-blur-sm rounded-full px-4 py-1.5 mb-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+                <span className="font-['Montserrat'] text-[10px] font-bold tracking-[0.25em] text-white/40 uppercase">
+                  About Aussie Growth Media
+                </span>
+              </div>
+
+              {/* Headline */}
+              <h2 className="font-['Cormorant_Garamond'] text-4xl sm:text-5xl lg:text-6xl font-light leading-[1.05] mb-8">
+                <span className="text-orange-400 italic block">
+                  You Focus on
+                  <br />
+                  Your Business.
+                </span>
+                <span className="text-white/80">We'll Take Care of</span>{" "}
+                <span className="text-white font-semibold">Your Growth.</span>
               </h2>
-              <p className="text-white mb-4 sm:mb-6 text-sm sm:text-base">
-                <span className="font-bold"> At Growth Flow Media,</span> we design data-driven strategies that create real impact and build strong online visibility for your business. Through expert web design and result-oriented digital marketing, we deliver engaging experiences for your target audience and help your brand move steadily toward success. From planning to execution, we stand by you at every step.
+
+              {/* Thin divider */}
+              <div className="w-12 h-px bg-orange-500/40 mb-8" />
+
+              {/* Body copy */}
+              <p className="font-['Montserrat'] text-white/50 text-sm sm:text-[15px] leading-relaxed font-light mb-5">
+                <span className="text-white/90 font-semibold">
+                  At Aussie Growth Media,
+                </span>{" "}
+                we design data-driven strategies that create real impact and
+                build strong online visibility. Through expert web design and
+                result-oriented digital marketing, we deliver engaging
+                experiences for your target audience — and help your brand move
+                steadily toward success.
               </p>
-              <p className="text-white mb-6 sm:mb-8 text-sm sm:text-base">
-                Our marketing operations are proudly based in Australia, allowing us to stay closely connected with our clients and markets. Our technical and development operations are powered by a skilled team in India, ensuring efficiency, innovation, and high-quality execution across all projects.
+
+              <p className="font-['Montserrat'] text-white/40 text-sm sm:text-[15px] leading-relaxed font-light mb-10">
+                Our marketing operations are proudly based in{" "}
+                <span className="text-white/70">Australia</span>, staying
+                closely connected with our clients and markets. Our technical
+                operations are powered by a skilled team in{" "}
+                <span className="text-white/70">India</span> — ensuring
+                efficiency, innovation, and high-quality execution across every
+                project.
               </p>
-              <button className="bg-orange-500 text-black px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium hover:bg-orange-600 flex items-center gap-2 text-sm sm:text-base" onClick={scrollToContact}>
-                Get Started Now <ChevronRight className="w-4 h-4" />
+
+              {/* Location pills */}
+              <div className="flex items-center gap-3 mb-10">
+                <div className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-4 py-2">
+                  <span className="text-base leading-none">🇦🇺</span>
+                  <span className="font-['Montserrat'] text-[11px] text-white/50 tracking-wide font-medium">
+                    Australia
+                  </span>
+                </div>
+                <div className="w-6 h-px bg-white/10" />
+                <div className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-4 py-2">
+                  <span className="text-base leading-none">🇮🇳</span>
+                  <span className="font-['Montserrat'] text-[11px] text-white/50 tracking-wide font-medium">
+                    India
+                  </span>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <button
+                onClick={scrollToContact}
+                className="group relative inline-flex items-center gap-3 font-['Montserrat'] text-sm font-semibold tracking-[0.15em] uppercase overflow-hidden rounded-full px-8 py-4 bg-orange-500 hover:bg-orange-400 text-black transition-all duration-300"
+              >
+                <span className="relative">Get Started Now</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-8 md:mt-0">
-              <img data-aos="slide-left"
-                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=300&h=300&fit=crop"
-                alt="Team discussion"
-                className="rounded-lg w-full h-48 sm:h-64 object-cover col-span-2"
-              />
-              <img data-aos="slide-up"
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop"
-                alt="Team member"
-                className="rounded-lg w-full h-40 sm:h-48 object-cover"
-              />
-              <img data-aos="slide-up"
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop"
-                alt="Team"
-                className="rounded-lg w-full h-40 sm:h-48 object-cover"
-              />
+            {/* ── RIGHT: Image collage ── */}
+            <div data-aos="fade-left" className="relative mt-8 md:mt-0">
+              {/* Floating stat card */}
+              <div className="absolute -left-4 sm:-left-8 top-6 z-20 bg-[#0f0f0f] border border-white/[0.08] rounded-2xl px-4 py-3 backdrop-blur-sm shadow-2xl">
+                <p className="font-['Cormorant_Garamond'] text-3xl font-semibold text-orange-400 leading-none">
+                  100+
+                </p>
+                <p className="font-['Montserrat'] text-[10px] text-white/40 tracking-widest uppercase mt-0.5">
+                  Industry Awards
+                </p>
+              </div>
+
+              {/* Floating stat card 2 */}
+              <div className="absolute -right-3 sm:-right-6 bottom-24 z-20 bg-[#0f0f0f] border border-white/[0.08] rounded-2xl px-4 py-3 backdrop-blur-sm shadow-2xl">
+                <p className="font-['Cormorant_Garamond'] text-3xl font-semibold text-white leading-none">
+                  30<span className="text-orange-400">+</span>
+                </p>
+                <p className="font-['Montserrat'] text-[10px] text-white/40 tracking-widest uppercase mt-0.5">
+                  Years Combined Exp.
+                </p>
+              </div>
+
+              {/* Images */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <img
+                  data-aos="fade-up"
+                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=500&fit=crop"
+                  alt="Team discussion"
+                  className="col-span-2 w-full h-52 sm:h-72 object-cover rounded-2xl"
+                />
+
+                <div className="relative overflow-hidden rounded-2xl">
+                  <img
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"
+                    alt="Team member"
+                    className="w-full h-40 sm:h-52 object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  {/* Overlay shimmer */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#060608]/60 to-transparent" />
+                </div>
+
+                <div className="relative overflow-hidden rounded-2xl">
+                  <img
+                    data-aos="fade-up"
+                    data-aos-delay="180"
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
+                    alt="Team"
+                    className="w-full h-40 sm:h-52 object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#060608]/60 to-transparent" />
+                </div>
+              </div>
+
+              {/* Decorative corner accent */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-orange-500/20 rounded-2xl -z-10" />
+              <div className="absolute -bottom-8 -right-8 w-24 h-24 border border-orange-500/10 rounded-2xl -z-10" />
             </div>
           </div>
         </div>
       </section>
 
-  
-<TestimonialsSection/>
+      <TestimonialsSection />
       {/* FAQ Section */}
       {/* FAQ Section - Updated with Working Toggle */}
-<section className="bg-black py-12 sm:py-20">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6">
-    <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-      <div>
-        <p data-aos="slide-up" className="text-orange-500 text-lg sm:text-xl mb-3 sm:mb-4" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-          Here's Some Frequently Asked Questions
-        </p>
-        <h2 data-aos="slide-up" className="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">
-          Your website and online marketing questions answered
-        </h2>
+      <section className="relative overflow-hidden bg-zinc-950 py-20 sm:py-32 border-t border-zinc-900">
+        {/* Subtle Background Lighting */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#e36a2e]/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8" data-aos="slide-right">
-          {faqData.slice(0, 3).map((faq, index) => (
-            <div 
-              key={index} 
-              className="bg-gray-900 rounded-lg overflow-hidden transition-all duration-300"
-            >
-              <button
-                className="w-full p-3 sm:p-4 flex justify-between items-center cursor-pointer hover:bg-gray-800 transition-colors"
-                onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            {/* Left Column: Text & FAQs */}
+            <div>
+              <div data-aos="fade-right" className="mb-10 sm:mb-14">
+                <p className="text-[#e36a2e] text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-4">
+                  FAQ
+                </p>
+                <h2 className="text-white text-4xl sm:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                  Your questions, <br />
+                  <span className="text-zinc-500">answered.</span>
+                </h2>
+              </div>
+
+              <div
+                className="space-y-1 mb-10 sm:mb-12"
+                data-aos="fade-up"
+                data-aos-delay="100"
               >
-                <span className="text-white text-sm sm:text-base text-left font-medium pr-4">
-                  {faq.question}
-                </span>
-                <span className={`text-orange-500 text-xl sm:text-2xl transition-transform duration-300 ${openFaqIndex === index ? 'rotate-45' : ''}`}>
-                  +
-                </span>
-              </button>
-              
-              <div 
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openFaqIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="p-4 sm:p-6 pt-2 border-t border-gray-700">
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                {faqData.slice(0, 3).map((faq, index) => (
+                  <div
+                    key={index}
+                    className="group border-b border-zinc-800 last:border-0"
+                  >
+                    <button
+                      className="w-full py-6 flex justify-between items-center cursor-pointer text-left transition-colors"
+                      onClick={() =>
+                        setOpenFaqIndex(openFaqIndex === index ? null : index)
+                      }
+                    >
+                      <span
+                        className={`text-base sm:text-lg font-medium pr-8 transition-colors duration-300 ${openFaqIndex === index ? "text-[#e36a2e]" : "text-zinc-200 group-hover:text-white"}`}
+                      >
+                        {faq.question}
+                      </span>
+                      <div
+                        className={`flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${openFaqIndex === index ? "border-[#e36a2e] bg-[#e36a2e]/10" : "border-zinc-700 group-hover:border-zinc-500"}`}
+                      >
+                        {/* Note: Make sure to import { Plus } from 'lucide-react' */}
+                        <Plus
+                          className={`w-4 h-4 transition-transform duration-500 ${
+                            openFaqIndex === index
+                              ? "rotate-45 text-[#e36a2e]"
+                              : "text-zinc-400 group-hover:text-white"
+                          }`}
+                        />
+                      </div>
+                    </button>
 
-        <button 
-          data-aos="slide-up" 
-          className="bg-orange-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium hover:bg-orange-600 flex items-center gap-2 text-sm sm:text-base transition-all hover:scale-105"
-          onClick={() => {
-            // You can implement "View All FAQs" functionality here
-            alert('Viewing all FAQs - this would open a modal or navigate to a FAQ page');
-          }}
-        >
-          More FAQs <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="mt-8 md:mt-0" data-aos="slide-up">
-        <img
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-          alt="Team meeting"
-          className="rounded-lg w-full shadow-lg"
-        />
-        <div className="mt-6 p-4 bg-gray-900/50 rounded-lg">
-          <h3 className="text-orange-500 font-bold text-lg mb-2">Need Immediate Help?</h3>
-          <p className="text-gray-300 text-sm mb-4">
-            Can't find your answer here? Our support team is ready to help!
-          </p>
-          <button 
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            onClick={scrollToContact}
-          >
-            Contact Support
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Latest News Section */}
-      <section ref={ContactSection} className="bg-white py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-           <h2 data-aos="slide-left"className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Contact Us</h2>
-        
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
-             <form onSubmit={handleSubmit}>
-             <div data-aos="slide-right" className="bg-black border rounded-lg p-4 sm:p-6 lg:p-8 mt-8 md:mt-0">
-              
-              <div className="flex items-center gap-2 mb-4 sm:mb-6">
-                <img
-                  src={image10}
-                  alt="Growth Flow Media"
-                  className="h-12 sm:h-16 lg:h-20 w-auto "
-                />
-              </div>
-
-              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-               
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="name"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                  value={formData.name}
-                      onChange={handleChange}
-                
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                
-                value={formData.email}
-                      onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  placeholder="Phone"
-                  name="phone"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                value={formData.phone}
-                      onChange={handleChange}
-                
-                />
-           
-              
-                 <input
-                  type="text"
-                  placeholder="Prefered call back time"
-                  name="callback"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                 value={formData.callback}
-                      onChange={handleChange}
-                
-                />
-              </div>
-
-              <p className="text-white mb-3 sm:mb-4 text-sm sm:text-base">How We May Help You?</p>
-
-              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 max-h-60 overflow-y-auto pr-2">
-                {[
-                  'Website Design',
-    'ECommerce Websites',
-    'Service Website',
-    'Branding & Logo Design',
-    'Digital Marketing',
-    'Search Engine Optimisation',
-    'Google Ads Management',
-    'Meta Ads Management',
-    'Content Marketing',
-    'Conversion Rate Optimization',
-    'Managed Hosting',
-    'Go High Level CRM',
-    'Ai Agents/Automation Development',
-    'White Label Marketing',
-    'Lead Generation'
-                ].map((option, i) => (
-                  <label key={i} className="flex items-center gap-3 bg-gray-100 px-3 sm:px-4 py-2 sm:py-3 rounded cursor-pointer hover:bg-gray-800">
-                    <input type="radio" name="service"  value={option} checked={formData.service===option}
-                      onChange={handleChange}className="w-4 h-4" />
-                    <span className="text-black text-xs sm:text-sm">{option}</span>
-                  </label>
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                        openFaqIndex === index
+                          ? "max-h-96 opacity-100 pb-8"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <p className="text-zinc-400 text-sm sm:text-base leading-relaxed pr-12">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
                 ))}
               </div>
 
-              <button className="w-full bg-orange-500 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-lg font-medium hover:bg-orange-600 text-base sm:text-lg">
-                Submit Request
+              <button
+                data-aos="fade-up"
+                data-aos-delay="200"
+                className="group inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-transparent px-8 py-3 sm:py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-[#e36a2e] hover:bg-[#e36a2e]/10 hover:text-[#e36a2e]"
+                onClick={() => {
+                  alert(
+                    "Viewing all FAQs - this would open a modal or navigate to a FAQ page",
+                  );
+                }}
+              >
+                View All FAQs
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
-             
             </div>
-             </form>
-            <div>
-              <h2 data-aos="slide-left"className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Latest News & Updates</h2>
-              <p data-aos="slide-up" className="text-orange-500 text-lg sm:text-xl mb-8 sm:mb-12" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                Stay up To Date With The Latest From Growth Flow Media.
-              </p>
 
-              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-                <div data-aos="slide-right"className="flex flex-col sm:flex-row gap-3 bg-white shadow-lg sm:shadow-xl rounded-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
-                  <div className='h-40 w-full sm:w-80 border rounded-lg overflow-hidden'>
-                    <img
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                      alt="Team meeting"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className=''>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      How Growth Flow Media Delivers High-Performance PPC Management in Brisbane
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mb-2">January 3, 2026</p>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      PPC management is becoming the foundation stone for the success of businesses in Brisbane. The instantaneous reach that it offers
-                    </p>
-                  </div>
-                </div>
-
-                <div data-aos="slide-right" className="flex flex-col sm:flex-row gap-3 bg-white shadow-lg sm:shadow-xl rounded-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
-                  <div className='h-40 w-full sm:w-80 border rounded-lg overflow-hidden'>
-                    <img
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                      alt="Team meeting"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className=''>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      Why Your Business Needs a Professional Website Design Agency in Brisbane
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mb-2">December 26, 2025</p>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      Website Design Agency in Brisbane plays a crucial role in today's market, where your website is often the very first
-                    </p>
-                  </div>
-                </div>
+            {/* Right Column: Image & Support Card */}
+            <div
+              className="relative mt-8 lg:mt-0 h-full flex flex-col"
+              data-aos="fade-left"
+            >
+              {/* Main Image */}
+              <div className="overflow-hidden rounded-3xl border border-zinc-800 shadow-2xl flex-grow">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                  alt="Team meeting"
+                  className="w-full h-full min-h-[300px] object-cover transition-transform duration-700 hover:scale-105"
+                />
               </div>
 
-              {/* <button data-aos="slide-left"className="bg-orange-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium hover:bg-orange-600 flex items-center gap-2 text-sm sm:text-base">
-                View All <ChevronRight className="w-4 h-4" />
-              </button> */}
+              {/* Glassmorphic Support Card */}
+              <div className="relative z-20 -mt-12 sm:-mt-16 mx-4 sm:mx-8 bg-zinc-900/80 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-6 sm:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+                <h3 className="text-white font-bold text-xl sm:text-2xl mb-2">
+                  Need Immediate Help?
+                </h3>
+                <p className="text-zinc-400 text-sm sm:text-base mb-6 leading-relaxed">
+                  Can't find your answer here? Our dedicated support team is
+                  ready to jump in and help you out.
+                </p>
+                <button
+                  className="w-full sm:w-auto bg-[#e36a2e] hover:bg-[#cf5f28] text-white px-8 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-[0_8px_20px_rgba(227,106,46,0.3)] hover:-translate-y-0.5"
+                  onClick={scrollToContact}
+                >
+                  Contact Support
+                </button>
+              </div>
             </div>
-
-           
           </div>
         </div>
       </section>
 
+      {/* Latest News Section */}
+      <section
+        ref={ContactSection}
+        className="relative bg-[#fafaf9] py-20 sm:py-28 lg:py-36 overflow-hidden"
+      >
+        {/* Top accent */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-300 to-transparent" />
+
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.015]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+
+        {/* Background tones */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_top_left,rgba(249,115,22,0.04),transparent_60%)]" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_bottom_right,rgba(249,115,22,0.03),transparent_60%)]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          {/* Section header */}
+          <div className="mb-14 sm:mb-18">
+            <div
+              data-aos="fade-down"
+              className="inline-flex items-center gap-2 border border-zinc-200 bg-white rounded-full px-4 py-1.5 mb-6"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+              <span className="font-['Montserrat'] text-[10px] font-bold tracking-[0.25em] text-zinc-400 uppercase">
+                Get In Touch
+              </span>
+            </div>
+            <h2
+              data-aos="slide-left"
+              className="font-['Cormorant_Garamond'] text-5xl sm:text-6xl lg:text-7xl font-light text-zinc-900 leading-[1.05]"
+            >
+              Let's <span className="italic text-orange-500">Talk.</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
+            {/* ── LEFT: Contact Form ── */}
+            <form onSubmit={handleSubmit} data-aos="fade-right">
+              <div className="bg-[#4e4e50] rounded-2xl p-6 sm:p-8 lg:p-10 border border-white/[0.06]">
+                {/* Logo */}
+                <div className="mb-8 pb-7 border-b border-white/[0.06]">
+                  <img
+                    src={image10}
+                    alt="Aussie Growth Media"
+                    className="h-10 sm:h-12 w-auto"
+                  />
+                </div>
+
+                {/* Text inputs */}
+                <div className="space-y-3 mb-7">
+                  {[
+                    { placeholder: "Full Name", name: "name", type: "text" },
+                    {
+                      placeholder: "Email Address",
+                      name: "email",
+                      type: "email",
+                    },
+                    {
+                      placeholder: "Phone Number",
+                      name: "phone",
+                      type: "text",
+                    },
+                    {
+                      placeholder: "Preferred Callback Time",
+                      name: "callback",
+                      type: "text",
+                    },
+                  ].map(({ placeholder, name, type }) => (
+                    <input
+                      key={name}
+                      type={type}
+                      placeholder={placeholder}
+                      name={name}
+                      value={formData[name]}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] text-white border border-white/[0.08] focus:outline-none focus:border-orange-500/50 placeholder:text-white/25 font-['Montserrat'] text-sm transition-colors duration-300"
+                    />
+                  ))}
+                </div>
+
+                {/* Service label */}
+                <p className="font-['Montserrat'] text-[11px] font-bold tracking-[0.2em] text-white/30 uppercase mb-4">
+                  How can we help?
+                </p>
+
+                {/* Service radio list */}
+                <div
+                  className="space-y-1.5 mb-7 max-h-56 overflow-y-auto pr-1
+            [&::-webkit-scrollbar]:w-1
+            [&::-webkit-scrollbar-track]:bg-transparent
+            [&::-webkit-scrollbar-thumb]:bg-white/10
+            [&::-webkit-scrollbar-thumb]:rounded-full"
+                >
+                  {[
+                    "Website Design",
+                    "ECommerce Websites",
+                    "Service Website",
+                    "Branding & Logo Design",
+                    "Digital Marketing",
+                    "Search Engine Optimisation",
+                    "Google Ads Management",
+                    "Meta Ads Management",
+                    "Content Marketing",
+                    "Conversion Rate Optimization",
+                    "Managed Hosting",
+                    "Go High Level CRM",
+                    "AI Agents/Automation Development",
+                    "White Label Marketing",
+                    "Lead Generation",
+                  ].map((option, i) => (
+                    <label
+                      key={i}
+                      className={`flex items-center gap-3 px-4 py-2.5 rounded-xl cursor-pointer transition-all duration-200 ${
+                        formData.service === option
+                          ? "bg-orange-500/15 border border-orange-500/30"
+                          : "bg-white/[0.03] border border-transparent hover:bg-white/[0.06]"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-200 ${
+                          formData.service === option
+                            ? "border-orange-400 bg-orange-400"
+                            : "border-white/20"
+                        }`}
+                      >
+                        {formData.service === option && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                        )}
+                      </div>
+                      <input
+                        type="radio"
+                        name="service"
+                        value={option}
+                        checked={formData.service === option}
+                        onChange={handleChange}
+                        className="sr-only"
+                      />
+                      <span
+                        className={`font-['Montserrat'] text-xs transition-colors duration-200 ${
+                          formData.service === option
+                            ? "text-orange-300"
+                            : "text-white/40"
+                        }`}
+                      >
+                        {option}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  className="group w-full bg-orange-500 hover:bg-orange-400 text-black font-['Montserrat'] font-semibold text-sm tracking-[0.15em] uppercase px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-3"
+                >
+                  Submit Request
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+            </form>
+
+            {/* ── RIGHT: News ── */}
+            <div data-aos="fade-left">
+              {/* News header */}
+              <div className="mb-10">
+                <div className="inline-flex items-center gap-2 border border-zinc-200 bg-white rounded-full px-4 py-1.5 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+                  <span className="font-['Montserrat'] text-[10px] font-bold tracking-[0.25em] text-zinc-400 uppercase">
+                    Latest Updates
+                  </span>
+                </div>
+                <h2
+                  data-aos="slide-left"
+                  className="font-['Cormorant_Garamond'] text-3xl sm:text-4xl font-light text-zinc-900 leading-tight"
+                >
+                  News &{" "}
+                  <span className="italic text-orange-500">Insights</span>
+                </h2>
+              </div>
+
+              {/* News cards */}
+              <div className="space-y-px bg-zinc-200 rounded-2xl overflow-hidden border border-zinc-200">
+                {[
+                  {
+                    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
+                    title:
+                      "How Aussie Growth Media Delivers High-Performance PPC Management in Brisbane",
+                    date: "January 3, 2026",
+                    excerpt:
+                      "PPC management is becoming the foundation stone for the success of businesses in Brisbane — the instantaneous reach it offers is unmatched.",
+                  },
+                  {
+                    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
+                    title:
+                      "Why Your Business Needs a Professional Website Design Agency in Brisbane",
+                    date: "December 26, 2025",
+                    excerpt:
+                      "Your website is often the very first impression a potential customer has of your business — make it count.",
+                  },
+                ].map((post, i) => (
+                  <div
+                    key={i}
+                    data-aos="fade-up"
+                    data-aos-delay={i * 100}
+                    className="group bg-white hover:bg-zinc-950 flex flex-col sm:flex-row gap-0 overflow-hidden transition-all duration-500 cursor-pointer"
+                  >
+                    {/* Image */}
+                    <div className="sm:w-44 shrink-0 overflow-hidden">
+                      <img
+                        src={post.img}
+                        alt={post.title}
+                        className="w-full h-40 sm:h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 p-5 sm:p-6 flex flex-col justify-between">
+                      <div>
+                        <p className="font-['Montserrat'] text-[10px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white/40 uppercase mb-3 transition-colors duration-500">
+                          {post.date}
+                        </p>
+                        <h3 className="font-['Cormorant_Garamond'] text-lg sm:text-xl font-semibold text-zinc-900 group-hover:text-white leading-snug mb-3 transition-colors duration-500">
+                          {post.title}
+                        </h3>
+                        <p className="font-['Montserrat'] text-zinc-400 group-hover:text-zinc-500 text-xs leading-relaxed font-light transition-colors duration-500">
+                          {post.excerpt}
+                        </p>
+                      </div>
+
+                      {/* Read more */}
+                      <div className="flex items-center gap-2 mt-4 font-['Montserrat'] text-[11px] font-bold tracking-[0.15em] uppercase text-orange-500 group-hover:text-orange-400 transition-colors duration-500">
+                        <span>Read More</span>
+                        <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* View all button */}
+              <div className="mt-5">
+                <button className="group inline-flex items-center gap-3 font-['Montserrat'] text-sm font-semibold tracking-[0.15em] uppercase text-zinc-900 border border-zinc-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white rounded-full px-7 py-3.5 transition-all duration-300">
+                  View All Articles
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-300 to-transparent" />
+      </section>
+
       {/* Contact Section */}
-      <div className="min-h-screen bg-black">
-        <section className="relative py-12 sm:py-16 px-4 sm:px-6" style={{background: 'linear-gradient(135deg, #1a1a1a 0%, #000000 100%)'}}>
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
-            {/* Sidebar */}
-            <div  data-aos="slide-right" className="bg-white p-4 sm:p-6 rounded-3xl shadow-2xl lg:w-64 xl:w-80 order-2 lg:order-1">
-              <div className="flex items-center gap-2 mb-4 sm:mb-6">
-             <img
+      <div className="bg-zinc-950">
+        {/* Final CTA Section */}
+        <section className="relative py-20 sm:py-32 px-4 sm:px-6 overflow-hidden border-t border-zinc-900">
+          {/* Ambient Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#e36a2e]/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+            {/* Left Sidebar: Agency Card */}
+            <div
+              data-aos="fade-right"
+              className="w-full lg:w-80 order-2 lg:order-1 bg-zinc-900/50 backdrop-blur-xl p-8 rounded-3xl border border-zinc-800 shadow-2xl flex flex-col items-center text-center"
+            >
+              <img
                 src={image6}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto"
+                alt="Aussie Growth Media"
+                className="h-12 sm:h-14 w-auto mb-8 object-contain"
               />
-              </div>
 
-              <div className="space-y-3 mb-4 sm:mb-6">
-                <a  href="tel:+919646174266"  className="w-full px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 text-white" style={{backgroundColor: '#FF9500'}}>
-                  <Phone size={14} />
-                  +91 9646174266
-                </a>
-               
-              </div>
+              <a
+                href="tel:+919646174266"
+                className="w-full py-3.5 rounded-full text-sm font-semibold flex items-center justify-center gap-2 text-white bg-zinc-800 hover:bg-[#e36a2e] border border-zinc-700 hover:border-[#e36a2e] transition-all duration-300 mb-8"
+              >
+                <Phone size={16} />
+                +91 9646 174 266
+              </a>
 
-              <div className="flex items-center justify-between  mb-4 sm:mb-6 px-1">
-              <div> <img
+              {/* Mini Image Grid */}
+              <div className="flex justify-center -space-x-4 mb-8">
+                <img
                   src={image7}
-                  alt="Growth Flow Media"
-                  className="h-12 object-cover sm:h-16 lg:h-20 w-auto"
-                /></div>
-              <div> <img
+                  alt="Team"
+                  className="w-16 h-16 rounded-full border-2 border-zinc-900 object-cover shadow-lg"
+                />
+                <img
                   src={image8}
-                  alt="Growth Flow Media"
-                  className="h-12 object-cover sm:h-16 lg:h-20 w-auto"
-                /></div>
-
-              <div> <img
+                  alt="Team"
+                  className="w-16 h-16 rounded-full border-2 border-zinc-900 object-cover shadow-lg"
+                />
+                <img
                   src={image9}
-                  alt="Growth Flow Media"
-                  className="h-12 object-cover :h-16 lg:h-20 w-auto"
-                /></div>
-
-            
+                  alt="Team"
+                  className="w-16 h-16 rounded-full border-2 border-zinc-900 object-cover shadow-lg"
+                />
               </div>
 
-              <div className="flex gap-2 justify-center flex-wrap">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full p-1 flex items-center justify-center" style={{backgroundColor: '#FF9500'}}>
-                  <Facebook  className="text-white sm:w-14 sm:h-14" />
-                </div>
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full p-1 flex items-center justify-center" style={{backgroundColor: '#FF9500'}}>
-                  <Linkedin  className="text-white sm:w-14 sm:h-14" />
-                </div>
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full p-1 flex items-center justify-center" style={{backgroundColor: '#FF9500'}}>
-                  <Instagram  className="text-white sm:w-14 sm:h-14" />
-                </div>
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full p-1 flex items-center justify-center" style={{backgroundColor: '#FF9500'}}>
-                  <Youtube  className="text-white sm:w-14 sm:h-14" />
-                </div>
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full  p-1 flex items-center justify-center" style={{backgroundColor: '#FF9500'}}>
-                  <Twitter  className="text-white sm:w-14 sm:h-14" />
-                </div>
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full  p-1 flex items-center justify-center" style={{backgroundColor: '#FF9500'}}>
-                  <Youtube  className="text-white sm:w-14 sm:h-14" />
-                </div>
+              {/* Sleek Socials */}
+              <div className="flex gap-3 justify-center flex-wrap">
+                {[Facebook, Linkedin, Instagram, Youtube, Twitter].map(
+                  (Icon, idx) => (
+                    <div
+                      key={idx}
+                      className="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-[#e36a2e] hover:border-[#e36a2e] hover:text-white transition-all duration-300 cursor-pointer"
+                    >
+                      <Icon size={18} />
+                    </div>
+                  ),
+                )}
               </div>
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 text-center pt-0 lg:pt-8 order-1 lg:order-2">
-              <h1 data-aos="slide-left" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-                <span  className="text-white">Let's </span>
-                <span  className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full text-white text-sm sm:text-base md:text-lg" style={{backgroundColor: '#FF9500'}}>
+            <div className="flex-1 text-center lg:text-left order-1 lg:order-2">
+              <h1
+                data-aos="fade-up"
+                className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-6 leading-[1.1] tracking-tight text-white"
+              >
+                Let's{" "}
+                <span className="inline-flex items-center gap-3 px-6 py-2 sm:py-3 rounded-full bg-[#e36a2e] text-white text-2xl sm:text-4xl lg:text-5xl shadow-[0_8px_30px_rgba(227,106,46,0.3)]">
                   Chat
-                  <span className="flex gap-1 sm:gap-1.5 items-end">
-                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-white rounded-full dot"></span>
-                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-white rounded-full dot dot-2"></span>
-                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-white rounded-full dot dot-3"></span>
+                  <span className="flex gap-1.5 items-center justify-center h-full mt-2">
+                    <span className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                    <span className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                    <span className="w-2 h-2 bg-white rounded-full animate-bounce"></span>
                   </span>
                 </span>
                 <br />
-                <span className="text-white">About Your Goals Today!</span>
+                About Your Goals.
               </h1>
-             
-              <p data-aos="slide-up" className="text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-                We love to talk with business owners about achieving incredible returns on the web. To find out if we're a good fit for each other, the best next step is to have a short discovery call with one of our digital experts.
+
+              <p
+                data-aos="fade-up"
+                data-aos-delay="100"
+                className="text-zinc-400 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed text-lg"
+              >
+                We love to talk with business owners about achieving incredible
+                returns on the web. To find out if we're a good fit for each
+                other, the best next step is to have a short discovery call with
+                one of our digital experts.
               </p>
 
-              <button data-aos="slide-up" className="px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold flex items-center gap-2 mx-auto text-black text-sm sm:text-base" style={{backgroundColor: '#FF9500'}}
-              onClick={scrollToContact}>
+              <button
+                data-aos="fade-up"
+                data-aos-delay="200"
+                className="group px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-3 mx-auto lg:mx-0 text-white bg-[#e36a2e] hover:bg-[#cf5f28] transition-all duration-300 shadow-[0_8px_20px_rgba(227,106,46,0.3)] hover:-translate-y-0.5"
+                onClick={scrollToContact}
+              >
                 Get Started Now
-                <ChevronRight size={18} className="sm:w-20 sm:h-20" />
+                <ChevronRight
+                  size={20}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
               </button>
             </div>
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="px-4 sm:px-6 py-8 sm:py-12" style={{background: 'linear-gradient(180deg, #1a1f2e 0%, #0a0e1a 100%)'}}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
-            {/* ABOUT */}
-        <div>
-          {/* replace src with your logo path */}
-          <img
-            src={image10}
-            alt="growth flow media"
-            className="w-40 mb-5 onject-cover "
-          />
+        <footer className="relative px-4 sm:px-6 py-16 sm:py-24 bg-zinc-950 border-t border-zinc-900 overflow-hidden">
+          <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
+            {/* Brand & About (Takes up 5 cols) */}
+            <div className="md:col-span-5">
+              <img
+                src={image10}
+                alt="Aussie Growth Media"
+                className="h-12 object-contain mb-6"
+              />
+              <p className="text-zinc-400 leading-relaxed text-sm max-w-sm mb-8">
+                Aussie Growth Media prides itself on delivering top-tier digital
+                marketing and design services at competitive prices. We engineer
+                growth so you can focus on your business.
+              </p>
 
-          <p className=" w-40 text-[#F2E9D8] leading-relaxed text-sm">
-            
-            <br />
-            Growth Flow Media we pride ourselves on delivering top-tier 
-           services at some of the most competitive prices in the
-            market.
-          </p>
-         
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {[
-                        { icon: <Facebook />, color: 'bg-blue-600', hover: 'bg-blue-700', label: 'Facebook' },
-                        { icon: <Twitter />, color: 'bg-sky-500', hover: 'bg-sky-600', label: 'Twitter' },
-                        { icon: <Instagram />, color: 'bg-pink-600', hover: 'bg-pink-700', label: 'Instagram' },
-                        { icon: <Linkedin />, color: 'bg-blue-700', hover: 'bg-blue-800', label: 'LinkedIn' },
-                        { icon: <Youtube />, color: 'bg-red-600', hover: 'bg-red-700', label: 'YouTube' },
-                      ].map((social, idx) => (
-                        <a
-                          key={idx}
-                          href="#"
-                          className={`w-10 h-10 ${social.color} hover:${social.hover} rounded-lg flex items-center justify-center text-white transition-all transform hover:scale-110`}
-                          aria-label={social.label}
-                        >
-                          {social.icon}
-                        </a>
-                      ))}
-                    </div>
-                 
-        </div>
-            {/* Quick Links Column */}
-            <div>
-              <h3 className="text-white text-lg sm:text-xl font-bold mb-4 sm:mb-6">Quick Links</h3>
-              <ul className="space-y-2 sm:space-y-3">
+              <h3 className="text-sm font-bold text-white tracking-widest uppercase mb-4">
+                Connect With Us
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { icon: <Facebook size={18} />, label: "Facebook" },
+                  { icon: <Twitter size={18} />, label: "Twitter" },
+                  { icon: <Instagram size={18} />, label: "Instagram" },
+                  { icon: <Linkedin size={18} />, label: "LinkedIn" },
+                  { icon: <Youtube size={18} />, label: "YouTube" },
+                ].map((social, idx) => (
+                  <a
+                    key={idx}
+                    href="#"
+                    className="w-10 h-10 bg-zinc-900 border border-zinc-800 hover:border-[#e36a2e] hover:bg-[#e36a2e] rounded-xl flex items-center justify-center text-zinc-400 hover:text-white transition-all duration-300"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links (Takes up 3 cols) */}
+            <div className="md:col-span-3">
+              <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6">
+                Quick Links
+              </h3>
+              <ul className="space-y-3">
                 {quickLinks.map((link) => (
-                  <li  className="flex items-center gap-2 text-gray-300 hover:text-orange-500 cursor-pointer text-xs sm:text-sm transition-colors">
-                    <ChevronRight onClick={()=>window.location.href=link.path} size={12} className="sm:w-8 sm:h-8" style={{color: '#FF9500'}} />
-                    <span onClick={()=>window.location.href=link.path} className="truncate">{link.name}</span>
+                  <li key={link.name} className="group">
+                    <a
+                      onClick={() => (window.location.href = link.path)}
+                      className="flex items-center gap-2 text-zinc-400 hover:text-[#e36a2e] cursor-pointer text-sm transition-all duration-300"
+                    >
+                      <ChevronRight
+                        size={14}
+                        className="text-[#e36a2e] transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                      <span>{link.name}</span>
+                    </a>
                   </li>
                 ))}
               </ul>
-
-          
             </div>
 
-            {/* Our Services Column */}
-            <div>
-              <h3 className="text-white text-lg sm:text-xl font-bold mb-4 sm:mb-6">Our Services</h3>
-                 <div className="py-3 px-4">
-                  <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between w-full font-medium text-gray-700 hover:text-primary-600"
-                  >
-                    <span>Services</span>
-                    <FaChevronDown className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isServicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pt-2 space-y-2">
-                          {serviceItems.map((service) => (
-                            <button
-                              key={service.name}
-                              onClick={() => handleServiceSelect(service.path)}
-                              className="block w-full text-left py-2 px-4 rounded-lg hover:bg-gray-50 hover:text-primary-600 text-gray-600 font-medium"
-                            >
-                              {service.name}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-            </div>
+            {/* Services Dropdown (Takes up 4 cols) */}
+            <div className="md:col-span-4">
+              <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6">
+                Our Services
+              </h3>
+              <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="flex items-center justify-between w-full px-5 py-4 font-medium text-white hover:bg-zinc-800 transition-colors"
+                >
+                  <span>Explore Services</span>
+                  <FaChevronDown
+                    className={`text-[#e36a2e] transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
 
-  
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden bg-zinc-900"
+                    >
+                      <div className="p-2 space-y-1 max-h-60 overflow-y-auto custom-scrollbar">
+                        {serviceItems.map((service) => (
+                          <button
+                            key={service.name}
+                            onClick={() => handleServiceSelect(service.path)}
+                            className="block w-full text-left py-2.5 px-4 rounded-xl hover:bg-zinc-800 hover:text-[#e36a2e] text-zinc-400 text-sm font-medium transition-colors"
+                          >
+                            {service.name}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
 
-          {/* Bottom Footer Links */}
-          <div className="max-w-7xl mx-auto mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-700">
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-400">
-              <a onClick={() => window.location.href = 'https://growthflowmedia.com'} className="hover:text-orange-500 transition-colors whitespace-nowrap">growthflowmedia.com</a>
-              <span className="hidden sm:inline">|</span>
-                <span>© {new Date().getFullYear()} All Rights are Reserved </span>
-              
+          {/* Bottom Legal Bar */}
+          <div className="relative z-10 max-w-7xl mx-auto mt-16 pt-8 border-t border-zinc-900">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-zinc-500">
+              <p>
+                © {new Date().getFullYear()} Aussie Growth Media. All Rights
+                Reserved.
+              </p>
+              <div className="flex items-center gap-4">
+                <a
+                  onClick={() => (window.location.href = "/")}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  growthflowmedia.com
+                </a>
+              </div>
             </div>
           </div>
         </footer>
-{/* Enhanced Floating Help Button with Dropdown */}
-<div className="help-button-container fixed right-0 top-1/2 transform -translate-y-1/2 z-50">
-  <div className="relative">
-    {/* Main Help Button */}
-    <button 
-      className="px-4 sm:px-7 py-2 sm:py-3 text-white text-xs sm:text-sm font-bold rounded-l-lg border-2 border-[#FF9500] flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-[#FF9500]/20"
-      style={{backgroundColor: '#080705', writingMode: 'vertical-rl', textOrientation: 'mixed'}}
-      onClick={(e) => {
-        e.stopPropagation(); // Prevent event from bubbling up
-        setHelpOpen(!helpOpen);
-      }}
-    >
-      <p className='ml-2 '>Need Help?</p>
-      
-      <span className={`ml-2 transition-transform duration-300 ${helpOpen ? 'rotate-180' : ''}`}>
-       <ChevronDown size={20} />
-      </span>
-    </button>
 
-    {/* Dropdown Menu */}
-    <div 
-      className={`absolute right-full top-0 mr-2 lg:w-90 bg-gradient-to-br from-gray-900 to-black rounded-lg shadow-2xl border border-[#FF9500]/30 overflow-hidden transition-all duration-300 ${
-        helpOpen ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible translate-x-4'
-      }`}
-    >
-      <div className="p-4">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#FF9500]/20">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#FF9500] to-orange-600 flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
+        {/* Premium Floating Help Button */}
+        <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-50">
+          <div className="relative">
+            {/* Help Button Tab */}
+            <button
+              className="group px-3 py-4 text-white text-sm font-bold rounded-l-2xl border-y border-l border-zinc-700 bg-zinc-900/90 backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:bg-zinc-800 hover:border-[#e36a2e] shadow-[-10px_0_30px_rgba(0,0,0,0.5)]"
+              style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setHelpOpen(!helpOpen);
+              }}
+            >
+              <span className="flex items-center gap-2">
+                <span
+                  className={`transition-transform duration-300 text-[#e36a2e] ${helpOpen ? "rotate-180" : ""}`}
+                >
+                  <ChevronDown size={18} />
+                </span>
+                Need Help?
+              </span>
+            </button>
+
+            {/* Glassmorphic Dropdown Menu */}
+            <div
+              className={`absolute right-full top-1/2 -translate-y-1/2 mr-3 w-72 sm:w-80 bg-zinc-900/90 backdrop-blur-2xl rounded-3xl shadow-2xl border border-zinc-700/50 overflow-hidden transition-all duration-300 origin-right ${
+                helpOpen
+                  ? "opacity-100 visible scale-100"
+                  : "opacity-0 invisible scale-95"
+              }`}
+            >
+              <div className="p-6">
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-5 pb-5 border-b border-zinc-800">
+                  <div className="w-12 h-12 rounded-full bg-[#e36a2e]/10 border border-[#e36a2e]/20 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-[#e36a2e]" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-lg">
+                      How can we help?
+                    </h3>
+                    <p className="text-zinc-400 text-xs">
+                      We're here for you 24/7
+                    </p>
+                  </div>
+                </div>
+
+                {/* Contact Options */}
+                <div className="space-y-3 mb-6">
+                  <a
+                    href="tel:+919646174266"
+                    className="flex items-center gap-4 p-3.5 rounded-2xl bg-zinc-800/50 hover:bg-zinc-800 border border-transparent hover:border-zinc-700 transition-all group"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="flex-1">
+                      <p className="text-white font-medium text-sm">
+                        Call Us Now
+                      </p>
+                      <p className="text-zinc-500 text-xs">+91 9646 174 266</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-zinc-600 group-hover:text-[#e36a2e] transition-colors" />
+                  </a>
+
+                  <a
+                    href="mailto:support@growthflowmedia.com"
+                    className="flex items-center gap-4 p-3.5 rounded-2xl bg-zinc-800/50 hover:bg-zinc-800 border border-transparent hover:border-zinc-700 transition-all group"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="flex-1">
+                      <p className="text-white font-medium text-sm">
+                        Email Support
+                      </p>
+                      <p className="text-zinc-500 text-xs truncate">
+                        support@growthflowmedia.com
+                      </p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-zinc-600 group-hover:text-[#e36a2e] transition-colors" />
+                  </a>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="flex gap-3">
+                  <button
+                    className="flex-1 bg-[#e36a2e] hover:bg-[#cf5f28] text-white text-sm py-2.5 rounded-xl font-medium transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setHelpOpen(false);
+                      navigate("/contact");
+                    }}
+                  >
+                    Get Quote
+                  </button>
+                  <button
+                    className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white text-sm py-2.5 rounded-xl font-medium transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setHelpOpen(false);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                  >
+                    Services
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 className="text-white font-bold text-lg">How can we help?</h3>
-            <p className="text-[#FF9500] text-sm">We're here for you</p>
-          </div>
         </div>
-
-        {/* Contact Options */}
-        <div className="space-y-3">
-          <a 
-            href="tel:+919646174266"
-            className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors group"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="w-8 h-8 rounded-full bg-[#FF9500]/20 flex items-center justify-center">
-              <Phone className="w-4 h-4 text-[#FF9500]" />
-            </div>
-            <div className="flex-1">
-              <p className="text-white font-medium text-sm">Call Us Now</p>
-              <p className="text-gray-400 text-xs">9646174266</p>
-            </div>
-            <ChevronRight className="w-4 h-4 text-[#FF9500] opacity-0 group-hover:opacity-100 transition-opacity" />
-          </a>
-
-          <a 
-            href="mailto:support@growthflowmedia.com" 
-            className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors group"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="w-8 h-8 rounded-full bg-[#FF9500]/20 flex items-center justify-center">
-              <Mail className="w-4 h-4 text-[#FF9500]" />
-            </div>
-            <div className="flex-1">
-              <p   className="text-white font-medium text-sm">Email Support</p>
-              <p   className="text-gray-400 text-xs truncate">support@growth...</p>
-            </div>
-            <ChevronRight className="w-4 h-4 text-[#FF9500] opacity-0 group-hover:opacity-100 transition-opacity" />
-          </a>
-
-      
-
-        </div>
-
-        Quick Actions
-        <div className="mt-4 flex gap-2">
-          <button 
-            className="flex-1 bg-[#FF9500] hover:bg-[#e36a2e] text-white text-xs py-2 rounded-lg font-medium transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              setHelpOpen(false);
-              // Add your quote functionality here
-              navigate('/contact')
-            }}
-          >
-            Quote
-          </button>
-          <button 
-            className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs py-2 rounded-lg font-medium transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              setHelpOpen(false);
-              // Add your services functionality here
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          >
-            Services
-          </button>
-        </div>
-      </div>
-
-      {/* Decorative Element */}
-      <div className="absolute -top-2 -right-2 w-4 h-4 bg-[#FF9500] rounded-full animate-ping opacity-20"></div>
-    </div>
-  </div>
-</div>
-     
       </div>
     </div>
   );

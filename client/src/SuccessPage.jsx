@@ -194,7 +194,7 @@ navigate("/");
           <p>© {new Date().getFullYear()} growthflowmedia.com All rights reserved.</p>
                <span>
           Developed and Managed by{" "}
-          <strong className="text-[#B23A2F] mt-2"><a href='https://growthflowmedia.com'>GROWTH FLOW MEDIA</a></strong>
+          <strong className="text-[#B23A2F] mt-2"><a href='https://growthflowmedia.com'>Aussie Growth Media</a></strong>
         </span>
          
         </div>

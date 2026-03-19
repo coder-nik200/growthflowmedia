@@ -208,7 +208,7 @@ const serviceItems = [
             <div onClick ={()=>{navigate('/')}}className="flex items-center gap-2">
               <img
                 src={image6}
-                alt="Growth Flow Media"
+                alt="Aussie Growth Media"
                 className="h-12 sm:h-16 md:h-20 w-auto "
               />
             </div>
@@ -428,7 +428,7 @@ const serviceItems = [
             <div>
               <h2 data-aos="slide-right"className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Latest News & Updates</h2>
               <p data-aos="slide-up" className="text-orange-500 text-lg sm:text-xl mb-8 sm:mb-12" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                Stay up To Date With The Latest From Growth Flow Media.
+                Stay up To Date With The Latest From Aussie Growth Media.
               </p>
 
               <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
@@ -442,7 +442,7 @@ const serviceItems = [
                   </div>
                   <div className=''>
                     <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      How Growth Flow Media Delivers High-Performance PPC Management in Brisbane
+                      How Aussie Growth Media Delivers High-Performance PPC Management in Brisbane
                     </h3>
                     <p className="text-gray-500 text-xs sm:text-sm mb-2">January 3, 2026</p>
                     <p className="text-gray-600 text-sm sm:text-base">
@@ -480,7 +480,7 @@ const serviceItems = [
               <div className="flex items-center gap-2 mb-4 sm:mb-6">
                 <img
                   src={image6}
-                  alt="Growth Flow Media"
+                  alt="Aussie Growth Media"
                   className="h-12 sm:h-16 lg:h-20 w-auto"
                 />
               </div>

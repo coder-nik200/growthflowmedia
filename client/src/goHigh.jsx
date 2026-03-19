@@ -1,569 +1,493 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import image6 from '../images/logo.jpg'
-import {Menu,ChevronDown,ChevronRight,ArrowRightCircle,Phone,Mail }from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import image6 from "../images/logo.jpg";
+import {
+  Menu,
+  ChevronDown,
+  ChevronRight,
+  ArrowRightCircle,
+  Phone,
+  Mail,
+  Globe,
+  Bot,
+  Target,
+  Server,
+  UserPlus,
+  Layers,
+  CheckCircle2,
+  Award,
+  Zap,
+  Rocket,
+  BarChart3,
+  Users,
+  Settings,
+} from "lucide-react";
+import { FaChevronDown } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaChevronDown } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import Footer from './Footer';
+import { motion, AnimatePresence } from "framer-motion";
+import Footer from "./Footer";
+
 const GoHighLevelCRM = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-      // Handle service selection
-    const handleServiceSelect = (path) => {
-      navigate(path);
-      setIsServicesOpen(false);
-      setIsMenuOpen(false);
-    };
-     const menuItems = [
-        "Our Services",
-        "Our Products",
-        "Our Work",
-        "Industries",
-        "The Agency",
-      ];
-      useEffect(()=>{
-        AOS.init({duration:800});
-      },[]);
-       const [menuOpen, setMenuOpen] = useState(false); 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    callback: "",
+    service: "Go High Level CRM", // Default selection for this page
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Form submitted!");
+  };
+
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+    window.scrollTo(0, 0);
+  }, []);
+
+  const serviceItems = [
+    { name: "Website Design", path: "/webdesign" },
+    { name: "ECommerce Websites", path: "/ecommerce" },
+    { name: "Service Website", path: "/service-site" },
+    { name: "Branding & Logo Design", path: "/branding&logodesign" },
+    { name: "Digital Marketing", path: "/digitalmarketing" },
+    { name: "Search Engine Optimisation", path: "/seo" },
+    { name: "Google Ads Management", path: "/googleads" },
+    { name: "Meta Ads Management", path: "/metaads" },
+    { name: "Conversion Rate Optimization", path: "/conversionrate" },
+    { name: "Managed Hosting", path: "/hosting" },
+    { name: "Go High Level CRM", path: "/gohigh" },
+    { name: "Ai Agents/Automation", path: "/ai" },
+    { name: "White Label Marketing", path: "/whitelabel" },
+    { name: "Lead Generation", path: "/lead" },
+  ];
+
   const features = [
     {
       category: "Marketing Automation",
+      icon: <Zap className="w-8 h-8 text-[#e36a2e]" />,
       items: [
-        "Email Marketing",
-        "SMS Campaigns",
-        "Lead Scoring",
+        "Email Marketing & Sequences",
+        "SMS Campaigns & Triggers",
+        "Advanced Lead Scoring",
         "Workflow Automation",
-        "Social Media Integration",
-        "Multi-channel Campaigns"
-      ]
+        "Multi-channel Campaigns",
+      ],
     },
     {
-      category: "CRM & Sales",
+      category: "CRM & Sales Pipeline",
+      icon: <BarChart3 className="w-8 h-8 text-[#e36a2e]" />,
       items: [
-        "Pipeline Management",
-        "Lead Tracking",
-        "Appointment Scheduling",
-        "Sales Analytics",
+        "Visual Pipeline Management",
+        "Lead Tracking & Routing",
+        "Automated Appointment Scheduling",
+        "Sales Analytics & Dashboards",
         "Team Management",
-        "Custom Dashboards"
-      ]
+      ],
     },
     {
       category: "Client Management",
+      icon: <Users className="w-8 h-8 text-[#e36a2e]" />,
       items: [
-        "Client Portals",
-        "Billing & Invoicing",
-        "Form Builders",
-        "Survey Tools",
+        "Secure Client Portals",
+        "Automated Billing & Invoicing",
+        "Custom Form Builders",
         "Reputation Management",
-        "Review Generation"
-      ]
-    }
+        "Review Generation System",
+      ],
+    },
   ];
 
   const benefits = [
     {
       title: "All-in-One Platform",
-      description: "Replace 10+ tools with a single, integrated platform"
+      description:
+        "Replace 10+ expensive tools with a single, deeply integrated platform.",
+      icon: <Layers className="w-6 h-6 text-[#e36a2e]" />,
     },
     {
-      title: "Customizable Workflows",
-      description: "Tailor automations to your specific business processes"
+      title: "Custom Workflows",
+      description:
+        "Tailor complex automations exactly to your specific business processes.",
+      icon: <Settings className="w-6 h-6 text-[#e36a2e]" />,
     },
     {
-      title: "White-label Solution",
-      description: "Brand it as your own and resell to clients"
+      title: "White-label Ready",
+      description:
+        "Brand it completely as your own and resell it to your clients.",
+      icon: <Award className="w-6 h-6 text-[#e36a2e]" />,
     },
     {
       title: "Real-time Analytics",
-      description: "Make data-driven decisions with comprehensive reporting"
-    }
-  ];
-  const quickLinks = [
-    'Brisbane Local SEO',
-    'Website Design Brisbane',
-    'Digital Marketing Brisbane',
-    'SEO Brisbane',
-    'Website Design Gold Coast',
-    'SEO Gold Coast',
-    'Who We Are',
-    'What We Do',
-    'Our Expertise',
-    'Contact'
-  ];
-  const navigate=useNavigate();
-const handleChangeSelection=(e)=>{
-const selectedValue=e.target.value;
-if(selectedValue){
-  navigate(selectedValue);
-}
-};
-  const packages = [
-    'Website Design Packages',
-    'Business Website Package',
-    'Search Engine Optimisation Packages',
-    'Meta Ads Management Package',
-    'Google Ads Management Packages',
-    'Pay Per Lead',
-    'Facebook Ads Services',
-    'Digital Marketing Consultancy',
-    'Social Media Marketing',
-    'SEO Consultancy / Free SEO Audit',
-    'AI Voice Automation',
-    'Landing Pages',
-    'PPC Management'
+      description:
+        "Make data-driven decisions with comprehensive, cross-channel reporting.",
+      icon: <BarChart3 className="w-6 h-6 text-[#e36a2e]" />,
+    },
   ];
 
-  const service = [
-    'Website Design',
-    'ECommerce Websites',
-    'Service Website',
-    'Branding & Logo Design',
-    'Digital Marketing',
-    'Search Engine Optimisation',
-    'Google Ads Management',
-    'Meta Ads Management',
-    'Content Marketing',
-    'Conversion Rate Optimization',
-    'Managed Hosting',
-    'Go High Level CRM',
-    'Ai Agents/Automation Development',
-    'White Label Marketing',
-    'Lead Generation'
-  ];
+  const handleServiceSelect = (path) => {
+    navigate(path);
+    setIsServicesOpen(false);
+    setMenuOpen(false);
+  };
 
-  const industries = [
-    'Mortgage & Finance',
-    'Automotive',
-    'Construction & Building',
-    'ECommerce',
-    'Health & Medical',
-    'NDIS',
-    'Professional Services',
-    'Trade',
-    'Hospitality',
-    'Lawyers & Immigration Agent',
-    'NDIS Website Designs & Marketing'
-  ];
-  const serviceItems = [
-    { name: 'Website Design', path: '/webdesign' },
-    {name:'Lead Generation',path:'/lead'},
-    {name:'Go High Level CRM',path:'/gohigh'},
-    {name:'Ai Agents/Automation Development',path:'/ai'},
-
-    {name:'White Label Marketing',path:'/whitelabel'},
-
-   
-    {name:'Digital Marketing',path:'/digitalmarketing'},
-    {name:'Managed Hosting',path:'/hosting'},
-
-
-
-    {name:'Conversion Rate Optimization',path:'/conversionrate'},
-
-    {name:'Service Website',path:'/service-site'},
-    {name:'Meta Ads Management',path:'/metaads'},
-
-    {name:'Search Engine Optimisation',path:'/seo'},
-
-    {name:'Branding & Logo Design',path:'/branding&logodesign'},
-
-    {name:'ECommerce Websites',path:'/ecommerce'},
-
-    {name:'Google Ads Management',path:'/googleads'},
-
-
-
-
-    
-  ];
   return (
-    <>
-{/* Header */}
-     {/* Header */}
-   <header className="relative z-50 w-full bg-[#f7f7f7] py-4" data-aos="slide-down">
-        <div className="mx-auto max-w-7xl px-4">
-          <nav className="flex items-center justify-between rounded-2xl bg-white px-4 sm:px-6 py-3 sm:py-4 shadow-md">
-            {/* Logo */}
-            <div onClick ={()=>{navigate('/')}}className="flex items-center gap-2">
-              <img
-                src={image6}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div>
+    <div className="min-h-screen bg-[#fafafa]">
+      {/* Dark Hero & Dashboard Bento Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-zinc-950 overflow-hidden">
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#e36a2e]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-            {/* Mobile Menu Button */}
-            <button 
-              className="lg:hidden p-2"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <Menu size={24} />
-            </button>
-
-            {/* Menu - Desktop */}
-            <ul className="hidden z-50 lg:flex  items-center gap-4 xl:gap-8 text-sm xl:text-[15px] font-medium text-gray-700">
-              <li className="group relative cursor-pointer z-50">
-                  <div onClick={()=>{navigate('/')}}className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                    Home
-                    
-                  </div>
-
-                </li>
-                <li>
-                 <div className="relative">
-                <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center font-medium transition-colors hover:text-gray-700 ${
-                    serviceItems.some(item => location.pathname === item.path)
-                      ? 'text-gray-700'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  Services
-                  <FaChevronDown className={`ml-2 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden"
-                      
-                    >
-                      {serviceItems.map((service) => (
-                        <button
-                          key={service.name}
-                          onClick={() => handleServiceSelect(service.path)}
-                          className="block w-full text-left px-4 py-3 hover:bg-gray-50 hover:text-primary-600 transition-colors text-gray-700 font-medium"
-                        >
-                          {service.name}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-                </li>
-                
-                
-                 <li onClick={()=>{navigate('/contact')}}className="group relative cursor-pointer">
-                  <div className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                   Contact us 
-                    
-                  </div>
-
-        
-                </li>
-      
-            </ul>
-
-            {/* CTA Button */}
-            <button className="hidden lg:flex gap-2 rounded-xl bg-[#e36a2e] px-4 sm:px-6 py-2 sm:py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28] whitespace-nowrap" onClick={()=>{navigate('/contact')}}>
-              Get Started Now <span><ArrowRightCircle size={18} className='text-black'/></span>
-            </button>
-          </nav>
-
-          {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden mt-4 bg-white rounded-2xl p-4 shadow-lg">
-              <ul className="cursor-pointer space-y-3">
-                 <li  onClick={()=>{navigate('/')}}className="py-2 border-b border-gray-100">
-                   Home
-                  </li>
-               
-                  <li className="py-2 border-b border-gray-100">
-                <div className="py-3 ">
-                  <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between w-full font-medium text-gray-700 hover:text-primary-600"
-                  >
-                    <span>Services</span>
-                    <FaChevronDown className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isServicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pt-2 space-y-2">
-                          {serviceItems.map((service) => (
-                            <button
-                              key={service.name}
-                              onClick={() => handleServiceSelect(service.path)}
-                              className="block w-full text-left py-2 px-4 rounded-lg hover:bg-gray-50 hover:text-primary-600 text-gray-600 font-medium"
-                            >
-                              {service.name}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-                  </li>
-              
-                <li>
-                  <li  onClick={()=>{navigate('/contact')}}className="py-2 border-b border-gray-100">
-                  Contact
-                  </li>
-                  <button className="w-full flex justify-center gap-2 rounded-xl bg-[#e36a2e] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28]" onClick={()=>{navigate('/contact')}}>
-                    Get Started Now <ArrowRightCircle size={18} className='text-black'/>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-      </header>
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="text-center mb-12 fade-in">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
-          <span className="gradient-text">GoHighLevel CRM</span>
-        </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          The ultimate all-in-one platform for agencies to manage clients, automate marketing, and scale operations.
-        </p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="relative">
-          <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl p-8 h-full">
-            <img 
-              src="/images/gohighlevel.jpg" 
-              alt="GoHighLevel Dashboard" 
-              className="rounded-xl shadow-lg w-full h-64 object-cover mb-6"
-            />
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Agencies Love GoHighLevel</h3>
-            <p className="text-gray-600 mb-6">
-              GoHighLevel provides agencies with a complete suite of tools to manage all aspects 
-              of their client services, from lead capture to campaign management and reporting.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center bg-white rounded-lg p-4">
-                <div className="text-pink-500 font-bold text-lg mr-4">🏆</div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">White-label Ready</h4>
-                  <p className="text-gray-600 text-sm">Brand the platform as your own solution</p>
-                </div>
-              </div>
-              <div className="flex items-center bg-white rounded-lg p-4">
-                <div className="text-pink-500 font-bold text-lg mr-4">⚡</div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Quick Setup</h4>
-                  <p className="text-gray-600 text-sm">Get clients live in days, not months</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-xl p-8 service-card">
-          <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg flex items-center justify-center mb-6">
-            <span className="text-white text-2xl">🚀</span>
-          </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Complete Agency Solution</h2>
-          <p className="text-gray-600 mb-6">
-            GoHighLevel eliminates the need for multiple software subscriptions by providing 
-            everything you need in one powerful platform designed specifically for marketing agencies.
-          </p>
-          
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Benefits</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-4 bg-pink-50 rounded-lg">
-                <div className="text-2xl font-bold text-pink-600">90%</div>
-                <div className="text-sm text-gray-600">Cost Reduction</div>
-              </div>
-              <div className="text-center p-4 bg-pink-50 rounded-lg">
-                <div className="text-2xl font-bold text-pink-600">3x</div>
-                <div className="text-sm text-gray-600">Faster Onboarding</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl p-6 text-white">
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 className="text-lg font-bold">Ready to Transform?</h4>
-                <p className="text-sm opacity-90">Book a demo to see it in action</p>
-              </div>
-              <button className="bg-white text-pink-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100">
-                Schedule Demo
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-8 mb-12">
-        {features.map((category, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-lg p-6 service-card">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">{category.category}</h3>
-            <ul className="space-y-4">
-              {category.items.map((item, idx) => (
-                <li key={idx} className="flex items-center">
-                  <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
-                    <span className="text-pink-500">✓</span>
-                  </div>
-                  <span className="text-gray-700">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl p-8 text-white">
-        <h2 className="text-3xl font-bold mb-8 text-center">Why Partner With Us for GoHighLevel?</h2>
-        <div className="grid md:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-              <p className="opacity-90">{benefit.description}</p>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          
-        </div>
-      </div>
-    </div>
- {/* Latest News Section */}
-      <section className="bg-white py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
-            <div>
-              <h2 data-aos="slide-right"className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Latest News & Updates</h2>
-              <p data-aos="slide-up" className="text-orange-500 text-lg sm:text-xl mb-8 sm:mb-12" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                Stay up To Date With The Latest From Growth Flow Media.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: Text Content */}
+            <div data-aos="fade-right">
+              <p className="text-[#e36a2e] text-sm font-bold tracking-[0.2em] uppercase mb-4">
+                Platform Implementation
               </p>
-
-              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-                <div data-aos="slide-right"className="flex flex-col sm:flex-row gap-3 bg-white shadow-lg sm:shadow-xl rounded-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
-                  <div className='h-40 w-full sm:w-80 border rounded-lg overflow-hidden'>
-                    <img
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                      alt="Team meeting"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className=''>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      How Growth Flow Media Delivers High-Performance PPC Management in Brisbane
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mb-2">January 3, 2026</p>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      PPC management is becoming the foundation stone for the success of businesses in Brisbane. The instantaneous reach that it offers
-                    </p>
-                  </div>
-                </div>
-
-                <div data-aos="slide-right" className="flex flex-col sm:flex-row gap-3 bg-white shadow-lg sm:shadow-xl rounded-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
-                  <div className='h-40 w-full sm:w-80 border rounded-lg overflow-hidden'>
-                    <img
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                      alt="Team meeting"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className=''>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      Why Your Business Needs a Professional Website Design Agency in Brisbane
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mb-2">December 26, 2025</p>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      Website Design Agency in Brisbane plays a crucial role in today's market, where your website is often the very first
-                    </p>
-                  </div>
-                </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-[1.1] tracking-tight">
+                Scale faster with <br />
+                <span className="bg-gradient-to-r from-orange-400 to-[#e36a2e] bg-clip-text text-transparent">
+                  GoHighLevel.
+                </span>
+              </h1>
+              <p className="text-zinc-400 text-lg sm:text-xl max-w-lg mb-10 leading-relaxed">
+                The ultimate all-in-one CRM platform to manage clients, automate
+                your marketing, and scale your operations without limits.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <button
+                  onClick={() => navigate("/contact")}
+                  className="group px-8 py-4 rounded-full font-semibold flex items-center gap-3 text-white bg-[#e36a2e] hover:bg-[#cf5f28] transition-all duration-300 shadow-[0_8px_20px_rgba(227,106,46,0.3)] hover:-translate-y-0.5"
+                >
+                  Book a Demo{" "}
+                  <ChevronRight
+                    size={20}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </button>
               </div>
-
-              <button data-aos="slide-left"className="bg-orange-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium hover:bg-orange-600 flex items-center gap-2 text-sm sm:text-base">
-                View All <ChevronRight className="w-4 h-4" />
-              </button>
             </div>
 
-            <div data-aos="slide-left" className="bg-black border rounded-lg p-4 sm:p-6 lg:p-8 mt-8 md:mt-0">
-              <div className="flex items-center gap-2 mb-4 sm:mb-6">
+            {/* Right: Dashboard Bento Grid */}
+            <div
+              className="relative grid grid-cols-2 gap-4 sm:gap-6"
+              data-aos="fade-left"
+            >
+              {/* Full Width Image Card */}
+              <div className="col-span-2 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl relative bg-zinc-900/50 backdrop-blur-md">
                 <img
-                  src={image6}
-                  alt="Growth Flow Media"
-                  className="h-12 sm:h-16 lg:h-20 w-auto"
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                  alt="GoHighLevel Dashboard"
+                  className="w-full h-56 sm:h-72 object-cover opacity-80 transition-transform duration-700 hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Complete Agency Solution
+                  </h3>
+                  <p className="text-zinc-400 text-sm">
+                    Eliminate the need for multiple software subscriptions.
+                    Everything you need is right here.
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-           
-              
-                 <input
-                  type="tel"
-                  placeholder="Preferd call back time"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
+              {/* Bento Box 1 */}
+              <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 rounded-3xl p-6 shadow-xl flex flex-col justify-center items-center text-center transition-colors hover:border-zinc-700">
+                <div className="text-3xl font-extrabold text-[#e36a2e] mb-2">
+                  90%
+                </div>
+                <div className="text-xs text-zinc-400 uppercase tracking-widest font-semibold">
+                  Software Cost
+                  <br />
+                  Reduction
+                </div>
               </div>
 
-              <p className="text-white mb-3 sm:mb-4 text-sm sm:text-base">How We May Help You?</p>
-
-              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 max-h-60 overflow-y-auto pr-2">
-                {[
-                  'Website Design',
-    'ECommerce Websites',
-    'Service Website',
-    'Branding & Logo Design',
-    'Digital Marketing',
-    'Search Engine Optimisation',
-    'Google Ads Management',
-    'Meta Ads Management',
-    'Content Marketing',
-    'Conversion Rate Optimization',
-    'Managed Hosting',
-    'Go High Level CRM',
-    'Ai Agents/Automation Development',
-    'White Label Marketing',
-    'Lead Generation'
-                ].map((option, i) => (
-                  <label key={i} className="flex items-center gap-3 bg-gray-100 px-3 sm:px-4 py-2 sm:py-3 rounded cursor-pointer hover:bg-gray-800">
-                    <input type="radio" name="service" className="w-4 h-4" />
-                    <span className="text-black text-xs sm:text-sm">{option}</span>
-                  </label>
-                ))}
+              {/* Bento Box 2 */}
+              <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 rounded-3xl p-6 shadow-xl flex flex-col justify-center items-center text-center transition-colors hover:border-zinc-700">
+                <div className="text-3xl font-extrabold text-white mb-2">
+                  3x
+                </div>
+                <div className="text-xs text-zinc-400 uppercase tracking-widest font-semibold">
+                  Faster Client
+                  <br />
+                  Onboarding
+                </div>
               </div>
-
-              <button className="w-full bg-orange-500 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-lg font-medium hover:bg-orange-600 text-base sm:text-lg">
-                Submit Request
-              </button>
             </div>
           </div>
         </div>
       </section>
-         {/* Footer */}
-        <Footer/>
-    </>
+
+      {/* Light Features Grid Section */}
+      <section className="py-20 lg:py-32 relative bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
+            <h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-6"
+              data-aos="fade-up"
+            >
+              Everything you need,{" "}
+              <span className="text-[#e36a2e]">in one place.</span>
+            </h2>
+            <p
+              className="text-gray-500 text-lg sm:text-xl"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              GoHighLevel provides a complete suite of tools to manage all
+              aspects of your business, from lead capture to campaign
+              management.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {features.map((category, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="group bg-white rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-8 transition-colors duration-500 group-hover:bg-[#e36a2e]/10">
+                  {category.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-100">
+                  {category.category}
+                </h3>
+                <ul className="space-y-5">
+                  {category.items.map((item, idx) => (
+                    <li key={idx} className="flex items-center group/item">
+                      <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center mr-4 transition-colors group-hover/item:bg-[#e36a2e]/10 shrink-0">
+                        <CheckCircle2 className="w-4 h-4 text-[#e36a2e]" />
+                      </div>
+                      <span className="text-gray-600 font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Dark Benefits Section */}
+      <section className="py-20 bg-zinc-950 border-y border-zinc-900 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#e36a2e]/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <h2
+            className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-16 tracking-tight"
+            data-aos="fade-up"
+          >
+            Why Partner With Us for Implementation?
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 hover:border-zinc-700 transition-colors"
+              >
+                <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mb-6">
+                  {benefit.icon}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* News & Contact Split Section */}
+      <section className="relative py-20 lg:py-32 bg-zinc-950 overflow-hidden border-t border-zinc-900">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e36a2e]/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
+            {/* Left Column: Latest News */}
+            <div data-aos="fade-right" className="flex flex-col h-full">
+              <div className="mb-10 sm:mb-14">
+                <p className="text-[#e36a2e] text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-4">
+                  Insights
+                </p>
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                  Latest News & <br /> Updates.
+                </h2>
+                <p className="text-zinc-400 text-lg">
+                  Stay up to date with the latest strategies, case studies, and
+                  insights from our team.
+                </p>
+              </div>
+
+              <div className="space-y-6 flex-grow flex flex-col justify-center">
+                {/* Article Card 1 */}
+                <div className="group flex flex-col sm:flex-row gap-5 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-4 sm:p-5 hover:border-zinc-700 transition-all duration-500 cursor-pointer">
+                  <div className="h-48 sm:h-40 w-full sm:w-40 shrink-0 rounded-2xl overflow-hidden relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
+                      alt="PPC"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center py-2 pr-2">
+                    <p className="text-[#e36a2e] text-xs font-bold tracking-wider uppercase mb-2">
+                      January 3, 2026
+                    </p>
+                    <h3 className="text-lg font-bold text-white mb-3 leading-tight transition-colors duration-300 group-hover:text-[#e36a2e]">
+                      How We Deliver High-Performance Marketing Campaigns
+                    </h3>
+                    <p className="text-zinc-400 text-sm line-clamp-2 leading-relaxed">
+                      Marketing automation is the foundation stone for the
+                      success of businesses today. Discover how instantaneous
+                      reach can transform your ROI.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Article Card 2 */}
+                <div className="group flex flex-col sm:flex-row gap-5 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-4 sm:p-5 hover:border-zinc-700 transition-all duration-500 cursor-pointer">
+                  <div className="h-48 sm:h-40 w-full sm:w-40 shrink-0 rounded-2xl overflow-hidden relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80"
+                      alt="CRM"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center py-2 pr-2">
+                    <p className="text-[#e36a2e] text-xs font-bold tracking-wider uppercase mb-2">
+                      December 26, 2025
+                    </p>
+                    <h3 className="text-lg font-bold text-white mb-3 leading-tight transition-colors duration-300 group-hover:text-[#e36a2e]">
+                      Why Your Agency Needs a White-Label CRM Solution
+                    </h3>
+                    <p className="text-zinc-400 text-sm line-clamp-2 leading-relaxed">
+                      A dedicated CRM plays a crucial role in today's market,
+                      where managing your client pipeline is the difference
+                      between scaling and stalling.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Premium Contact Form */}
+            <div data-aos="fade-left">
+              <form
+                onSubmit={handleSubmit}
+                className="relative bg-zinc-900/80 backdrop-blur-xl rounded-3xl p-6 sm:p-10 border border-zinc-800 shadow-[0_8px_30px_rgb(0,0,0,0.2)]"
+              >
+                <div className="mb-8 pb-7 border-b border-zinc-800/80">
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
+                    Ready to transform your agency?
+                  </h3>
+                  <p className="text-zinc-400 text-sm mt-2">
+                    Fill out the form below and our integration experts will be
+                    in touch.
+                  </p>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-[#e36a2e] focus:ring-1 focus:ring-[#e36a2e] placeholder:text-zinc-600 text-sm sm:text-base transition-all duration-300"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-[#e36a2e] focus:ring-1 focus:ring-[#e36a2e] placeholder:text-zinc-600 text-sm sm:text-base transition-all duration-300"
+                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Phone Number"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-5 py-4 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-[#e36a2e] focus:ring-1 focus:ring-[#e36a2e] placeholder:text-zinc-600 text-sm sm:text-base transition-all duration-300"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Callback Time"
+                      name="callback"
+                      value={formData.callback}
+                      onChange={handleChange}
+                      className="w-full px-5 py-4 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-[#e36a2e] focus:ring-1 focus:ring-[#e36a2e] placeholder:text-zinc-600 text-sm sm:text-base transition-all duration-300"
+                    />
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm font-bold tracking-[0.15em] text-zinc-500 uppercase mb-4">
+                  How can we help?
+                </p>
+                <div className="flex flex-wrap gap-2.5 mb-8 max-h-48 overflow-y-auto pr-2 custom-scrollbar [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-zinc-700 [&::-webkit-scrollbar-thumb]:rounded-full">
+                  {[
+                    "Go High Level CRM",
+                    "CRM Migration",
+                    "Marketing Automation",
+                    "White Label Setup",
+                    "Custom Workflows",
+                    "Sales Pipeline",
+                  ].map((option, i) => (
+                    <label
+                      key={i}
+                      className={`cursor-pointer px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border ${formData.service === option ? "bg-[#e36a2e] border-[#e36a2e] text-white shadow-[0_4px_12px_rgba(227,106,46,0.3)]" : "bg-zinc-950/50 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white"}`}
+                    >
+                      <input
+                        type="radio"
+                        name="service"
+                        value={option}
+                        checked={formData.service === option}
+                        onChange={handleChange}
+                        className="hidden"
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+
+                <button
+                  type="submit"
+                  className="group w-full bg-[#e36a2e] hover:bg-[#cf5f28] text-white font-semibold text-sm sm:text-base tracking-wide uppercase px-8 py-4 rounded-full transition-all duration-300 shadow-[0_8px_20px_rgba(227,106,46,0.3)] hover:-translate-y-0.5 flex items-center justify-center gap-3"
+                >
+                  Submit Request{" "}
+                  <ChevronRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 };
 

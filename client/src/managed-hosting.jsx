@@ -1,389 +1,290 @@
-import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Zap, Shield, TrendingUp, Globe, Smartphone, CreditCard, Search, BarChart, Users, Package, Star, ArrowRight, Check, Sparkles, Lock, Truck, MousePointer, Eye, Target, Menu, ChevronDown, ArrowRightCircle } from 'lucide-react';
-import Footer from './Footer';
+import React, { useState, useEffect } from "react";
+import {
+  ShoppingBag,
+  Zap,
+  Shield,
+  TrendingUp,
+  Globe,
+  Smartphone,
+  CreditCard,
+  Search,
+  BarChart,
+  Users,
+  Package,
+  Star,
+  ArrowRight,
+  Check,
+  Sparkles,
+  Lock,
+  Truck,
+  MousePointer,
+  Eye,
+  Target,
+  Menu,
+  ChevronDown,
+  ArrowRightCircle,
+  CheckCircle2,
+  Server,
+  Clock,
+  Phone,
+  Mail,
+  Settings,
+  ChevronRight,
+} from "lucide-react";
+import Footer from "./Footer";
+import { FaChevronDown } from "react-icons/fa";
 import image6 from "../images/logo.jpg";
-import { FaChevronDown } from 'react-icons/fa';
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+
 const Hosting = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-      // Handle service selection
-    const handleServiceSelect = (path) => {
-      navigate(path);
-      setIsServicesOpen(false);
-      setIsMenuOpen(false);
-    };
-      const navigate=useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-   const menuItems = [
-      "Our Services",
-      "Our Products",
-      "Our Work",
-      "Industries",
-      "The Agency",
-    ];  useEffect(()=>{
-        AOS.init({duration:800});
-      },[]);
+
   const [uptimePercentage, setUptimePercentage] = useState(99.0);
+
+  // Handle service selection
+  const handleServiceSelect = (path) => {
+    navigate(path);
+    setIsServicesOpen(false);
+    setIsMenuOpen(false);
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setUptimePercentage(prev => {
+      setUptimePercentage((prev) => {
         const newVal = prev + 0.01;
-        return newVal >= 99.99 ? 99.9 : newVal;
+        return newVal >= 99.99 ? 99.99 : newVal;
       });
     }, 50);
-    
+
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('zoom-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('.zoom').forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-const serviceItems = [
-    { name: 'Website Design', path: '/webdesign' },
-    {name:'Lead Generation',path:'/lead'},
-    {name:'Go High Level CRM',path:'/gohigh'},
-    {name:'Ai Agents/Automation Development',path:'/ai'},
-
-    {name:'White Label Marketing',path:'/whitelabel'},
-
-   
-    {name:'Digital Marketing',path:'/digitalmarketing'},
-    {name:'Managed Hosting',path:'/hosting'},
-
-
-
-    {name:'Conversion Rate Optimization',path:'/conversionrate'},
-
-    {name:'Service Website',path:'/service-site'},
-    {name:'Meta Ads Management',path:'/metaads'},
-
-    {name:'Search Engine Optimisation',path:'/seo'},
-
-    {name:'Branding & Logo Design',path:'/branding&logodesign'},
-
-    {name:'ECommerce Websites',path:'/ecommerce'},
-
-    {name:'Google Ads Management',path:'/googleads'},
-
-
-
-
-    
+  const serviceItems = [
+    { name: "Website Design", path: "/webdesign" },
+    { name: "ECommerce Websites", path: "/ecommerce" },
+    { name: "Service Website", path: "/service-site" },
+    { name: "Branding & Logo Design", path: "/branding&logodesign" },
+    { name: "Digital Marketing", path: "/digitalmarketing" },
+    { name: "Search Engine Optimisation", path: "/seo" },
+    { name: "Google Ads Management", path: "/googleads" },
+    { name: "Meta Ads Management", path: "/metaads" },
+    { name: "Conversion Rate Optimization", path: "/conversionrate" },
+    { name: "Managed Hosting", path: "/hosting" },
+    { name: "Go High Level CRM", path: "/gohigh" },
+    { name: "Ai Agents/Automation", path: "/ai" },
+    { name: "White Label Marketing", path: "/whitelabel" },
+    { name: "Lead Generation", path: "/lead" },
   ];
-const handleChangeSelection=(e)=>{
-const selectedValue=e.target.value;
-if(selectedValue){
-  navigate(selectedValue);
-}
-};
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
-        
-        * {
-          font-family: 'IBM Plex Sans', sans-serif;
-        }
-        
-        .mono-font {
-          font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .zoom {
-          opacity: 0;
-          transform: scale(0.95);
-          transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .zoom-in {
-          opacity: 1;
-          transform: scale(1);
-        }
-        
-        @keyframes server-pulse {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.05); }
-        }
-        
-        .server-pulse {
-          animation: server-pulse 2s ease-in-out infinite;
-        }
-        
-        .card-shadow {
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          transition: all 0.3s ease;
-        }
-        
-        .card-shadow:hover {
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-          transform: translateY(-4px);
-        }
-      `}</style>
-  <header className="relative z-50 w-full bg-[#f7f7f7] py-4" data-aos="slide-down">
-        <div className="mx-auto max-w-7xl px-4">
-          <nav className="flex items-center justify-between rounded-2xl bg-white px-4 sm:px-6 py-3 sm:py-4 shadow-md">
-            {/* Logo */}
-            <div onClick ={()=>{navigate('/')}}className="flex items-center gap-2">
-              <img
-                src={image6}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
+    <div className="min-h-screen bg-[#fafafa] font-sans">
+      {/* Dark Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-zinc-950 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#e36a2e]/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center" data-aos="fade-up">
+            <div className="inline-flex items-center bg-[#e36a2e]/10 border border-[#e36a2e]/20 rounded-full px-6 py-2.5 mb-8">
+              <span className="text-xs sm:text-sm font-bold text-[#e36a2e] tracking-[0.2em] uppercase">
+                Enterprise-Grade Infrastructure
+              </span>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button 
-              className="lg:hidden p-2"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <Menu size={24} />
-            </button>
-
-            {/* Menu - Desktop */}
-            <ul className="hidden z-50 lg:flex  items-center gap-4 xl:gap-8 text-sm xl:text-[15px] font-medium text-gray-700">
-              <li className="group relative cursor-pointer z-50">
-                  <div onClick={()=>{navigate('/')}}className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                    Home
-                    
-                  </div>
-
-                </li>
-                <li>
-                 <div className="relative">
-                <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center font-medium transition-colors hover:text-gray-700 ${
-                    serviceItems.some(item => location.pathname === item.path)
-                      ? 'text-gray-700'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  Services
-                  <FaChevronDown className={`ml-2 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden"
-                      
-                    >
-                      {serviceItems.map((service) => (
-                        <button
-                          key={service.name}
-                          onClick={() => handleServiceSelect(service.path)}
-                          className="block w-full text-left px-4 py-3 hover:bg-gray-50 hover:text-primary-600 transition-colors text-gray-700 font-medium"
-                        >
-                          {service.name}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-                </li>
-                
-                
-                 <li onClick={()=>{navigate('/contact')}}className="group relative cursor-pointer">
-                  <div className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                   Contact us 
-                    
-                  </div>
-
-        
-                </li>
-      
-            </ul>
-
-            {/* CTA Button */}
-            <button className="hidden lg:flex gap-2 rounded-xl bg-[#e36a2e] px-4 sm:px-6 py-2 sm:py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28] whitespace-nowrap" onClick={()=>{navigate('/contact')}}>
-              Get Started Now <span><ArrowRightCircle size={18} className='text-black'/></span>
-            </button>
-          </nav>
-
-          {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden mt-4 bg-white rounded-2xl p-4 shadow-lg">
-              <ul className="cursor-pointer space-y-3">
-                 <li  onClick={()=>{navigate('/')}}className="py-2 border-b border-gray-100">
-                   Home
-                  </li>
-               
-                  <li className="py-2 border-b border-gray-100">
-                <div className="py-3 ">
-                  <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between w-full font-medium text-gray-700 hover:text-primary-600"
-                  >
-                    <span>Services</span>
-                    <FaChevronDown className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isServicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pt-2 space-y-2">
-                          {serviceItems.map((service) => (
-                            <button
-                              key={service.name}
-                              onClick={() => handleServiceSelect(service.path)}
-                              className="block w-full text-left py-2 px-4 rounded-lg hover:bg-gray-50 hover:text-primary-600 text-gray-600 font-medium"
-                            >
-                              {service.name}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-                  </li>
-              
-                <li>
-                  <li  onClick={()=>{navigate('/contact')}}className="py-2 border-b border-gray-100">
-                  Contact
-                  </li>
-                  <button className="w-full flex justify-center gap-2 rounded-xl bg-[#e36a2e] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28]" onClick={()=>{navigate('/contact')}}>
-                    Get Started Now <ArrowRightCircle size={18} className='text-black'/>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-      </header>
-      {/* Hero */}
-      <div className="bg-gradient-to-b from-gray-900 to-gray-800 py-24 lg:py-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center zoom">
-            <div className="inline-flex items-center bg-yellow-400/20 backdrop-blur-sm border-2 border-yellow-400 rounded-lg px-6 py-3 mb-8">
-              <span className="mono-font text-sm font-bold text-yellow-400 tracking-wider">ENTERPRISE-GRADE INFRASTRUCTURE</span>
-            </div>
-            
-            <h1 className="mono-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">
-              HOSTING THAT
-              <span className="block text-yellow-400">NEVER SLEEPS</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
+              Hosting that <br />
+              <span className="bg-gradient-to-r from-orange-400 to-[#e36a2e] bg-clip-text text-transparent">
+                never sleeps.
+              </span>
             </h1>
-            
-            <p className="text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-              Lightning-fast, ultra-secure, fully managed hosting with 99.99% uptime guarantee. Focus on your business while we handle the infrastructure.
+
+            <p className="text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+              Lightning-fast, ultra-secure, fully managed hosting with a 99.99%
+              uptime guarantee. Focus on your business while we handle the
+              infrastructure.
             </p>
 
-            <div className="bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8 max-w-2xl mx-auto">
-              <div className="mono-font text-8xl font-black text-yellow-400 mb-2">
-                {uptimePercentage.toFixed(2)}%
-              </div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">UPTIME GUARANTEE</div>
-              <div className="mt-6 bg-gray-700 rounded-full h-3 overflow-hidden">
-                <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 h-full rounded-full" style={{width: `${uptimePercentage}%`}}></div>
+            {/* Live Uptime Counter Bento */}
+            <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 sm:p-10 max-w-2xl mx-auto shadow-2xl relative overflow-hidden group hover:border-zinc-700 transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-b from-[#e36a2e]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="text-6xl sm:text-8xl font-black text-[#e36a2e] mb-2 tracking-tighter">
+                  {uptimePercentage.toFixed(2)}%
+                </div>
+                <div className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-6">
+                  Uptime Guarantee
+                </div>
+                <div className="bg-zinc-950 rounded-full h-3 overflow-hidden border border-zinc-800 p-0.5">
+                  <div
+                    className="bg-gradient-to-r from-orange-500 to-[#e36a2e] h-full rounded-full transition-all duration-300"
+                    style={{ width: `${uptimePercentage}%` }}
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Features */}
-      <div className="py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 zoom">
-            <h2 className="mono-font text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
-              PREMIUM FEATURES INCLUDED
+      {/* Light Features Section */}
+      <section className="py-20 lg:py-32 relative bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16 lg:mb-24" data-aos="fade-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
+              Premium Features <span className="text-[#e36a2e]">Included.</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need for a fast, secure, and scalable website—no hidden fees or surprise charges
+            <p className="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto">
+              Everything you need for a fast, secure, and scalable website—no
+              hidden fees or surprise charges.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
-                icon: '⚡',
-                title: 'Blazing Fast Speed',
-                description: 'SSD storage, CDN integration, advanced caching, and optimized servers deliver sub-second page load times globally.',
-                specs: ['NVMe SSD Storage', 'Global CDN', 'HTTP/3 Support', 'Server-level Caching']
+                icon: <Zap />,
+                title: "Blazing Fast Speed",
+                description:
+                  "SSD storage, CDN integration, advanced caching, and optimized servers deliver sub-second page load times globally.",
+                specs: [
+                  "NVMe SSD Storage",
+                  "Global CDN",
+                  "HTTP/3 Support",
+                  "Server-level Caching",
+                ],
               },
               {
-                icon: '🔒',
-                title: 'Advanced Security',
-                description: 'Enterprise-grade security with automatic malware scanning, DDoS protection, firewall, and free SSL certificates.',
-                specs: ['Free SSL Certificates', 'DDoS Protection', 'Malware Scanning', 'Firewall Protection']
+                icon: <Shield />,
+                title: "Advanced Security",
+                description:
+                  "Enterprise-grade security with automatic malware scanning, DDoS protection, firewall, and free SSL certificates.",
+                specs: [
+                  "Free SSL Certificates",
+                  "DDoS Protection",
+                  "Malware Scanning",
+                  "Firewall Protection",
+                ],
               },
               {
-                icon: '📈',
-                title: 'Auto-Scaling',
-                description: 'Automatically scale resources based on traffic. Handle viral moments and traffic spikes without slowdowns.',
-                specs: ['Auto Resource Scaling', 'Load Balancing', 'Traffic Spike Protection', 'Unlimited Bandwidth']
+                icon: <TrendingUp />,
+                title: "Auto-Scaling",
+                description:
+                  "Automatically scale resources based on traffic. Handle viral moments and traffic spikes without slowdowns.",
+                specs: [
+                  "Auto Resource Scaling",
+                  "Load Balancing",
+                  "Traffic Spike Protection",
+                  "Unlimited Bandwidth",
+                ],
               },
               {
-                icon: '💾',
-                title: 'Daily Backups',
-                description: 'Automated daily backups with 30-day retention. One-click restore to any previous version with zero data loss.',
-                specs: ['Automated Daily Backups', '30-Day Retention', 'One-Click Restore', 'Offsite Storage']
+                icon: <Server />,
+                title: "Daily Backups",
+                description:
+                  "Automated daily backups with 30-day retention. One-click restore to any previous version with zero data loss.",
+                specs: [
+                  "Automated Daily Backups",
+                  "30-Day Retention",
+                  "One-Click Restore",
+                  "Offsite Storage",
+                ],
               },
               {
-                icon: '🎯',
-                title: 'Staging Environment',
-                description: 'Test changes safely in a staging environment before pushing to production. Perfect for updates and development.',
-                specs: ['Full Staging Site', 'Git Integration', 'One-Click Deploy', 'Environment Sync']
+                icon: <Target />,
+                title: "Staging Environment",
+                description:
+                  "Test changes safely in a staging environment before pushing to production. Perfect for updates and development.",
+                specs: [
+                  "Full Staging Site",
+                  "Git Integration",
+                  "One-Click Deploy",
+                  "Environment Sync",
+                ],
               },
               {
-                icon: '📊',
-                title: 'Performance Monitoring',
-                description: 'Real-time monitoring of server health, uptime, and performance metrics with instant alerts for any issues.',
-                specs: ['24/7 Monitoring', 'Performance Metrics', 'Instant Alerts', 'Detailed Analytics']
+                icon: <BarChart />,
+                title: "Performance Monitoring",
+                description:
+                  "Real-time monitoring of server health, uptime, and performance metrics with instant alerts for any issues.",
+                specs: [
+                  "24/7 Monitoring",
+                  "Performance Metrics",
+                  "Instant Alerts",
+                  "Detailed Analytics",
+                ],
               },
               {
-                icon: '🔧',
-                title: 'Expert Support',
-                description: '24/7/365 expert support from real humans who know hosting inside out. Average response time under 15 minutes.',
-                specs: ['24/7/365 Support', '<15min Response', 'Expert Engineers', 'Priority Handling']
+                icon: <Users />,
+                title: "Expert Support",
+                description:
+                  "24/7/365 expert support from real humans who know hosting inside out. Average response time under 15 minutes.",
+                specs: [
+                  "24/7/365 Support",
+                  "<15min Response",
+                  "Expert Engineers",
+                  "Priority Handling",
+                ],
               },
               {
-                icon: '🚀',
-                title: 'Optimized Stack',
-                description: 'Latest versions of PHP, MySQL, Node.js, and more. Optimized server configurations for maximum performance.',
-                specs: ['Latest PHP/MySQL', 'Node.js Support', 'Redis/Memcached', 'Custom Configs']
+                icon: <Globe />,
+                title: "Optimized Stack",
+                description:
+                  "Latest versions of PHP, MySQL, Node.js, and more. Optimized server configurations for maximum performance.",
+                specs: [
+                  "Latest PHP/MySQL",
+                  "Node.js Support",
+                  "Redis/Memcached",
+                  "Custom Configs",
+                ],
               },
               {
-                icon: '⚙️',
-                title: 'Developer Tools',
-                description: 'SSH access, WP-CLI, Git integration, composer, and all the tools developers need for efficient workflows.',
-                specs: ['SSH/SFTP Access', 'WP-CLI Support', 'Git Integration', 'Composer & NPM']
+                icon: <Settings />,
+                title: "Developer Tools",
+                description:
+                  "SSH access, WP-CLI, Git integration, composer, and all the tools developers need for efficient workflows.",
+                specs: [
+                  "SSH/SFTP Access",
+                  "WP-CLI Support",
+                  "Git Integration",
+                  "Composer & NPM",
+                ],
               },
             ].map((feature, idx) => (
-              <div key={idx} className="zoom bg-white rounded-2xl p-8 card-shadow" style={{transitionDelay: `${idx * 0.1}s`}}>
-                <div className="text-6xl mb-4 server-pulse" style={{animationDelay: `${idx * 0.3}s`}}>{feature.icon}</div>
-                <h3 className="mono-font text-2xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
-                <div className="space-y-2">
+              <div
+                key={idx}
+                data-aos="fade-up"
+                data-aos-delay={(idx % 3) * 100}
+                className="group bg-white rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center mb-6 text-[#e36a2e] transition-colors duration-500 group-hover:bg-[#e36a2e]/10">
+                  {feature.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-500 mb-6 leading-relaxed text-sm sm:text-base">
+                  {feature.description}
+                </p>
+                <div className="space-y-3">
                   {feature.specs.map((spec, i) => (
-                    <div key={i} className="flex items-center text-sm text-gray-700">
-                      <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-3"></div>
+                    <div
+                      key={i}
+                      className="flex items-center text-sm font-medium text-gray-700 group/spec"
+                    >
+                      <div className="w-1.5 h-1.5 bg-[#e36a2e] rounded-full mr-3 transition-transform group-hover/spec:scale-150"></div>
                       {spec}
                     </div>
                   ))}
@@ -392,170 +293,240 @@ if(selectedValue){
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Infrastructure */}
-      <div className="py-24 lg:py-32 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 zoom">
-            <h2 className="mono-font text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
-              WORLD-CLASS INFRASTRUCTURE
+      {/* Dark Infrastructure Section */}
+      <section className="py-20 lg:py-32 bg-zinc-950 border-y border-zinc-900 relative overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#e36a2e]/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center mb-16 lg:mb-24" data-aos="fade-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">
+              World-Class Infrastructure
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Built on enterprise-grade infrastructure trusted by Fortune 500 companies
+            <p className="text-lg sm:text-xl text-zinc-400 max-w-3xl mx-auto">
+              Built on enterprise-grade architecture trusted by Fortune 500
+              companies.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="zoom space-y-8">
-              <div className="bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8">
-                <h3 className="mono-font text-3xl font-bold text-yellow-400 mb-6">SERVER SPECS</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="space-y-8">
+              {/* Server Specs Bento */}
+              <div
+                data-aos="fade-right"
+                className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 lg:p-10 hover:border-zinc-700 transition-colors"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                  <Server className="text-[#e36a2e]" /> Server Specs
+                </h3>
                 <div className="space-y-4">
                   {[
-                    { label: 'CPU', value: 'Intel Xeon / AMD EPYC' },
-                    { label: 'RAM', value: 'DDR4 ECC Memory' },
-                    { label: 'Storage', value: 'NVMe SSD RAID 10' },
-                    { label: 'Network', value: '10Gbps Redundant' },
-                    { label: 'OS', value: 'Ubuntu/AlmaLinux' },
-                    { label: 'PHP', value: 'v7.4 - v8.3' },
+                    { label: "CPU", value: "Intel Xeon / AMD EPYC" },
+                    { label: "RAM", value: "DDR4 ECC Memory" },
+                    { label: "Storage", value: "NVMe SSD RAID 10" },
+                    { label: "Network", value: "10Gbps Redundant" },
+                    { label: "OS", value: "Ubuntu/AlmaLinux" },
+                    { label: "PHP", value: "v7.4 - v8.3" },
                   ].map((spec, idx) => (
-                    <div key={idx} className="flex items-center justify-between border-b border-gray-700 pb-3">
-                      <span className="text-gray-400 mono-font text-sm">{spec.label}</span>
-                      <span className="text-white font-semibold">{spec.value}</span>
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between border-b border-zinc-800 pb-3 last:border-0 last:pb-0"
+                    >
+                      <span className="text-zinc-500 text-sm font-semibold tracking-wider uppercase">
+                        {spec.label}
+                      </span>
+                      <span className="text-zinc-200 font-medium">
+                        {spec.value}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8">
-                <h3 className="mono-font text-3xl font-bold text-yellow-400 mb-6">GLOBAL CDN</h3>
-                <p className="text-gray-300 mb-6">
-                  Content delivered from 200+ edge locations worldwide ensuring lightning-fast load times regardless of visitor location.
+              {/* Global CDN Bento */}
+              <div
+                data-aos="fade-right"
+                data-aos-delay="100"
+                className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 lg:p-10 hover:border-zinc-700 transition-colors"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                  <Globe className="text-[#e36a2e]" /> Global CDN
+                </h3>
+                <p className="text-zinc-400 mb-8 leading-relaxed">
+                  Content delivered from 200+ edge locations worldwide ensuring
+                  lightning-fast load times regardless of visitor location.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {['North America', 'Europe', 'Asia Pacific', 'South America', 'Middle East', 'Africa'].map((region, idx) => (
-                    <div key={idx} className="bg-gray-700 rounded-lg p-3 text-center">
-                      <div className="text-2xl mb-1">🌍</div>
-                      <div className="text-xs text-gray-400">{region}</div>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    "North America",
+                    "Europe",
+                    "Asia Pacific",
+                    "South America",
+                    "Middle East",
+                    "Africa",
+                  ].map((region, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-center"
+                    >
+                      <div className="text-xs font-semibold text-zinc-300">
+                        {region}
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="zoom space-y-8">
-              <div className="bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8">
-                <h3 className="mono-font text-3xl font-bold text-yellow-400 mb-6">SECURITY LAYERS</h3>
+            <div className="space-y-8">
+              {/* Security Layers Bento */}
+              <div
+                data-aos="fade-left"
+                className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 lg:p-10 hover:border-zinc-700 transition-colors"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                  <Shield className="text-[#e36a2e]" /> Security Layers
+                </h3>
                 <div className="space-y-4">
                   {[
-                    { layer: 'Layer 7', protection: 'Application DDoS Protection' },
-                    { layer: 'Layer 4', protection: 'Network DDoS Mitigation' },
-                    { layer: 'Layer 3', protection: 'IP Reputation Filtering' },
-                    { layer: 'SSL/TLS', protection: 'Encrypted Connections' },
-                    { layer: 'Firewall', protection: 'Advanced WAF Rules' },
-                    { layer: 'Malware', protection: 'Real-time Scanning' },
+                    {
+                      layer: "Layer 7",
+                      protection: "Application DDoS Protection",
+                    },
+                    { layer: "Layer 4", protection: "Network DDoS Mitigation" },
+                    { layer: "Layer 3", protection: "IP Reputation Filtering" },
+                    { layer: "SSL/TLS", protection: "Encrypted Connections" },
+                    { layer: "Firewall", protection: "Advanced WAF Rules" },
+                    { layer: "Malware", protection: "Real-time Scanning" },
                   ].map((item, idx) => (
-                    <div key={idx} className="bg-gray-700 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="mono-font text-sm text-yellow-400 font-bold">{item.layer}</span>
-                        <div className="w-2 h-2 bg-green-400 rounded-full server-pulse"></div>
+                    <div
+                      key={idx}
+                      className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between group hover:border-zinc-700 transition-colors"
+                    >
+                      <div className="flex flex-col">
+                        <span className="text-[#e36a2e] text-xs font-bold uppercase tracking-wider mb-1">
+                          {item.layer}
+                        </span>
+                        <span className="text-zinc-300 text-sm font-medium">
+                          {item.protection}
+                        </span>
                       </div>
-                      <div className="text-sm text-gray-300">{item.protection}</div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8">
-                <h3 className="mono-font text-3xl font-bold text-yellow-400 mb-6">UPTIME SLA</h3>
-                <div className="text-center mb-6">
-                  <div className="mono-font text-6xl font-black text-white">99.99%</div>
-                  <div className="text-gray-400 mt-2">Guaranteed Uptime</div>
+              {/* SLA Bento */}
+              <div
+                data-aos="fade-left"
+                data-aos-delay="100"
+                className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 lg:p-10 hover:border-zinc-700 transition-colors"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
+                  Uptime SLA
+                </h3>
+                <div className="text-center mb-8">
+                  <div className="text-6xl font-black text-white tracking-tighter mb-2">
+                    99.99%
+                  </div>
+                  <div className="text-zinc-500 text-sm font-bold uppercase tracking-widest">
+                    Guaranteed Uptime
+                  </div>
                 </div>
-                <div className="bg-gray-700 rounded-lg p-4 mb-4">
-                  <div className="text-sm text-gray-400 mb-2">Maximum Downtime/Year</div>
-                  <div className="text-2xl font-bold text-white">52 minutes</div>
+                <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 mb-4 flex justify-between items-center">
+                  <div className="text-sm font-semibold text-zinc-400 uppercase tracking-wide">
+                    Max Downtime / Year
+                  </div>
+                  <div className="text-xl font-bold text-white">52 min</div>
                 </div>
-                <div className="text-xs text-gray-400 text-center">
+                <div className="text-xs text-zinc-500 text-center font-medium">
                   * We credit your account for any SLA violations
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Management */}
-      <div className="py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 zoom">
-            <h2 className="mono-font text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
-              FULLY MANAGED SERVICE
+      {/* Light Managed Services */}
+      <section className="py-20 lg:py-32 relative bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16 lg:mb-24" data-aos="fade-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
+              Fully Managed <span className="text-[#e36a2e]">Service.</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We handle all the technical details so you can focus on growing your business
+            <p className="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto">
+              We handle all the technical details so you can focus exclusively
+              on growing your business.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {[
               {
-                category: 'Server Management',
+                category: "Server Management",
                 tasks: [
-                  'OS updates and security patches',
-                  'Software installation and updates',
-                  'Performance optimization',
-                  'Resource monitoring and scaling',
-                  'Load balancing configuration',
-                  'Database optimization'
-                ]
+                  "OS updates & security patches",
+                  "Software installation & updates",
+                  "Performance optimization",
+                  "Resource monitoring & scaling",
+                  "Load balancing configuration",
+                  "Database optimization",
+                ],
               },
               {
-                category: 'Security Management',
+                category: "Security Management",
                 tasks: [
-                  'SSL certificate installation and renewal',
-                  'Firewall configuration and updates',
-                  'Malware scanning and removal',
-                  'Security audit and hardening',
-                  'DDoS attack mitigation',
-                  'Intrusion detection and prevention'
-                ]
+                  "SSL certificate installation",
+                  "Firewall configuration",
+                  "Malware scanning & removal",
+                  "Security audit & hardening",
+                  "DDoS attack mitigation",
+                  "Intrusion detection",
+                ],
               },
               {
-                category: 'Backup Management',
+                category: "Backup Management",
                 tasks: [
-                  'Automated daily backups',
-                  'Backup verification and testing',
-                  'Offsite backup storage',
-                  'Disaster recovery planning',
-                  'Quick restore service',
-                  'Version control for rollbacks'
-                ]
+                  "Automated daily backups",
+                  "Backup verification & testing",
+                  "Offsite backup storage",
+                  "Disaster recovery planning",
+                  "Quick restore service",
+                  "Version control rollbacks",
+                ],
               },
               {
-                category: 'Application Management',
+                category: "Application Management",
                 tasks: [
-                  'CMS updates (WordPress, etc.)',
-                  'Plugin and theme updates',
-                  'Compatibility testing',
-                  'Performance profiling',
-                  'Cache configuration',
-                  'Database cleanup and repair'
-                ]
+                  "CMS updates (WordPress, etc.)",
+                  "Plugin and theme updates",
+                  "Compatibility testing",
+                  "Performance profiling",
+                  "Cache configuration",
+                  "Database cleanup",
+                ],
               },
             ].map((service, idx) => (
-              <div key={idx} className="zoom bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-2xl p-8 card-shadow" style={{transitionDelay: `${idx * 0.15}s`}}>
-                <div className="flex items-center mb-6">
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3 server-pulse"></div>
-                  <h3 className="mono-font text-2xl font-bold text-gray-900">{service.category}</h3>
+              <div
+                key={idx}
+                data-aos="fade-up"
+                data-aos-delay={idx * 100}
+                className="group bg-white rounded-3xl p-8 lg:p-10 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="flex items-center mb-8">
+                  <div className="w-3 h-3 bg-[#e36a2e] rounded-full mr-4 animate-pulse"></div>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    {service.category}
+                  </h3>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {service.tasks.map((task, i) => (
                     <li key={i} className="flex items-start">
-                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-700">{task}</span>
+                      <CheckCircle2 className="w-5 h-5 text-[#e36a2e] mr-3 shrink-0" />
+                      <span className="text-gray-600 font-medium">{task}</span>
                     </li>
                   ))}
                 </ul>
@@ -563,137 +534,236 @@ if(selectedValue){
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Migration */}
-      <div className="py-24 lg:py-32 bg-yellow-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center zoom">
-            <h2 className="mono-font text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
-              FREE WEBSITE MIGRATION
-            </h2>
-            <p className="text-xl text-gray-800 max-w-3xl mx-auto mb-12">
-              Switching hosts? We'll handle everything. Zero downtime, zero hassle, zero cost.
-            </p>
+      {/* Dark Migration & Support & CTA */}
+      <section className="py-20 lg:py-32 bg-zinc-950 relative overflow-hidden border-t border-zinc-900">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e36a2e]/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#e36a2e]/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 space-y-32">
+          {/* Free Migration Block */}
+          <div data-aos="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">
+                Free Website Migration
+              </h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+                Switching hosts? We'll handle everything. Zero downtime, zero
+                hassle, zero cost.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto mb-16">
               {[
-                { step: '1', title: 'Sign Up', desc: 'Choose your hosting plan' },
-                { step: '2', title: 'Submit Details', desc: 'Provide current host info' },
-                { step: '3', title: 'We Migrate', desc: 'Expert team handles transfer' },
-                { step: '4', title: 'Go Live', desc: 'Update DNS when ready' },
+                {
+                  step: "01",
+                  title: "Sign Up",
+                  desc: "Choose your hosting plan",
+                },
+                {
+                  step: "02",
+                  title: "Submit Details",
+                  desc: "Provide current host info",
+                },
+                {
+                  step: "03",
+                  title: "We Migrate",
+                  desc: "Expert team handles transfer",
+                },
+                { step: "04", title: "Go Live", desc: "Update DNS when ready" },
               ].map((item, idx) => (
-                <div key={idx} className="bg-white rounded-2xl p-6 card-shadow">
-                  <div className="mono-font text-5xl font-black text-gray-900 mb-3">{item.step}</div>
-                  <div className="font-bold text-gray-900 mb-2">{item.title}</div>
-                  <div className="text-sm text-gray-600">{item.desc}</div>
+                <div
+                  key={idx}
+                  className="bg-zinc-900/50 backdrop-blur-md rounded-3xl p-6 border border-zinc-800 text-center hover:border-zinc-700 transition-colors"
+                >
+                  <div className="text-4xl font-black text-[#e36a2e] mb-4">
+                    {item.step}
+                  </div>
+                  <div className="text-lg font-bold text-white mb-2">
+                    {item.title}
+                  </div>
+                  <div className="text-sm text-zinc-400">{item.desc}</div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 bg-gray-900 rounded-2xl p-8 max-w-3xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
-                <div>
-                  <div className="text-3xl font-bold mb-2">$0</div>
-                  <div className="text-sm text-gray-400">Migration Cost</div>
+            <div className="bg-zinc-900/50 backdrop-blur-md rounded-3xl p-8 max-w-4xl mx-auto border border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-zinc-800 text-center">
+                <div className="pt-4 sm:pt-0">
+                  <div className="text-4xl font-extrabold text-white mb-2">
+                    $0
+                  </div>
+                  <div className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                    Migration Cost
+                  </div>
                 </div>
-                <div>
-                  <div className="text-3xl font-bold mb-2">0hrs</div>
-                  <div className="text-sm text-gray-400">Downtime</div>
+                <div className="pt-6 sm:pt-0">
+                  <div className="text-4xl font-extrabold text-white mb-2">
+                    0 hrs
+                  </div>
+                  <div className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                    Downtime
+                  </div>
                 </div>
-                <div>
-                  <div className="text-3xl font-bold mb-2">24-48hrs</div>
-                  <div className="text-sm text-gray-400">Completion Time</div>
+                <div className="pt-6 sm:pt-0">
+                  <div className="text-4xl font-extrabold text-white mb-2">
+                    24-48
+                  </div>
+                  <div className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                    Hours to Complete
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Support */}
-      <div className="py-24 lg:py-32 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 zoom">
-            <h2 className="mono-font text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
-              24/7/365 EXPERT SUPPORT
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Real humans, real expertise, real fast response times
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="zoom bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8 text-center">
-              <div className="text-6xl mb-4">💬</div>
-              <h3 className="mono-font text-2xl font-bold text-white mb-3">Live Chat</h3>
-              <p className="text-gray-400 mb-6">Instant help via live chat. Average response time under 2 minutes.</p>
-              <div className="mono-font text-4xl font-bold text-yellow-400">&lt;2min</div>
-              <div className="text-sm text-gray-500 mt-2">Response Time</div>
+          {/* Support Block */}
+          <div data-aos="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">
+                24/7/365 Expert Support
+              </h2>
+              <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+                Real humans, real expertise, real fast response times.
+              </p>
             </div>
 
-            <div className="zoom bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8 text-center" style={{transitionDelay: '0.1s'}}>
-              <div className="text-6xl mb-4">📧</div>
-              <h3 className="mono-font text-2xl font-bold text-white mb-3">Email Support</h3>
-              <p className="text-gray-400 mb-6">Detailed support via email with attachments and screenshots.</p>
-              <div className="mono-font text-4xl font-bold text-yellow-400">&lt;15min</div>
-              <div className="text-sm text-gray-500 mt-2">Response Time</div>
-            </div>
-
-            <div className="zoom bg-gray-800 border-2 border-yellow-400 rounded-2xl p-8 text-center" style={{transitionDelay: '0.2s'}}>
-              <div className="text-6xl mb-4">📞</div>
-              <h3 className="mono-font text-2xl font-bold text-white mb-3">Phone Support</h3>
-              <p className="text-gray-400 mb-6">Talk to an expert for complex issues and urgent situations.</p>
-              <div className="mono-font text-4xl font-bold text-yellow-400">&lt;5min</div>
-              <div className="text-sm text-gray-500 mt-2">Wait Time</div>
-            </div>
-          </div>
-
-          <div className="mt-16 bg-gray-800 rounded-2xl p-12 text-center zoom">
-            <h3 className="mono-font text-3xl font-bold text-white mb-6">WHAT OUR SUPPORT COVERS</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {[
-                'Server Issues',
-                'Website Errors',
-                'Email Problems',
-                'Database Issues',
-                'SSL Certificates',
-                'DNS Configuration',
-                'Performance Issues',
-                'Security Incidents',
-              ].map((item, idx) => (
-                <div key={idx} className="bg-gray-700 rounded-lg p-4">
-                  <svg className="w-8 h-8 text-yellow-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <div className="text-sm text-gray-300">{item}</div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+              <div className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 text-center hover:border-zinc-700 transition-colors">
+                <div className="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <MessageSquare className="w-6 h-6 text-[#e36a2e]" />
                 </div>
-              ))}
+                <h3 className="text-xl font-bold text-white mb-4">Live Chat</h3>
+                <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+                  Instant help via live chat. Average response time under 2
+                  minutes.
+                </p>
+                <div className="text-3xl font-extrabold text-[#e36a2e] mb-1">
+                  &lt;2 min
+                </div>
+                <div className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                  Response Time
+                </div>
+              </div>
+
+              <div className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 text-center hover:border-zinc-700 transition-colors">
+                <div className="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-6 h-6 text-[#e36a2e]" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Email Support
+                </h3>
+                <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+                  Detailed support via email with attachments and screenshots.
+                </p>
+                <div className="text-3xl font-extrabold text-[#e36a2e] mb-1">
+                  &lt;15 min
+                </div>
+                <div className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                  Response Time
+                </div>
+              </div>
+
+              <div className="bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 text-center hover:border-zinc-700 transition-colors">
+                <div className="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Phone className="w-6 h-6 text-[#e36a2e]" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Phone Support
+                </h3>
+                <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+                  Talk to an expert directly for complex issues and urgent
+                  situations.
+                </p>
+                <div className="text-3xl font-extrabold text-[#e36a2e] mb-1">
+                  &lt;5 min
+                </div>
+                <div className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                  Wait Time
+                </div>
+              </div>
+            </div>
+
+            {/* What we cover grid */}
+            <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 lg:p-12 text-center max-w-5xl mx-auto">
+              <h3 className="text-sm font-bold text-zinc-400 tracking-widest uppercase mb-8">
+                What Our Support Covers
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "Server Issues",
+                  "Website Errors",
+                  "Email Problems",
+                  "Database Issues",
+                  "SSL Certificates",
+                  "DNS Config",
+                  "Performance",
+                  "Security",
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-zinc-950 border border-zinc-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-[#e36a2e]" />
+                    <div className="text-xs font-medium text-zinc-300 uppercase tracking-wider">
+                      {item}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Final CTA Block */}
+          <div
+            data-aos="zoom-in"
+            className="relative bg-zinc-950 rounded-3xl p-10 sm:p-16 overflow-hidden shadow-2xl text-center border border-zinc-800"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#e36a2e]/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-6 tracking-tight">
+                Ready for Better Hosting?
+              </h3>
+              <p className="text-zinc-400 mb-10 text-lg">
+                Experience the difference of truly managed, enterprise-grade
+                hosting. Free migration included.
+              </p>
+              <button
+                onClick={() => navigate("/contact")}
+                className="group inline-flex items-center justify-center gap-3 bg-[#e36a2e] hover:bg-[#cf5f28] text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-[0_8px_20px_rgba(227,106,46,0.3)] hover:-translate-y-0.5"
+              >
+                Get Started Now
+                <ChevronRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div className="py-24 lg:py-32 bg-gradient-to-br from-yellow-400 to-yellow-500">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center zoom">
-          <h2 className="mono-font text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
-            READY FOR BETTER HOSTING?
-          </h2>
-          <p className="text-xl text-gray-800 mb-12">
-            Experience the difference of truly managed hosting. Free migration included.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={()=>navigate('/contact')} className="bg-gray-900 text-white px-12 py-6 rounded-xl mono-font text-lg font-bold hover:shadow-2xl transform hover:scale-105 transition-all">
-              GET STARTED NOW
-            </button>
-           
-          </div>
-        </div>
-      </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
+
+// Add missing lucide-react import component locally if needed by the code above
+const MessageSquare = ({ className, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+);
 
 export default Hosting;

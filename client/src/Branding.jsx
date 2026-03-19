@@ -1,515 +1,604 @@
-import React, { useEffect, useState } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
-import image6 from '../images/logo.jpg'
-import {Menu,ChevronDown,ChevronRight,ArrowRightCircle,Phone,Mail }from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { ChevronRight, ArrowRightCircle } from "lucide-react";
+import image6 from "../images/logo.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Footer from './Footer';
-import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-const Branding = () => {
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-      // Handle service selection
-    const handleServiceSelect = (path) => {
-      navigate(path);
-      setIsServicesOpen(false);
-      setIsMenuOpen(false);
-    };
-      const menuItems = [
-    "Our Services",
-    "Our Products",
-    "Our Work",
-    "Industries",
-    "The Agency",
-  ];
-  useEffect(()=>{
-    AOS.init({duration:800});
-  },[]);
-  const navigate=useNavigate();
-const handleChangeSelection=(e)=>{
-const selectedValue=e.target.value;
-if(selectedValue){
-  navigate(selectedValue);
-}
-};
-const serviceItems = [
-    { name: 'Website Design', path: '/webdesign' },
-    {name:'Lead Generation',path:'/lead'},
-    {name:'Go High Level CRM',path:'/gohigh'},
-    {name:'Ai Agents/Automation Development',path:'/ai'},
+import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
-    {name:'White Label Marketing',path:'/whitelabel'},
+const SERVICES = [
+  {
+    title: "Logo Design",
+    desc: "Unique, memorable logos that capture your brand essence",
+    icon: "✦",
+    features: [
+      "Custom Design",
+      "Multiple Concepts",
+      "Unlimited Revisions",
+      "All File Formats",
+    ],
+  },
+  {
+    title: "Brand Identity",
+    desc: "Complete visual identity system for consistency across platforms",
+    icon: "◈",
+    features: [
+      "Color Palette",
+      "Typography",
+      "Visual Elements",
+      "Brand Guidelines",
+    ],
+  },
+  {
+    title: "Brand Strategy",
+    desc: "Strategic positioning and messaging framework",
+    icon: "◎",
+    features: [
+      "Target Audience",
+      "Brand Voice",
+      "Competitive Analysis",
+      "Positioning Strategy",
+    ],
+  },
+];
 
-   
-    {name:'Digital Marketing',path:'/digitalmarketing'},
-    {name:'Managed Hosting',path:'/hosting'},
+const PROCESS = [
+  {
+    num: "01",
+    title: "Discovery & Research",
+    desc: "Understanding your business, audience, and competition.",
+  },
+  {
+    num: "02",
+    title: "Concept Development",
+    desc: "Creating multiple design directions for your brand.",
+  },
+  {
+    num: "03",
+    title: "Refinement & Delivery",
+    desc: "Perfecting your brand assets and delivering a complete package.",
+  },
+];
 
+const WHY = [
+  "Builds recognition and trust",
+  "Creates emotional connections",
+  "Differentiates from competitors",
+];
 
+const RADIO_OPTIONS = [
+  "Website Design",
+  "ECommerce Websites",
+  "Service Website",
+  "Branding & Logo Design",
+  "Digital Marketing",
+  "Search Engine Optimisation",
+  "Google Ads Management",
+  "Meta Ads Management",
+  "Content Marketing",
+  "Conversion Rate Optimization",
+  "Managed Hosting",
+  "Go High Level CRM",
+  "AI Agents/Automation Development",
+  "White Label Marketing",
+  "Lead Generation",
+];
 
-    {name:'Conversion Rate Optimization',path:'/conversionrate'},
+const NEWS = [
+  {
+    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
+    date: "January 3, 2026",
+    title:
+      "How Aussie Growth Media Delivers High-Performance PPC Management in Brisbane",
+    excerpt:
+      "PPC management is becoming the foundation stone for the success of businesses in Brisbane. The instantaneous reach that it offers…",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
+    date: "December 26, 2025",
+    title:
+      "Why Your Business Needs a Professional Website Design Agency in Brisbane",
+    excerpt:
+      "Website Design Agency in Brisbane plays a crucial role in today's market, where your website is often the very first…",
+  },
+];
 
-    {name:'Service Website',path:'/service-site'},
-    {name:'Meta Ads Management',path:'/metaads'},
+export default function Branding() {
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    callback: "",
+  });
 
-    {name:'Search Engine Optimisation',path:'/seo'},
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
 
-    {name:'Branding & Logo Design',path:'/branding&logodesign'},
-
-    {name:'ECommerce Websites',path:'/ecommerce'},
-
-    {name:'Google Ads Management',path:'/googleads'},
-
-
-
-
-    
-  ];
-   const [menuOpen, setMenuOpen] = useState(false); 
-  const services = [
-    {
-      title: "Logo Design",
-      description: "Unique, memorable logos that capture your brand essence",
-      features: ["Custom Design", "Multiple Concepts", "Unlimited Revisions", "All File Formats"]
-    },
-    {
-      title: "Brand Identity",
-      description: "Complete visual identity system for consistency across platforms",
-      features: ["Color Palette", "Typography", "Visual Elements", "Brand Guidelines"]
-    },
-    {
-      title: "Brand Strategy",
-      description: "Strategic positioning and messaging framework",
-      features: ["Target Audience", "Brand Voice", "Competitive Analysis", "Positioning Strategy"]
-    }
-  ];
-  const quickLinks = [
-    'Brisbane Local SEO',
-    'Website Design Brisbane',
-    'Digital Marketing Brisbane',
-    'SEO Brisbane',
-    'Website Design Gold Coast',
-    'SEO Gold Coast',
-    'Who We Are',
-    'What We Do',
-    'Our Expertise',
-    'Contact'
-  ];
-  const packages = [
-    'Website Design Packages',
-    'Business Website Package',
-    'Search Engine Optimisation Packages',
-    'Meta Ads Management Package',
-    'Google Ads Management Packages',
-    'Pay Per Lead',
-    'Facebook Ads Services',
-    'Digital Marketing Consultancy',
-    'Social Media Marketing',
-    'SEO Consultancy / Free SEO Audit',
-    'AI Voice Automation',
-    'Landing Pages',
-    'PPC Management'
-  ];
-
-  const service = [
-    'Website Design',
-    'ECommerce Websites',
-    'Service Website',
-    'Branding & Logo Design',
-    'Digital Marketing',
-    'Search Engine Optimisation',
-    'Google Ads Management',
-    'Meta Ads Management',
-    'Content Marketing',
-    'Conversion Rate Optimization',
-    'Managed Hosting',
-    'Go High Level CRM',
-    'Ai Agents/Automation Development',
-    'White Label Marketing',
-    'Lead Generation'
-  ];
-
-  const industries = [
-    'Mortgage & Finance',
-    'Automotive',
-    'Construction & Building',
-    'ECommerce',
-    'Health & Medical',
-    'NDIS',
-    'Professional Services',
-    'Trade',
-    'Hospitality',
-    'Lawyers & Immigration Agent',
-    'NDIS Website Designs & Marketing'
-  ];
   return (
-    <div>
-       
-{/* Header */}
-        {/* Header */}
-        <header className="relative z-50 w-full bg-[#f7f7f7] py-4" data-aos="slide-down">
-        <div className="mx-auto max-w-7xl px-4">
-          <nav className="flex items-center justify-between rounded-2xl bg-white px-4 sm:px-6 py-3 sm:py-4 shadow-md">
-            {/* Logo */}
-            <div onClick ={()=>{navigate('/')}}className="flex items-center gap-2">
-              <img
-                src={image6}
-                alt="Growth Flow Media"
-                className="h-12 sm:h-16 md:h-20 w-auto "
-              />
-            </div>
+    <div className="bg-[#fafaf8] font-['Montserrat']">
+      {/* ══════════════════════════════════════════════════════
+          HERO BANNER
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden bg-[#fafaf8] pt-32 pb-20 px-4 sm:px-6">
+        {/* orange half-circle top-right */}
+        <div
+          className="absolute -top-40 -right-40 w-[500px] h-[500px]
+          rounded-full bg-[#e36a2e]/8 pointer-events-none"
+        />
+        <div
+          className="absolute -top-20 -right-20 w-[300px] h-[300px]
+          rounded-full bg-[#e36a2e]/6 pointer-events-none"
+        />
 
-            {/* Mobile Menu Button */}
-            <button 
-              className="lg:hidden p-2"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <Menu size={24} />
-            </button>
-
-            {/* Menu - Desktop */}
-            <ul className="hidden z-50 lg:flex  items-center gap-4 xl:gap-8 text-sm xl:text-[15px] font-medium text-gray-700">
-              <li className="group relative cursor-pointer z-50">
-                  <div onClick={()=>{navigate('/')}}className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                    Home
-                    
-                  </div>
-
-                </li>
-                <li>
-                 <div className="relative">
-                <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className={`flex items-center font-medium transition-colors hover:text-gray-700 ${
-                    serviceItems.some(item => location.pathname === item.path)
-                      ? 'text-gray-700'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  Services
-                  <FaChevronDown className={`ml-2 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl overflow-hidden"
-                      
-                    >
-                      {serviceItems.map((service) => (
-                        <button
-                          key={service.name}
-                          onClick={() => handleServiceSelect(service.path)}
-                          className="block w-full text-left px-4 py-3 hover:bg-gray-50 hover:text-primary-600 transition-colors text-gray-700 font-medium"
-                        >
-                          {service.name}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-                </li>
-                
-                
-                 <li onClick={()=>{navigate('/contact')}}className="group relative cursor-pointer">
-                  <div className="flex items-center gap-1 hover:text-black whitespace-nowrap">
-                   Contact us 
-                    
-                  </div>
-
-        
-                </li>
-      
-            </ul>
-
-            {/* CTA Button */}
-            <button className="hidden lg:flex gap-2 rounded-xl bg-[#e36a2e] px-4 sm:px-6 py-2 sm:py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28] whitespace-nowrap" onClick={()=>{navigate('/contact')}}>
-              Get Started Now <span><ArrowRightCircle size={18} className='text-black'/></span>
-            </button>
-          </nav>
-
-          {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden mt-4 bg-white rounded-2xl p-4 shadow-lg">
-              <ul className="cursor-pointer space-y-3">
-                 <li  onClick={()=>{navigate('/')}}className="py-2 border-b border-gray-100">
-                   Home
-                  </li>
-               
-                  <li className="py-2 border-b border-gray-100">
-                <div className="py-3 ">
-                  <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between w-full font-medium text-gray-700 hover:text-primary-600"
-                  >
-                    <span>Services</span>
-                    <FaChevronDown className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  <AnimatePresence>
-                    {isServicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pt-2 space-y-2">
-                          {serviceItems.map((service) => (
-                            <button
-                              key={service.name}
-                              onClick={() => handleServiceSelect(service.path)}
-                              className="block w-full text-left py-2 px-4 rounded-lg hover:bg-gray-50 hover:text-primary-600 text-gray-600 font-medium"
-                            >
-                              {service.name}
-                            </button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-                  </li>
-              
-                <li>
-                  <li  onClick={()=>{navigate('/contact')}}className="py-2 border-b border-gray-100">
-                  Contact
-                  </li>
-                  <button className="w-full flex justify-center gap-2 rounded-xl bg-[#e36a2e] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#cf5f28]" onClick={()=>{navigate('/contact')}}>
-                    Get Started Now <ArrowRightCircle size={18} className='text-black'/>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-      </header>
-  
-        <div className="max-w-7xl mx-auto px-4 py-12">
-  
-
-      
-  
-        
-      <div className="text-center mb-12 fade-in">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
-          <span className="gradient-text">Branding & Logo Design</span>
-        </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Create a powerful brand identity that resonates with your audience and stands out in the market.
-        </p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-white rounded-2xl shadow-xl p-8 service-card">
-          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-6">
-            <span className="text-white text-2xl">🎨</span>
+        <div className="max-w-7xl mx-auto text-center relative">
+          <div
+            data-aos="fade-down"
+            className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60
+              px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.2em]
+              uppercase text-[#e36a2e] mb-6"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e36a2e] animate-pulse" />
+            Our Expertise
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Branding Matters</h2>
-          <p className="text-gray-600 mb-6">
-            Your brand is more than just a logo—it's the entire experience your customers have with your company. 
-            It's what sets you apart from competitors and builds emotional connections with your audience.
+
+          <h1
+            data-aos="fade-up"
+            className="text-5xl sm:text-6xl lg:text-7xl font-black text-zinc-900
+              leading-tight tracking-tight mb-6"
+          >
+            Branding &amp;{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10 text-[#e36a2e]">Logo Design</span>
+              {/* underline squiggle */}
+              <svg
+                className="absolute -bottom-2 left-0 w-full"
+                height="6"
+                viewBox="0 0 200 6"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M0 3 Q25 0 50 3 Q75 6 100 3 Q125 0 150 3 Q175 6 200 3"
+                  stroke="#e36a2e"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeOpacity="0.4"
+                />
+              </svg>
+            </span>
+          </h1>
+
+          <p
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="text-zinc-500 text-lg sm:text-xl max-w-2xl mx-auto font-light leading-relaxed"
+          >
+            Create a powerful brand identity that resonates with your audience
+            and stands out in the market.
           </p>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-              <span className="text-gray-700">Builds recognition and trust</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-              <span className="text-gray-700">Creates emotional connections</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-              <span className="text-gray-700">Differentiates from competitors</span>
-            </div>
-          </div>
         </div>
+      </section>
 
-        <div className="relative">
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 h-full">
-            <img 
-              src="/images/branding.jpg" 
-              alt="Branding Process" 
-              className="rounded-xl shadow-lg w-full h-64 object-cover mb-6"
+      {/* ══════════════════════════════════════════════════════
+          WHY BRANDING + PROCESS
+      ══════════════════════════════════════════════════════ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {/* Why Branding card */}
+          <div
+            data-aos="fade-right"
+            className="relative bg-white rounded-2xl border border-zinc-100
+              shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-8 lg:p-10 overflow-hidden group
+              hover:shadow-[0_8px_40px_rgba(0,0,0,0.10)] hover:-translate-y-1
+              transition-all duration-400"
+          >
+            {/* top accent */}
+            <div
+              className="absolute top-0 left-0 right-0 h-0.5
+              bg-gradient-to-r from-transparent via-[#e36a2e]/50 to-transparent"
             />
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Process</h3>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <div className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">1</div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Discovery & Research</h4>
-                  <p className="text-gray-600">Understanding your business, audience, and competition</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">2</div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Concept Development</h4>
-                  <p className="text-gray-600">Creating multiple design directions for your brand</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">3</div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Refinement & Delivery</h4>
-                  <p className="text-gray-600">Perfecting your brand assets and delivering complete package</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {services.map((service, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-lg p-6 service-card">
-            <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-            <p className="text-gray-600 mb-4">{service.description}</p>
-            <ul className="space-y-2">
-              {service.features.map((feature, idx) => (
-                <li key={idx} className="flex items-center text-gray-700">
-                  <span className="text-purple-500 mr-2">✓</span>
-                  {feature}
-                </li>
+            <div
+              className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#e36a2e] to-orange-400
+              flex items-center justify-center mb-6 shadow-[0_4px_14px_rgba(227,106,46,0.35)]"
+            >
+              <span className="text-white text-2xl">🎨</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 mb-4 tracking-tight">
+              Why Branding Matters
+            </h2>
+            <p className="text-zinc-500 text-sm leading-relaxed mb-7 font-light">
+              Your brand is more than just a logo — it's the entire experience
+              your customers have with your company. It's what sets you apart
+              and builds emotional connections.
+            </p>
+
+            <div className="space-y-3">
+              {WHY.map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div
+                    className="w-6 h-6 rounded-full bg-orange-50 border border-orange-200/60
+                    flex items-center justify-center shrink-0"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#e36a2e]" />
+                  </div>
+                  <span className="text-zinc-700 text-sm font-medium">
+                    {item}
+                  </span>
+                </div>
               ))}
-            </ul>
-            
+            </div>
           </div>
-        ))}
-      </div>
-      
-    </div>
-        {/* Latest News Section */}
-      <section className="bg-white py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
-            <div>
-              <h2 data-aos="slide-right"className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Latest News & Updates</h2>
-              <p data-aos="slide-up" className="text-orange-500 text-lg sm:text-xl mb-8 sm:mb-12" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                Stay up To Date With The Latest From Growth Flow Media.
-              </p>
 
-              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-                <div data-aos="slide-right"className="flex flex-col sm:flex-row gap-3 bg-white shadow-lg sm:shadow-xl rounded-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
-                  <div className='h-40 w-full sm:w-80 border rounded-lg overflow-hidden'>
-                    <img
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                      alt="Team meeting"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className=''>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      How Growth Flow Media Delivers High-Performance PPC Management in Brisbane
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mb-2">January 3, 2026</p>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      PPC management is becoming the foundation stone for the success of businesses in Brisbane. The instantaneous reach that it offers
-                    </p>
-                  </div>
-                </div>
+          {/* Process card */}
+          <div
+            data-aos="fade-left"
+            className="relative bg-zinc-900 rounded-2xl
+              shadow-[0_4px_24px_rgba(0,0,0,0.12)] p-8 lg:p-10 overflow-hidden
+              hover:shadow-[0_8px_40px_rgba(0,0,0,0.2)] hover:-translate-y-1
+              transition-all duration-400"
+          >
+            {/* top accent */}
+            <div
+              className="absolute top-0 left-0 right-0 h-0.5
+              bg-gradient-to-r from-transparent via-[#e36a2e]/60 to-transparent"
+            />
 
-                <div data-aos="slide-right" className="flex flex-col sm:flex-row gap-3 bg-white shadow-lg sm:shadow-xl rounded-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
-                  <div className='h-40 w-full sm:w-80 border rounded-lg overflow-hidden'>
-                    <img
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                      alt="Team meeting"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className=''>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      Why Your Business Needs a Professional Website Design Agency in Brisbane
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mb-2">December 26, 2025</p>
-                    <p className="text-gray-600 text-sm sm:text-base">
-                      Website Design Agency in Brisbane plays a crucial role in today's market, where your website is often the very first
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <button data-aos="slide-left"className="bg-orange-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium hover:bg-orange-600 flex items-center gap-2 text-sm sm:text-base">
-                View All <ChevronRight className="w-4 h-4" />
-              </button>
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-1 h-6 rounded-full bg-[#e36a2e]" />
+              <span className="text-[10px] tracking-[0.25em] uppercase text-white/40 font-semibold">
+                Our Process
+              </span>
             </div>
 
-            <div data-aos="slide-left" className="bg-black border rounded-lg p-4 sm:p-6 lg:p-8 mt-8 md:mt-0">
-              <div className="flex items-center gap-2 mb-4 sm:mb-6">
-                <img
-                  src={image6}
-                  alt="Growth Flow Media"
-                  className="h-12 sm:h-16 lg:h-20 w-auto"
-                />
-              </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-white mb-8 tracking-tight">
+              How We Build
+              <br />
+              <span className="text-[#e36a2e]">Your Brand</span>
+            </h2>
 
-              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-           
-              
-                 <input
-                  type="tel"
-                  placeholder="Preferd call back time"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded bg-gray-900 text-white border border-gray-700 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                />
-              </div>
-
-              <p className="text-white mb-3 sm:mb-4 text-sm sm:text-base">How We May Help You?</p>
-
-              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 max-h-60 overflow-y-auto pr-2">
-                {[
-                  'Website Design',
-    'ECommerce Websites',
-    'Service Website',
-    'Branding & Logo Design',
-    'Digital Marketing',
-    'Search Engine Optimisation',
-    'Google Ads Management',
-    'Meta Ads Management',
-    'Content Marketing',
-    'Conversion Rate Optimization',
-    'Managed Hosting',
-    'Go High Level CRM',
-    'Ai Agents/Automation Development',
-    'White Label Marketing',
-    'Lead Generation'
-                ].map((option, i) => (
-                  <label key={i} className="flex items-center gap-3 bg-gray-100 px-3 sm:px-4 py-2 sm:py-3 rounded cursor-pointer hover:bg-gray-800">
-                    <input type="radio" name="service" className="w-4 h-4" />
-                    <span className="text-black text-xs sm:text-sm">{option}</span>
-                  </label>
-                ))}
-              </div>
-
-              <button className="w-full bg-orange-500 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-lg font-medium hover:bg-orange-600 text-base sm:text-lg">
-                Submit Request
-              </button>
+            <div className="space-y-6">
+              {PROCESS.map((p, i) => (
+                <div key={i} className="flex gap-5 group">
+                  <div
+                    className="shrink-0 w-10 h-10 rounded-xl bg-[#e36a2e]/10 border border-[#e36a2e]/20
+                    flex items-center justify-center
+                    group-hover:bg-[#e36a2e]/20 transition-colors duration-200"
+                  >
+                    <span className="text-[#e36a2e] text-xs font-black">
+                      {p.num}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-sm mb-1">
+                      {p.title}
+                    </h4>
+                    <p className="text-white/35 text-xs leading-relaxed font-light">
+                      {p.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
-   <Footer/>
-     </div>
-  );
-};
 
-export default Branding;
+      {/* ══════════════════════════════════════════════════════
+          SERVICE CARDS
+      ══════════════════════════════════════════════════════ */}
+      <section className="bg-white py-20 px-4 sm:px-6 border-y border-zinc-100">
+        <div className="max-w-7xl mx-auto">
+          <div data-aos="fade-up" className="mb-12">
+            <p
+              className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em]
+              uppercase text-[#e36a2e] font-semibold mb-3"
+            >
+              <span className="w-5 h-px bg-[#e36a2e]" />
+              What We Offer
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 tracking-tight">
+              Our Branding <span className="text-[#e36a2e]">Services</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {SERVICES.map((s, i) => (
+              <div
+                key={i}
+                data-aos="fade-up"
+                data-aos-delay={i * 80}
+                className="group relative bg-[#fafaf8] rounded-2xl border border-zinc-100
+                  p-7 overflow-hidden
+                  hover:border-[#e36a2e]/30 hover:shadow-[0_8px_30px_rgba(227,106,46,0.08)]
+                  hover:-translate-y-1 transition-all duration-300"
+              >
+                {/* hover bottom bar */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-0.5
+                  bg-[#e36a2e] scale-x-0 group-hover:scale-x-100
+                  transition-transform duration-400 origin-left"
+                />
+
+                <div
+                  className="text-3xl text-[#e36a2e]/30 font-black mb-4 leading-none
+                  group-hover:text-[#e36a2e]/50 transition-colors duration-300"
+                >
+                  {s.icon}
+                </div>
+
+                <h3 className="text-lg font-black text-zinc-900 mb-2 tracking-tight">
+                  {s.title}
+                </h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-5 font-light">
+                  {s.desc}
+                </p>
+
+                <ul className="space-y-2">
+                  {s.features.map((f, j) => (
+                    <li
+                      key={j}
+                      className="flex items-center gap-2.5 text-zinc-600 text-sm"
+                    >
+                      <span
+                        className="w-4 h-4 rounded-full bg-orange-50 border border-orange-200/60
+                        flex items-center justify-center shrink-0"
+                      >
+                        <span className="text-[#e36a2e] text-[9px] font-black">
+                          ✓
+                        </span>
+                      </span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          NEWS + CONTACT FORM
+      ══════════════════════════════════════════════════════ */}
+      <section className="py-20 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+          {/* ── NEWS ── */}
+          <div>
+            <div data-aos="slide-right" className="mb-10">
+              <p
+                className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em]
+                uppercase text-[#e36a2e] font-semibold mb-3"
+              >
+                <span className="w-5 h-px bg-[#e36a2e]" />
+                Latest
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-black text-zinc-900 tracking-tight mb-2">
+                News &amp; Updates
+              </h2>
+              <p className="text-zinc-400 text-sm font-light">
+                Stay up to date with the latest from Aussie Growth Media.
+              </p>
+            </div>
+
+            <div className="space-y-4 mb-8">
+              {NEWS.map((n, i) => (
+                <div
+                  key={i}
+                  data-aos="slide-right"
+                  data-aos-delay={i * 80}
+                  className="group flex gap-4 bg-white rounded-2xl border border-zinc-100
+                    p-4 sm:p-5 hover:border-[#e36a2e]/25
+                    hover:shadow-[0_4px_20px_rgba(0,0,0,0.07)]
+                    transition-all duration-300 cursor-pointer"
+                >
+                  <div className="shrink-0 w-24 sm:w-32 h-24 rounded-xl overflow-hidden">
+                    <img
+                      src={n.img}
+                      alt={n.title}
+                      className="w-full h-full object-cover
+                        group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] tracking-widest text-zinc-400 uppercase font-semibold mb-1.5">
+                      {n.date}
+                    </p>
+                    <h3
+                      className="text-sm font-bold text-zinc-900 leading-snug mb-2
+                      group-hover:text-[#e36a2e] transition-colors duration-200 line-clamp-2"
+                    >
+                      {n.title}
+                    </h3>
+                    <p className="text-zinc-400 text-xs leading-relaxed font-light line-clamp-2">
+                      {n.excerpt}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button
+              data-aos="fade-up"
+              className="group inline-flex items-center gap-2
+                bg-[#e36a2e] hover:bg-[#cf5f28] text-white
+                font-semibold text-sm px-7 py-3 rounded-full
+                transition-all duration-300
+                hover:shadow-[0_8px_24px_rgba(227,106,46,0.35)]
+                hover:-translate-y-0.5 relative overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 translate-x-[-100%]
+                group-hover:translate-x-[100%] transition-transform duration-500
+                bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              />
+              <span className="relative">View All</span>
+              <ChevronRight
+                size={15}
+                className="relative group-hover:translate-x-0.5
+                transition-transform duration-300"
+              />
+            </button>
+          </div>
+
+          {/* ── CONTACT FORM ── */}
+          <div
+            data-aos="slide-left"
+            className="relative bg-[#5a5a61] rounded-2xl overflow-hidden"
+          >
+            {/* top accent line */}
+            <div className="h-px bg-gradient-to-r from-transparent via-[#e36a2e]/60 to-transparent" />
+
+            <div className="p-7 sm:p-9">
+              {/* logo */}
+              <div className="mb-7 pb-6 border-b border-white/[0.06] flex items-center gap-3">
+                <img
+                  src={image6}
+                  alt="Aussie Growth Media"
+                  className="h-10 sm:h-12 w-auto object-contain"
+                />
+              </div>
+
+              {/* heading */}
+              <div className="mb-6">
+                <p
+                  className="text-[10px] tracking-[0.25em] uppercase text-[#e36a2e]/70
+                  font-semibold mb-1.5"
+                >
+                  Get In Touch
+                </p>
+                <h3 className="text-xl font-bold text-white leading-snug">
+                  Start your branding journey
+                </h3>
+              </div>
+
+              {/* text fields */}
+              <div className="space-y-3 mb-6">
+                {[
+                  { ph: "Full Name", name: "name", type: "text" },
+                  { ph: "Email Address", name: "email", type: "email" },
+                  { ph: "Phone Number", name: "phone", type: "tel" },
+                  {
+                    ph: "Preferred Callback Time",
+                    name: "callback",
+                    type: "text",
+                  },
+                ].map(({ ph, name, type }) => (
+                  <input
+                    key={name}
+                    type={type}
+                    placeholder={ph}
+                    value={formData[name]}
+                    onChange={(e) =>
+                      setFormData((p) => ({ ...p, [name]: e.target.value }))
+                    }
+                    className="w-full px-4 py-3 rounded-xl
+                      bg-white/[0.04] border border-white/[0.07]
+                      text-white text-sm placeholder:text-white/20
+                      focus:outline-none focus:border-[#e36a2e]/40
+                      transition-colors duration-200 font-['Montserrat']"
+                  />
+                ))}
+              </div>
+
+              {/* radio label */}
+              <p
+                className="text-[10px] tracking-[0.22em] uppercase text-white/25
+                font-semibold mb-3"
+              >
+                How can we help?
+              </p>
+
+              {/* radio list */}
+              <div
+                className="space-y-1 mb-6 max-h-52 overflow-y-auto pr-1
+                [&::-webkit-scrollbar]:w-[3px]
+                [&::-webkit-scrollbar-track]:bg-transparent
+                [&::-webkit-scrollbar-thumb]:bg-[#e36a2e]/20
+                [&::-webkit-scrollbar-thumb]:rounded-full"
+              >
+                {RADIO_OPTIONS.map((opt) => {
+                  const active = selected === opt;
+                  return (
+                    <label
+                      key={opt}
+                      className={`flex items-center gap-3 px-4 py-2.5 rounded-xl
+                        cursor-pointer transition-all duration-150 group relative
+                        ${
+                          active
+                            ? "bg-[#e36a2e]/10 border border-[#e36a2e]/25"
+                            : "border border-transparent hover:bg-white/[0.04]"
+                        }`}
+                    >
+                      {active && (
+                        <div className="absolute left-0 top-2 bottom-2 w-px bg-[#e36a2e]/60 rounded-full" />
+                      )}
+
+                      <div
+                        className={`w-3.5 h-3.5 rounded-full border shrink-0
+                        flex items-center justify-center transition-all duration-150
+                        ${
+                          active
+                            ? "border-[#e36a2e] bg-[#e36a2e]/15"
+                            : "border-white/15 group-hover:border-white/30"
+                        }`}
+                      >
+                        {active && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#e36a2e]" />
+                        )}
+                      </div>
+
+                      <input
+                        type="radio"
+                        name="service"
+                        value={opt}
+                        checked={active}
+                        onChange={() => setSelected(opt)}
+                        className="sr-only"
+                      />
+
+                      <span
+                        className={`text-xs font-medium transition-colors duration-150
+                        ${active ? "text-orange-300/90" : "text-white/35 group-hover:text-white/55"}`}
+                      >
+                        {opt}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+
+              {/* submit */}
+              <button
+                className="group relative w-full overflow-hidden
+                bg-[#e36a2e] hover:bg-[#cf5f28] text-black
+                font-bold text-xs tracking-[0.15em] uppercase
+                px-8 py-4 rounded-xl flex items-center justify-center gap-2
+                transition-all duration-300
+                hover:shadow-[0_8px_24px_rgba(227,106,46,0.4)]"
+              >
+                <div
+                  className="absolute inset-0 translate-x-[-100%]
+                  group-hover:translate-x-[100%] transition-transform duration-600
+                  bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                />
+                <span className="relative">Submit Request</span>
+                <ArrowRightCircle size={15} className="relative" />
+              </button>
+
+              <p className="text-center text-[10px] text-white/15 mt-4 tracking-wide">
+                We respond within 2 business hours
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
