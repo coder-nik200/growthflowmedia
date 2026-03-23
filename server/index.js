@@ -15,6 +15,4 @@ app.get("/", (req, res) => res.send("Server is running 🚀"));
 
 app.use("/api/enquiry", enquiryRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = app;
