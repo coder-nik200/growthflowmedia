@@ -28,7 +28,7 @@ const ContactForm = ({
   logoAlt = "Aussie Growth Media",
   brandName,
   accentColor = "#e36a2e",
-  apiRoute = "http://localhost:5000/web/api/enquiry/enquiry-insert",
+  apiRoute = "http://localhost:5000/api/enquiry/enquiry-insert",
   successPath = "/success-page",
   radioOptions = DEFAULT_RADIO_OPTIONS,
   formTitle = "Send us a message",

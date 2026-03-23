@@ -12,8 +12,8 @@ import axios from "axios";
 export const api = axios.create({
   baseURL:
     import.meta.env.VITE_API_BASE_URL ||
-    "https://growthflowmedia-esxn.vercel.app/web/api",
-
+    "https://growthflowmedia-esxn.vercel.app/api" ||
+    "http://localhost:5000",
   withCredentials: false,
 
   headers: {

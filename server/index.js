@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.send("Server is running 🚀"));
 
-app.use("/web/api/enquiry", enquiryRoutes);
+app.use("/api/enquiry", enquiryRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
